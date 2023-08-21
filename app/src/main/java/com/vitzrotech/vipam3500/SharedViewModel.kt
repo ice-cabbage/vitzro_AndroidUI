@@ -165,6 +165,116 @@ class SharedViewModel : ViewModel() {
     val ma3 = mutableStateOf(0.0f)
     val ma4 = mutableStateOf(0.0f)
 
+    //최대 전류
+    val maxCur = mutableStateOf(0.0f)
+    val maxCurPh = mutableStateOf(0.0f)
+    val maxCurY = mutableStateOf(0)
+    val maxCurMon = mutableStateOf(0)
+    val maxCurD = mutableStateOf(0)
+    val maxCurH = mutableStateOf(0)
+    val maxCurMin = mutableStateOf(0)
+    val maxCurS = mutableStateOf(0)
+    val maxCurms = mutableStateOf(0)
+
+    //최소 전류
+    val minCur = mutableStateOf(0.0f)
+    val minCurPh = mutableStateOf(0.0f)
+    val minCurY = mutableStateOf(0)
+    val minCurMon = mutableStateOf(0)
+    val minCurD = mutableStateOf(0)
+    val minCurH = mutableStateOf(0)
+    val minCurMin = mutableStateOf(0)
+    val minCurS = mutableStateOf(0)
+    val minCurms = mutableStateOf(0)
+
+    //최대 전압
+    val maxVol = mutableStateOf(0.0f)
+    val maxVolPh = mutableStateOf(0.0f)
+    val maxVolY = mutableStateOf(0)
+    val maxVolMon = mutableStateOf(0)
+    val maxVolD = mutableStateOf(0)
+    val maxVolH = mutableStateOf(0)
+    val maxVolMin = mutableStateOf(0)
+    val maxVolS = mutableStateOf(0)
+    val maxVolms = mutableStateOf(0)
+
+    //최소 전압
+    val minVol = mutableStateOf(0.0f)
+    val minVolPh = mutableStateOf(0.0f)
+    val minVolY = mutableStateOf(0)
+    val minVolMon = mutableStateOf(0)
+    val minVolD = mutableStateOf(0)
+    val minVolH = mutableStateOf(0)
+    val minVolMin = mutableStateOf(0)
+    val minVolS = mutableStateOf(0)
+    val minVolms = mutableStateOf(0)
+
+    //최대 주파수
+    val maxFreq = mutableStateOf(0.0f)
+    val maxFreqPh = mutableStateOf(0.0f)
+    val maxFreqY = mutableStateOf(0)
+    val maxFreqMon = mutableStateOf(0)
+    val maxFreqD = mutableStateOf(0)
+    val maxFreqH = mutableStateOf(0)
+    val maxFreqMin = mutableStateOf(0)
+    val maxFreqS = mutableStateOf(0)
+    val maxFreqms = mutableStateOf(0)
+
+    //최소 주파수
+    val minFreq = mutableStateOf(0.0f)
+    val minFreqPh = mutableStateOf(0.0f)
+    val minFreqY = mutableStateOf(0)
+    val minFreqMon = mutableStateOf(0)
+    val minFreqD = mutableStateOf(0)
+    val minFreqH = mutableStateOf(0)
+    val minFreqMin = mutableStateOf(0)
+    val minFreqS = mutableStateOf(0)
+    val minFreqms = mutableStateOf(0)
+
+    //최대 유효전력
+    val maxWatt = mutableStateOf(0.0f)
+    val maxWattPh = mutableStateOf(0.0f)
+    val maxWattY = mutableStateOf(0)
+    val maxWattMon = mutableStateOf(0)
+    val maxWattD = mutableStateOf(0)
+    val maxWattH = mutableStateOf(0)
+    val maxWattMin = mutableStateOf(0)
+    val maxWattS = mutableStateOf(0)
+    val maxWattms = mutableStateOf(0)
+
+    //최소 유효전력
+    val minWatt = mutableStateOf(0.0f)
+    val minWattPh = mutableStateOf(0.0f)
+    val minWattY = mutableStateOf(0)
+    val minWattMon = mutableStateOf(0)
+    val minWattD = mutableStateOf(0)
+    val minWattH = mutableStateOf(0)
+    val minWattMin = mutableStateOf(0)
+    val minWattS = mutableStateOf(0)
+    val minWattms = mutableStateOf(0)
+
+    //최대 무효전력
+    val maxVar = mutableStateOf(0.0f)
+    val maxVarPh = mutableStateOf(0.0f)
+    val maxVarY = mutableStateOf(0)
+    val maxVarMon = mutableStateOf(0)
+    val maxVarD = mutableStateOf(0)
+    val maxVarH = mutableStateOf(0)
+    val maxVarMin = mutableStateOf(0)
+    val maxVarS = mutableStateOf(0)
+    val maxVarms = mutableStateOf(0)
+
+    //최소 무효전력
+    val minVar = mutableStateOf(0.0f)
+    val minVarPh = mutableStateOf(0.0f)
+    val minVarY = mutableStateOf(0)
+    val minVarMon = mutableStateOf(0)
+    val minVarD = mutableStateOf(0)
+    val minVarH = mutableStateOf(0)
+    val minVarMin = mutableStateOf(0)
+    val minVarS = mutableStateOf(0)
+    val minVarms = mutableStateOf(0)
+
     val cb1 = mutableStateOf(0x0u)
     val cb2 = mutableStateOf(0x0u)
     val diStatus1 = mutableStateOf(0x0u)
@@ -290,6 +400,87 @@ class SharedViewModel : ViewModel() {
     private var rVahG = 0.0f
 
     fun messageArrived(topic: String, value: Int) {
+        when(topic) {
+            "MI/MSTA/MaxAmps/t/tm_year" -> maxCurY.value = value
+            "MI/MSTA/MaxAmps/t/tm_mon" -> maxCurMon.value = value
+            "MI/MSTA/MaxAmps/t/tm_mday" -> maxCurD.value = value
+            "MI/MSTA/MaxAmps/t/tm_hour" -> maxCurH.value = value
+            "MI/MSTA/MaxAmps/t/tm_min" -> maxCurMin.value = value
+            "MI/MSTA/MaxAmps/t/tm_sec" -> maxCurS.value = value
+            "MI/MSTA/MaxAmps/t/tm_ms" -> maxCurms.value = value
+
+            "MI/MSTA/MinAmps/t/tm_year" -> minCurY.value = value
+            "MI/MSTA/MinAmps/t/tm_mon" -> minCurMon.value = value
+            "MI/MSTA/MinAmps/t/tm_mday" -> minCurD.value = value
+            "MI/MSTA/MinAmps/t/tm_hour" -> minCurH.value = value
+            "MI/MSTA/MinAmps/t/tm_min" -> minCurMin.value = value
+            "MI/MSTA/MinAmps/t/tm_sec" -> minCurS.value = value
+            "MI/MSTA/MinAmps/t/tm_ms" -> minCurms.value = value
+
+            "MI/MSTA/MaxVolts/t/tm_year" -> maxVolY.value = value
+            "MI/MSTA/MaxVolts/t/tm_mon" -> maxVolMon.value = value
+            "MI/MSTA/MaxVolts/t/tm_mday" -> maxVolD.value = value
+            "MI/MSTA/MaxVolts/t/tm_hour" -> maxVolH.value = value
+            "MI/MSTA/MaxVolts/t/tm_min" -> maxVolMin.value = value
+            "MI/MSTA/MaxVolts/t/tm_sec" -> maxVolS.value = value
+            "MI/MSTA/MaxVolts/t/tm_ms" -> maxVolms.value = value
+
+            "MI/MSTA/MinVolts/t/tm_year" -> minVolY.value = value
+            "MI/MSTA/MinVolts/t/tm_mon" -> minVolMon.value = value
+            "MI/MSTA/MinVolts/t/tm_mday" -> minVolD.value = value
+            "MI/MSTA/MinVolts/t/tm_hour" -> minVolH.value = value
+            "MI/MSTA/MinVolts/t/tm_min" -> minVolMin.value = value
+            "MI/MSTA/MinVolts/t/tm_sec" -> minVolS.value = value
+            "MI/MSTA/MinVolts/t/tm_ms" -> minVolms.value = value
+
+            "MI/MSTA/MaxHz/t/tm_year" -> maxFreqY.value = value
+            "MI/MSTA/MaxHz/t/tm_mon" -> maxFreqMon.value = value
+            "MI/MSTA/MaxHz/t/tm_mday" -> maxFreqD.value = value
+            "MI/MSTA/MaxHz/t/tm_hour" -> maxFreqH.value = value
+            "MI/MSTA/MaxHz/t/tm_min" -> maxFreqMin.value = value
+            "MI/MSTA/MaxHz/t/tm_sec" -> maxFreqS.value = value
+            "MI/MSTA/MaxHz/t/tm_ms" -> maxFreqms.value = value
+
+            "MI/MSTA/MinHz/t/tm_year" -> minFreqY.value = value
+            "MI/MSTA/MinHz/t/tm_mon" -> minFreqMon.value = value
+            "MI/MSTA/MinHz/t/tm_mday" -> minFreqD.value = value
+            "MI/MSTA/MinHz/t/tm_hour" -> minFreqH.value = value
+            "MI/MSTA/MinHz/t/tm_min" -> minFreqMin.value = value
+            "MI/MSTA/MinHz/t/tm_sec" -> minFreqS.value = value
+            "MI/MSTA/MinHz/t/tm_ms" -> minFreqms.value = value
+
+            "MI/MSTA/MaxTotW/t/tm_year" -> maxWattY.value = value
+            "MI/MSTA/MaxTotW/t/tm_mon" -> maxWattMon.value = value
+            "MI/MSTA/MaxTotW/t/tm_mday" -> maxWattD.value = value
+            "MI/MSTA/MaxTotW/t/tm_hour" -> maxWattH.value = value
+            "MI/MSTA/MaxTotW/t/tm_min" -> maxWattMin.value = value
+            "MI/MSTA/MaxTotW/t/tm_sec" -> maxWattS.value = value
+            "MI/MSTA/MaxTotW/t/tm_ms" -> maxWattms.value = value
+
+            "MI/MSTA/MinTotW/t/tm_year" -> minWattY.value = value
+            "MI/MSTA/MinTotW/t/tm_mon" -> minWattMon.value = value
+            "MI/MSTA/MinTotW/t/tm_mday" -> minWattD.value = value
+            "MI/MSTA/MinTotW/t/tm_hour" -> minWattH.value = value
+            "MI/MSTA/MinTotW/t/tm_min" -> minWattMin.value = value
+            "MI/MSTA/MinTotW/t/tm_sec" -> minWattS.value = value
+            "MI/MSTA/MinTotW/t/tm_ms" -> minWattms.value = value
+
+            "MI/MSTA/MaxTotVAr/t/tm_year" -> maxVarY.value = value
+            "MI/MSTA/MaxTotVAr/t/tm_mon" -> maxVarMon.value = value
+            "MI/MSTA/MaxTotVAr/t/tm_mday" -> maxVarD.value = value
+            "MI/MSTA/MaxTotVAr/t/tm_hour" -> maxVarH.value = value
+            "MI/MSTA/MaxTotVAr/t/tm_min" -> maxVarMin.value = value
+            "MI/MSTA/MaxTotVAr/t/tm_sec" -> maxVarS.value = value
+            "MI/MSTA/MaxTotVAr/t/tm_ms" -> maxVarms.value = value
+
+            "MI/MSTA/MinTotVAr/t/tm_year" -> minVarY.value = value
+            "MI/MSTA/MinTotVAr/t/tm_mon" -> minVarMon.value = value
+            "MI/MSTA/MinTotVAr/t/tm_mday" -> minVarD.value = value
+            "MI/MSTA/MinTotVAr/t/tm_hour" -> minVarH.value = value
+            "MI/MSTA/MinTotVAr/t/tm_min" -> minVarMin.value = value
+            "MI/MSTA/MinTotVAr/t/tm_sec" -> minVarS.value = value
+            "MI/MSTA/MinTotVAr/t/tm_ms" -> minVarms.value = value
+        }
     }
 
     fun messageArrived(topic: String, value: UInt) {
@@ -589,6 +780,46 @@ class SharedViewModel : ViewModel() {
             "MI/MHAI/HCfA/phsA/val/mag" -> hcfIA.value = value
             "MI/MHAI/HCfA/phsB/val/mag" -> hcfIB.value = value
             "MI/MHAI/HCfA/phsC/val/mag" -> hcfIC.value = value
+
+            //최대전류
+            "MI/MSTA/MaxAmps/mag" -> maxCur.value = value
+            "MI/MSTA/MaxAmps/phase" -> maxCurPh.value = value
+
+            //최소전류
+            "MI/MSTA/MinAmps/mag" -> minCur.value = value
+            "MI/MSTA/MinAmps/phase" -> minCurPh.value = value
+
+            //최대 전압
+            "MI/MSTA/MaxVolts/mag" -> maxVol.value = value
+            "MI/MSTA/MaxVolts/phase" -> maxVolPh.value = value
+
+            //최소 전압
+            "MI/MSTA/MinVolts/mag" -> minVol.value = value
+            "MI/MSTA/MinVolts/phase" -> minVolPh.value = value
+
+            //최대 주파수
+            "MI/MSTA/MaxHz/mag" -> maxFreq.value = value
+            "MI/MSTA/MaxHz/phase" -> maxFreqPh.value = value
+
+            //최소 주파수
+            "MI/MSTA/MinHz/mag" -> minFreq.value = value
+            "MI/MSTA/MinHz/phase" -> minFreq.value = value
+
+            //최대 유효전력
+            "MI/MSTA/MaxTotW/mag" -> maxWatt.value = value
+            "MI/MSTA/MaxTotW/phase" -> maxWattPh.value = value
+
+            //최소 유효전력
+            "MI/MSTA/MinTotW/mag" -> minWatt.value = value
+            "MI/MSTA/MinTotW/phase" -> minWattPh.value = value
+
+            //최대 무효전력
+            "MI/MSTA/MaxTotVAr/mag" -> maxVar.value = value
+            "MI/MSTA/MaxTotVAr/phase" -> maxVarPh.value = value
+
+            //최소 무효전력
+            "MI/MSTA/MinTotVAr/mag" -> minVar.value = value
+            "MI/MSTA/MinTotVAr/phase" -> minVarPh.value = value
         }
     }
 

@@ -19,11 +19,3 @@
 연결이 가능하기 때문에 효율적이고 이동이 가능하며,
 
 전기의 연결 없이도 조작할 수 있는 안드로이드 앱으로 개발하게 되었습니다.
-
-</br>
-
-<img src="https://github-readme-stats.vercel.app/api?username=ice-cabbage&bg_color=180,00000000,1100ff&title_color=000000&text_color=ffc800"  />
-
-</br>
-
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=ice-cabbage&layout=compact&bg_color=180,00000000,1100ff&title_color=5092fb&text_color=5092fb"  />

@@ -141,9 +141,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("settings") {
             SettingScreen(viewModel)
         }
-        composable("log") {
-            LogScreen()
-        }
     }
 }
 
@@ -164,22 +161,46 @@ object DrawerParams {
             R.string.home_description
         ),
         AppDrawerItemInfo(
+            "voltage_current",
+            R.string.voltage_current,
+            R.drawable.ic_voltage_current,
+            R.string.voltage_current_description
+        ),
+        AppDrawerItemInfo(
+            "instrumentation",
+            R.string.instrumentation,
+            R.drawable.ic_instrumentation,
+            R.string.instrumentation_description
+        ),
+        AppDrawerItemInfo(
+            "system",
+            R.string.system,
+            R.drawable.ic_system,
+            R.string.system_description
+        ),
+        AppDrawerItemInfo(
             "relay",
             R.string.relay,
             R.drawable.ic_relay,
             R.string.relay_description
         ),
         AppDrawerItemInfo(
-            "site",
-            R.string.site,
-            R.drawable.ic_site,
-            R.string.site_description
+            "log",
+            R.string.log,
+            R.drawable.ic_log,
+            R.string.log_description
         ),
         AppDrawerItemInfo(
-            "voltage_current",
-            R.string.voltage_current,
-            R.drawable.ic_voltage_current,
-            R.string.voltage_current_description
+            "simulation_test",
+            R.string.simulation_test,
+            R.drawable.ic_simulation_test,
+            R.string.simulation_test_description
+        ),
+        AppDrawerItemInfo(
+            "manufacturing company",
+            R.string.manufacturing_company,
+            R.drawable.ic_manufacturing_company,
+            R.string.manufacturing_company_description
         )
     )
 }

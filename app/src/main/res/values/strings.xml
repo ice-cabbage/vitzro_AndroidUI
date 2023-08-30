@@ -31,4 +31,13 @@
     <string name="voltage_current">Voltage Current</string>
     <string name="voltage_current_description">Voltage current navigation button</string>
     <string name="log">Log Menu List</string>
+    <string name="log_description">Log Menu</string>
+    <string name="instrumentation">instrumentation Menu List</string>
+    <string name="instrumentation_description">instrumentation Menu</string>
+    <string name="system">System Menu List</string>
+    <string name="system_description">System Menu</string>
+    <string name="simulation_test">simulation_test Menu List</string>
+    <string name="simulation_test_description">simulation_test Menu</string>
+    <string name="manufacturing_company">Manufacturing_company Menu List</string>
+    <string name="manufacturing_company_description">Manufacturing_Company Menu</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.vitzrotech.vipam3500
 
 import android.util.Log
-import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -116,11 +115,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                         object : IMqttActionListener {
                             override fun onSuccess(asyncActionToken: IMqttToken?) {
                                 Log.d(this.javaClass.name, "Connection success")
-                                Toast.makeText(
-                                    context,
-                                    "MQTT Connection success",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                                 connected = true
                             }
 
@@ -132,11 +126,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                                     this.javaClass.name,
                                     "Connection failure: ${exception.toString()}"
                                 )
-                                Toast.makeText(
-                                    context,
-                                    "MQTT Connection fails: ${exception.toString()}",
-                                    Toast.LENGTH_SHORT
-                                ).show()
                             }
                         },
                         object : MqttCallback {
@@ -145,7 +134,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                                 val msg =
                                     "Receive message: ${message.toString()} from topic: $topic"
                                 Log.d(this.javaClass.name, msg)
-                                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                                 if (topic != null) {
                                     if (message != null) {
                                         val str = message.toString()
@@ -209,7 +197,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                                 override fun onSuccess(asyncActionToken: IMqttToken?) {
                                     val msg ="Publish message: $pubMessage to topic: $pubTopic"
                                     Log.d(this.javaClass.name, msg)
-                                    Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                                 }
 
                                 override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -244,7 +231,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                                     override fun onSuccess(asyncActionToken: IMqttToken?) {
                                         val msg = "Subscribed to: $subTopic"
                                         Log.d(this.javaClass.name, msg)
-                                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                                     }
 
                                     override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -269,8 +255,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                                     override fun onSuccess(asyncActionToken: IMqttToken?) {
                                         val msg = "Unsubscribed to: $subTopic"
                                         Log.d(this.javaClass.name, msg)
-
-                                        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
                                     }
 
                                     override fun onFailure(asyncActionToken: IMqttToken?, exception: Throwable?) {
@@ -295,7 +279,6 @@ fun SettingScreen(viewModel: SharedViewModel) {
                         mqttClient?.disconnect(object : IMqttActionListener {
                             override fun onSuccess(asyncActionToken: IMqttToken?) {
                                 Log.d(this.javaClass.name, "Disconnected")
-                                Toast.makeText(context, "MQTT Disconnection success", Toast.LENGTH_SHORT).show()
                                 connected = false
                             }
 

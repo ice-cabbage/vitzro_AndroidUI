@@ -135,17 +135,14 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("home"){
             HomeScreen()
         }
-        composable("relay"){
-            RelayScreen()
-        }
-        composable("site") {
-            SiteScreen()
-        }
         composable("voltage_current") {
             VoltageCurrentScreen(viewModel)
         }
         composable("settings") {
             SettingScreen(viewModel)
+        }
+        composable("log") {
+            LogScreen()
         }
     }
 }

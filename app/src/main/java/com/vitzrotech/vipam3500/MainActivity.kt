@@ -7,6 +7,7 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.SeekBar
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -78,10 +79,27 @@ import androidx.navigation.navArgument
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import android.widget.TextView
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        val statusText:TextView = findViewById(R.id.status_text)
+        val seekBar:SeekBar = findViewById(R.id.seekBar)
+
+        seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
+            override fun onProgressChanged(p0: SeekBar?, progress: Int, p2: Boolean) {
+                statusText.text = "${progress}%"
+            }
+
+            override fun onStartTrackingTouch(p0: SeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(p0: SeekBar?) {
+            }
+        })
+
         setContent {
             VIPAM3500Theme {
                 // A surface container using the 'background' color from the theme
@@ -507,4 +525,3 @@ fun MainActivityPreview() {
         MainCompose()
     }
 }
-

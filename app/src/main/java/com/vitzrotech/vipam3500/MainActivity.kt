@@ -157,10 +157,40 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             SettingScreen(viewModel)
         }
         composable("relay") {
-            RelayScreen()
+            RelayScreen(viewModel)
         }
         composable("site") {
             SiteScreen()
+        }
+        composable("measurement") {
+            MeasurementScreen(navController)
+        }
+        composable("power") {
+            PowerScreen(viewModel)
+        }
+        composable("energy") {
+            EnergyScreen(viewModel)
+        }
+        composable("reverse_Energy") {
+            ReverseEnergyScreen(viewModel)
+        }
+        composable("DI/DO_Status") {
+            DIDO_StatusScreen(viewModel)
+        }
+        composable("AI_TD") {
+            AI_TDScreen(viewModel)
+        }
+        composable("Thermal/LoadRate") {
+            ThermalLoadRateScreen(viewModel)
+        }
+        composable("sequence") {
+            SequenceScreen(viewModel)
+        }
+        composable("phase_Balance") {
+            Phase_BalanceScreen(viewModel)
+        }
+        composable("interlock_Status") {
+            Interlock_StatusScreen(viewModel)
         }
     }
 }
@@ -182,16 +212,10 @@ object DrawerParams {
             R.string.home_description
         ),
         AppDrawerItemInfo(
-            "voltage_current",
-            R.string.voltage_current,
-            R.drawable.ic_voltage_current,
-            R.string.voltage_current_description
-        ),
-        AppDrawerItemInfo(
-            "instrumentation",
-            R.string.instrumentation,
-            R.drawable.ic_instrumentation,
-            R.string.instrumentation_description
+            "measurement",
+            R.string.measurement,
+            R.drawable.ic_measurement,
+            R.string.measurement_description
         ),
         AppDrawerItemInfo(
             "system",

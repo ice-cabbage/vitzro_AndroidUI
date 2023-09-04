@@ -7,8 +7,8 @@
     <string name="disconnect">Disconnect</string>
     <string name="home">Home</string>
     <string name="home_description">Home Navigation Button</string>
-    <string name="instrumentation">Instrumentation</string>
-    <string name="instrumentation_description">Instrumentation</string>
+    <string name="measurement">Measurement</string>
+    <string name="measurement_description">Measurement Menu</string>
     <string name="log">Log</string>
     <string name="log_description">Log Menu</string>
     <string name="manufacturing_company">Company</string>
@@ -40,4 +40,8 @@
     <string name="username">Username</string>
     <string name="voltage_current">Voltage Current</string>
     <string name="voltage_current_description">Voltage current navigation button</string>
+    <string name="power">Power</string>
+    <string name="energy">Energy</string>
+    <string name="mod">Mod</string>
+    <string name="trip">Trip</string>
 </resources>

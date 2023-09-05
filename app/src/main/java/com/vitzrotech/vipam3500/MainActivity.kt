@@ -189,8 +189,26 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("phase_Balance") {
             Phase_BalanceScreen(viewModel)
         }
+        composable("harmonics") {
+            HarmonicScreen(viewModel)
+        }
+        composable("k-factor/c-factor") {
+            K_C_factorScreen(viewModel)
+        }
+        composable("demand") {
+            DemandScreen(viewModel)
+        }
+        composable("max/min") {
+            MaxminScreen(viewModel)
+        }
+        composable("true_RMS") {
+            True_RMS_Screen(viewModel)
+        }
         composable("interlock_Status") {
             Interlock_StatusScreen(viewModel)
+        }
+        composable("PLC_IO_Memory") {
+            PLC_IO_MemoryScreen(viewModel)
         }
     }
 }

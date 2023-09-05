@@ -274,10 +274,6 @@ class MIMICView @JvmOverloads constructor(
         return value
     }
 
-    private fun convertEnergyValue(high: Float, low: Float, giga: Float): Float {
-        return high + (low / 10000) + (giga * 1000000000)
-    }
-
     private fun convertText(attr: TextAttr): String
     {
         val load = attr.stringFormat
@@ -673,4 +669,8 @@ class MIMICView @JvmOverloads constructor(
             arrayOf("SB_SWb3OFF.bmp", "SB_SWb3ON.bmp"),
             arrayOf("SB_SWb4OFF.bmp", "SB_SWb4ON.bmp"))
     }
+}
+
+fun convertEnergyValue(high: Float, low: Float, giga: Float): Float {
+    return high + (low / 10000) + (giga * 1000000000)
 }

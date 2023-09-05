@@ -4,6 +4,7 @@ import android.view.Menu
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -66,6 +67,8 @@ fun MeasurementScreen(navController: NavHostController) {
                         ) {
                             androidx.compose.material3.Text(text = buttonList[index].buttonName)
                         }
+                    } else {
+                        Spacer(modifier = Modifier.weight(1f))
                     }
                 }
             }

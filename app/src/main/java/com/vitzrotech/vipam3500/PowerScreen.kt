@@ -19,7 +19,8 @@ import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 data class Power (
     val name: String = "",
-    val watt: Float = 0.0f
+    val watt: Float = 0.0f,
+    val unit: String = ""
 )
 
 @Composable
@@ -37,18 +38,18 @@ fun PowerScreen(viewModel: SharedViewModel) {
     val vaCMag by remember { viewModel.vaCMag }
     val totVA by remember { viewModel.totVA }
     val power = arrayOf(
-        Power("Active P Phs A", wAMag),
-        Power("Active P Phs B", wBMag),
-        Power("Active P Phs C", wCMag),
-        Power("Active P Phs Total", totW),
-        Power("Reactive P Phs A", varAMag),
-        Power("Reactive P Phs B", varBMag),
-        Power("Reactive P Phs C", varCMag),
-        Power("Reactive P Phs Total", totVAR),
-        Power("Apparent P Phs A", vaAMag),
-        Power("Apparent P Phs B", vaBMag),
-        Power("Apparent P Phs C", vaCMag),
-        Power("Apparent P Phs Total", totVA),
+        Power("Active P Phs A", wAMag, "W"),
+        Power("Active P Phs B", wBMag, "W"),
+        Power("Active P Phs C", wCMag, "W"),
+        Power("Active P Phs Total", totW, "W"),
+        Power("Reactive P Phs A", varAMag, "Var"),
+        Power("Reactive P Phs B", varBMag, "Var"),
+        Power("Reactive P Phs C", varCMag, "Var"),
+        Power("Reactive P Phs Total", totVAR, "Var"),
+        Power("Apparent P Phs A", vaAMag, "VA"),
+        Power("Apparent P Phs B", vaBMag, "VA"),
+        Power("Apparent P Phs C", vaCMag, "VA"),
+        Power("Apparent P Phs Total", totVA, "VA")
     )
     LazyColumn(
         Modifier
@@ -62,15 +63,15 @@ fun PowerScreen(viewModel: SharedViewModel) {
                     Modifier
                         .border(1.dp, Color.Black)
                         .weight(0.5f)
-                        .padding(10.dp, 10.dp),
+                        .padding(10.dp),
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    "${v.watt.toUnitString("%.02f", "W")}",
+                    "${v.watt.toUnitString("%.02f", v.unit)}",
                     Modifier
                         .border(1.dp, Color.Black)
                         .weight(0.4f)
-                        .padding(10.dp, 10.dp),
+                        .padding(10.dp),
                     textAlign = TextAlign.Center
                 )
             }

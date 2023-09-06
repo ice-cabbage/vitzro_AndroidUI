@@ -171,6 +171,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("log") {
             LogScreen(navController)
         }
+        composable("relaymenu") {
+            RelayMenuScreen(navController)
+        }
         composable("power") {
             PowerScreen(viewModel)
         }

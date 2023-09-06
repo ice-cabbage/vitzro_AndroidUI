@@ -1,5 +1,8 @@
 package com.vitzrotech.vipam3500
 
-class LocalScreen {
+import androidx.compose.runtime.Composable
+
+@Composable
+fun LocalScreen() {
 
 }

@@ -5,39 +5,43 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
-data class MenuItem(
-    val buttonName : String = "",
-    val dst : String = ""
+data class MenuList(
+    val buttonName: String = "",
+    val dst: String = ""
 )
 
 @Composable
-fun MeasurementScreen(navController: NavHostController) {
+fun SystemScreen(navController: NavHostController) {
     val buttonList = arrayListOf(
-        MenuItem("voltage_current", "voltage_current"),
-        MenuItem("power", "power"),
-        MenuItem("energy", "energy"),
-        MenuItem("reverse_Energy", "reverse_Energy"),
-        MenuItem("DI/DO_Status", "DI/DO_Status"),
-        MenuItem("AI_TD", "AI_TD"),
-        MenuItem("Thermal/LoadRate", "Thermal/LoadRate"),
-        MenuItem("sequence", "sequence"),
-        MenuItem("phase_Balance", "phase_Balance"),
-        MenuItem("harmonics", "harmonics"),
-        MenuItem("k-factor/c-factor", "k-factor/c-factor"),
-        MenuItem("demand", "demand"),
-        MenuItem("max/min", "max/min"),
-        MenuItem("true_RMS", "true_RMS"),
-        MenuItem("relay_Status", "relay_Status"),
-        MenuItem("interlock_Status", "interlock_Status"),
-        MenuItem("PLC_IO_Memory", "PLC_IO_Memory")
+        MenuList("device_info", "device_info"),
+        MenuList("power_system", "power_system"),
+        MenuList("addition_faculty", "addition_faculty"),
+        MenuList("motor_status_info", "motor_status_info"),
+        MenuList("DO_control", "DO_control"),
+        MenuList("breaker_failure", "breaker_failure"),
+        MenuList("TCS&TRS", "TCS&TRS"),
+        MenuList("coldLoad_pickUp", "coldLock_pickUp"),
+        MenuList("power_Supervision", "power_Supervision"),
+        MenuList("communication", "communication"),
+        MenuList("VT_Failure", "VT_Failure"),
+        MenuList("virtual_DI", "virtual_DI"),
+        MenuList("PQ_Configuration", "PQ_Configuration"),
+        MenuList("demand_Configuration", "demand_Configuration"),
+        MenuList("system_Dignosis", "system_Dignosis"),
+        MenuList("function", "function"),
+        MenuList("AI_Config", "AI_Config")
     )
     Column {
         for (r in 0 until 6) {
@@ -45,19 +49,19 @@ fun MeasurementScreen(navController: NavHostController) {
                 for (c in 0 until 3) {
                     val index = r * 3 + c
                     if (index < buttonList.size) {
-                        androidx.compose.material3.Button(
+                        Button(
                             onClick = {
                                 navController.navigate(buttonList[index].dst) {
                                     popUpTo(popUpToId)
                                 }
                             },
-                            modifier = androidx.compose.ui.Modifier
+                            modifier = Modifier
                                 .height(75.dp)
                                 .weight(1f)
                                 .padding(8.dp, 8.dp),
-                            shape = androidx.compose.ui.graphics.RectangleShape
+                            shape = RectangleShape
                         ) {
-                            androidx.compose.material3.Text(text = buttonList[index].buttonName)
+                            Text(text = buttonList[index].buttonName)
                         }
                     } else {
                         Spacer(modifier = Modifier.weight(1f))
@@ -70,8 +74,8 @@ fun MeasurementScreen(navController: NavHostController) {
 
 @Preview
 @Composable
-fun MeasurementScreenPreview() {
+fun SystemScreenPreview() {
     VIPAM3500Theme {
-        MeasurementScreen(rememberNavController())
+        SystemScreen(rememberNavController())
     }
 }

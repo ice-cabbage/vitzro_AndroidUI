@@ -165,6 +165,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("measurement") {
             MeasurementScreen(navController)
         }
+        composable("system") {
+            SystemScreen(navController)
+        }
         composable("power") {
             PowerScreen(viewModel)
         }

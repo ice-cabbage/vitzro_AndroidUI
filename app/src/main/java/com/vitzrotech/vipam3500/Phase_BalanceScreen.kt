@@ -22,34 +22,7 @@ data class Balance (
 
 @Composable
 fun Phase_BalanceScreen(viewModel: SharedViewModel) {
-    val balance = arrayOf()
 
-    LazyColumn(
-        Modifier
-            .fillMaxWidth()
-            .padding(16.dp)
-            .border(2.dp, Color.Black)) {
-        items(balance.size) {
-            val v = balance[it]
-            Row(Modifier.fillMaxWidth()) {
-                Text(v.name,
-                    Modifier
-                        .border(1.dp, Color.Black)
-                        .weight(0.5f)
-                        .padding(10.dp),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    "${v.watt.toUnitString("%.02f", "%")}",
-                    Modifier
-                        .border(1.dp, Color.Black)
-                        .weight(0.4f)
-                        .padding(10.dp),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
 }
 
 @Preview

@@ -159,8 +159,8 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("relay") {
             RelayScreen(viewModel)
         }
-        composable("site") {
-            SiteScreen()
+        composable("local") {
+            LocalScreen()
         }
         composable("measurement") {
             MeasurementScreen(navController)

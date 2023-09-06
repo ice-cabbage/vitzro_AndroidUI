@@ -219,6 +219,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("PLC_IO_Memory") {
             PLC_IO_MemoryScreen(viewModel)
         }
+        composable("Setting_Group") {
+            SettingGroupScreen(viewModel)
+        }
     }
 }
 

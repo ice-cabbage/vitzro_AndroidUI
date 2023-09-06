@@ -168,6 +168,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("system") {
             SystemScreen(navController)
         }
+        composable("log") {
+            LogScreen(navController)
+        }
         composable("power") {
             PowerScreen(viewModel)
         }

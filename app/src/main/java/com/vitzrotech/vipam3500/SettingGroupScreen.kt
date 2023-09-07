@@ -7,7 +7,7 @@ import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 @Composable
 fun SettingGroupScreen(viewModel: SharedViewModel) {
-    
+
 }
 
 @Preview

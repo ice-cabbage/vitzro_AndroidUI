@@ -1,5 +1,6 @@
 package com.vitzrotech.vipam3500
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -53,7 +54,7 @@ fun RelayMenuScreen(navController: NavHostController) {
         RelayItem("ROCOF", "ROCOF"),
         RelayItem("SEF", "SEF")
     )
-    LazyColumn {
+    Column {
         for (r in 0 until 3) {
             Row {
                 for (c in 0 until 3) {

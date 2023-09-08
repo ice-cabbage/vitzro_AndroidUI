@@ -74,6 +74,7 @@ fun MeasurementScreen(navController: NavHostController) {
                     ) {
                         Text(text = item.buttonName)
                     }
+                    Spacer(modifier = Modifier.weight(2f))
                 }
             }
         }

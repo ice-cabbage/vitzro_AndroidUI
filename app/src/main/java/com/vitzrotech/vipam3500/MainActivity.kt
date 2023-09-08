@@ -567,26 +567,12 @@ fun MainCompose(
     }
 }
 
-fun NavigationBarItem(navController: NavHostController, popUpToId: String) {
-    var isDialogVisible by remember { mutableStateOf(false) }
 
-    if(isDialogVisible) {
-        PasswordDialog(
-            onDismiss = { isDialogVisible = false },
-            onPasswordEntered = {
-                navController.navigate("relay") {
-                    popUpTo(popUpToId)
-                }
-            }
-        )
-    }
-    NavigationBarItem(
-        route = "local",
-        onClick = {
-            if ("0000")
-        }
-    )
-}
+//이거 어떻게 하는지 모르겠다
+//Local 버튼을 클릭하면 비밀번호 입력 창이 떠야하고
+//비밀번호는 0000으로 세팅해놓고
+//0000입력 받으면 toast 메시지 띄우고 싶은데
+//어케하누
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview

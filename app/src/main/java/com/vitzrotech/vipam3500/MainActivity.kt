@@ -538,7 +538,9 @@ fun MainCompose(
                             }
                         }
                     }
-                }
+                },
+
+
 
             ) {
                 Column(
@@ -563,6 +565,27 @@ fun MainCompose(
             }
         }
     }
+}
+
+fun NavigationBarItem(navController: NavHostController, popUpToId: String) {
+    var isDialogVisible by remember { mutableStateOf(false) }
+
+    if(isDialogVisible) {
+        PasswordDialog(
+            onDismiss = { isDialogVisible = false },
+            onPasswordEntered = {
+                navController.navigate("relay") {
+                    popUpTo(popUpToId)
+                }
+            }
+        )
+    }
+    NavigationBarItem(
+        route = "local",
+        onClick = {
+            if ("0000")
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -219,6 +219,33 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Setting_Group") {
             SettingGroupScreen(viewModel)
         }
+        composable("COS_Log") {
+            COS_LogScreen(viewModel)
+        }
+        composable("SOE_Log") {
+            SOE_LogScreen(viewModel)
+        }
+        composable("Demand_LogScreen") {
+            Demand_LogScreen(viewModel)
+        }
+        composable("Fault_List") {
+            Fault_ListScreen(viewModel)
+        }
+        composable("PQ_Log") {
+            PQ_LogScreen(viewModel)
+        }
+        composable("DO_Count") {
+            DO_CountScreen(viewModel)
+        }
+        composable("CB_OperationCount") {
+            CB_OperationCount_Screen(viewModel)
+        }
+        composable("SMS_Log") {
+            SMS_LogScreen(viewModel)
+        }
+        composable("Operation_Time") {
+            Operation_TimeScreen(viewModel)
+        }
     }
 }
 

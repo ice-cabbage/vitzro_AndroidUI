@@ -159,9 +159,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("relay") {
             RelayScreen(viewModel)
         }
-        composable("local") {
-            LocalScreen()
-        }
         composable("measurement") {
             MeasurementScreen(navController)
         }
@@ -254,7 +251,7 @@ object DrawerParams {
             R.string.system_description
         ),
         AppDrawerItemInfo(
-            "relay",
+            "relaymenu",
             R.string.relay,
             R.drawable.ic_relay,
             R.string.relay_description
@@ -486,20 +483,20 @@ fun MainCompose(
                             },
                             label = { Text(stringResource(R.string.relay)) }
                         )
-                        NavigationBarItem(route == "site",
+                        NavigationBarItem(route == "local",
                             onClick = {
-                                navController.navigate("site") {
+                                navController.navigate("local") {
                                     popUpTo(popUpToId)
                                 }
                             },
                             icon = {
                                 Icon(
-                                    painterResource(R.drawable.ic_site),
-                                    contentDescription = stringResource(R.string.site_description),
+                                    painterResource(R.drawable.ic_local),
+                                    contentDescription = stringResource(R.string.local_description),
                                     modifier = Modifier.size(32.dp)
                                 )
                             },
-                            label = { Text(stringResource(R.string.site)) }
+                            label = { Text(stringResource(R.string.local)) }
                         )
                     }
                 },

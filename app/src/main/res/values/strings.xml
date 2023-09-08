@@ -24,8 +24,8 @@
     <string name="settings_description">Settings button</string>
     <string name="simulation_test">Simulation_Test</string>
     <string name="simulation_test_description">simulation_test Menu</string>
-    <string name="site">Site</string>
-    <string name="site_description">Site Operation</string>
+    <string name="local">Local</string>
+    <string name="local_description">Local Operation</string>
     <string name="subscribe">Subscribe</string>
     <string name="system">System</string>
     <string name="system_description">System Menu</string>

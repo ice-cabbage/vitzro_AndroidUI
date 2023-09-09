@@ -7,4 +7,9 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="hmc_1st">#FFcff8f6</color>
+    <color name="hmc_2nd">#FF94d4d4</color>
+    <color name="hmc_3rd">#FF88d4bb</color>
+    <color name="hmc_4th">#FF76aeaf</color>
+    <color name="hmc_5th">#FF2a6d82</color>
 </resources>

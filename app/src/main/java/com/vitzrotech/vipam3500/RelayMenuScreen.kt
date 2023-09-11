@@ -1,22 +1,24 @@
 package com.vitzrotech.vipam3500
 
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Text
 
 data class RelayItem(
     val buttonName: String = "",
@@ -54,28 +56,30 @@ fun RelayMenuScreen(navController: NavHostController) {
         RelayItem("ROCOF", "ROCOF"),
         RelayItem("SEF", "SEF")
     )
-    Column {
-        for (r in 0 until 3) {
-            Row {
-                for (c in 0 until 3) {
-                    val index = r * 3 + c
-                    if (index < buttonList.size) {
-                        Button(
-                            onClick = {
-                                navController.navigate(buttonList[index].dst) {
-                                    popUpTo(popUpToId)
-                                }
-                            },
-                            modifier = Modifier
-                                .height(95.dp)
-                                .weight(1f)
-                                .padding(9.dp, 9.dp),
-                            shape = RectangleShape
-                        ) {
-                            Text(text = buttonList[index].buttonName)
-                        }
-                    } else {
-                        Spacer(modifier = Modifier.weight(1f))
+    val gridItems = buttonList.chunked(3)
+    LazyColumn {
+        items(gridItems) { rowItems ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                for (item in rowItems) {
+                    val modifier = Modifier
+                        .height(75.dp)
+                        .width(100.dp)
+                        .weight(1f)
+                        .padding(8.dp)
+
+                    Button (
+                        onClick = {
+                            navController.navigate(item.dst) {
+                                popUpTo(popUpToId)
+                            }
+                        },
+                        modifier = modifier,
+                        shape = androidx.compose.ui.graphics.RectangleShape
+                    ) {
+                        Text(text = item.buttonName)
                     }
                 }
             }

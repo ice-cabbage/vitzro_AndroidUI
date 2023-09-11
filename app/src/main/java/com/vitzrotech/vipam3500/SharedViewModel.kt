@@ -115,6 +115,12 @@ class SharedViewModel : ViewModel() {
     val hcfIA = mutableStateOf(0.0f)
     val hcfIB = mutableStateOf(0.0f)
     val hcfIC = mutableStateOf(0.0f)
+    val seqV1 = mutableStateOf(0.0f)
+    val seqV2 = mutableStateOf(0.0f)
+    val seqV3 = mutableStateOf(0.0f)
+    val seqA1 = mutableStateOf(0.0f)
+    val seqA2 = mutableStateOf(0.0f)
+    val seqA3 = mutableStateOf(0.0f)
 
     val cb1 = mutableStateOf(0x0u)
     val cb2 = mutableStateOf(0x0u)
@@ -367,6 +373,12 @@ class SharedViewModel : ViewModel() {
             "MI/MMXU/VA/phsA/val/mag" -> vaAMag.value = value
             "MI/MMXU/VA/phsB/val/mag" -> vaBMag.value = value
             "MI/MMXU/VA/phsC/val/mag" -> vaCMag.value = value
+            "MI/MSQI/SeqV/c1/mag" -> seqV1.value = value
+            "MI/MSQI/SeqV/c2/mag" -> seqV2.value = value
+            "MI/MSQI/SeqV/c3/mag" -> seqV3.value = value
+            "MI/MSQI/SeqA/c1/mag" -> seqA1.value = value
+            "MI/MSQI/SeqA/c2/mag" -> seqA2.value = value
+            "MI/MSQI/SeqA/c3/mag" -> seqA3.value = value
             "MI/MMTR/Wh/phsA/actVal/High" -> { whAH = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }
             "MI/MMTR/Wh/phsA/actVal/Low" -> { whAL = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }
             "MI/MMTR/Wh/phsA/actVal/Giga" -> { whAG = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }

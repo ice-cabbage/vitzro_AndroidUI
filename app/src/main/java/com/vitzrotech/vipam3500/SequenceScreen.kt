@@ -25,7 +25,44 @@ data class Sequence (
 
 @Composable
 fun SequenceScreen(viewModel: SharedViewModel) {
+    val seqV1 by remember { viewModel.seqV1 }
+    val seqV2 by remember { viewModel.seqV2 }
+    val seqV3 by remember { viewModel.seqV3 }
+    val seqA1 by remember { viewModel.seqA1 }
+    val seqA2 by remember { viewModel.seqA1 }
+    val seqA3 by remember { viewModel.seqA3 }
 
+    val seq = arrayOf(
+        Sequence("PSeq Vol : ", seqV1, "V"),
+        Sequence("NSeq Vol : ", seqV2, "V"),
+        Sequence("ZSeq Vol : ", seqV3, "V"),
+        Sequence("PSeq Cur : ", seqA1, "A"),
+        Sequence("NSeq Cur : ", seqA2, "A"),
+        Sequence("ZSeq Cur : ", seqA3, "A")
+    )
+    LazyColumn(
+        Modifier
+            .fillMaxWidth()
+            .padding(20.dp)) {
+        items(seq.size) {
+            val v = seq[it]
+            Row(Modifier.fillMaxWidth()) {
+                Text(v.name,
+                    Modifier
+                        .weight(0.5f)
+                        .padding(24.dp, 10.dp),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    "${v.volt.toUnitString("%.02f", v.unit)}",
+                    Modifier
+                        .weight(0.4f)
+                        .padding(24.dp, 10.dp),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
 }
 
 @Preview

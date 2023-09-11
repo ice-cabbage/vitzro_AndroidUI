@@ -59,7 +59,7 @@ fun MeasurementScreen(navController: NavHostController) {
                         .height(75.dp)
                         .width(100.dp)
                         .weight(1f)
-                        .padding(8.dp, 8.dp)
+                        .padding(10.dp, 10.dp)
 
                     Button(
                         onClick = {

@@ -246,6 +246,12 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Operation_Time") {
             Operation_TimeScreen(viewModel)
         }
+        composable("Simulation_Test") {
+            Simulation_TestScreen(viewModel)
+        }
+        composable("Company") {
+            CompanyScreen(viewModel)
+        }
     }
 }
 

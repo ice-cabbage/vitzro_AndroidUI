@@ -17,10 +17,8 @@ import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.ui.graphics.Color
 
 data class MenuItem(
     val buttonName : String = "",

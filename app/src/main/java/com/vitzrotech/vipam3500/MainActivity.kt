@@ -252,6 +252,10 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Company") {
             CompanyScreen(viewModel)
         }
+        composable("Local") {
+            LocalScreen()
+            //파라미터를 어떻게 줘야 할까요
+        }
     }
 }
 

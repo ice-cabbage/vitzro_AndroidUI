@@ -252,9 +252,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Company") {
             CompanyScreen(viewModel)
         }
-        composable("Local") {
-            LocalScreen()
-        }
     }
 }
 

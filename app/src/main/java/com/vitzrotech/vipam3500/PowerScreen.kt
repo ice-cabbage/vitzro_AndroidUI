@@ -4,6 +4,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Row
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
@@ -54,24 +55,23 @@ fun PowerScreen(viewModel: SharedViewModel) {
     LazyColumn(
         Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .border(2.dp, Color.Black)) {
+            .padding(16.dp)) {
         items(power.size) {
             val v = power[it]
             Row(Modifier.fillMaxWidth()) {
                 Text(v.name,
                     Modifier
-                        .border(1.dp, Color.Black)
-                        .weight(0.5f)
-                        .padding(10.dp),
+                        .weight(0.4f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
                     textAlign = TextAlign.Center
                 )
                 Text(
                     "${v.watt.toUnitString("%.02f", v.unit)}",
                     Modifier
-                        .border(1.dp, Color.Black)
-                        .weight(0.4f)
-                        .padding(10.dp),
+                        .weight(0.3f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
                     textAlign = TextAlign.Center
                 )
             }

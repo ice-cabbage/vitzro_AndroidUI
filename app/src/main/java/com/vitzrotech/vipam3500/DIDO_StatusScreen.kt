@@ -19,14 +19,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 @Composable
-fun DIDO_StatusScreen(viewModel: SharedViewModel) {
+fun DIDO_Screen(viewModel: SharedViewModel) {
 
 }
 
 @Preview
 @Composable
-fun DIDO_StatusScreenPreview() {
+fun DIDO_ScreenPreview() {
     VIPAM3500Theme {
-        DIDO_StatusScreen(viewModel())
+        DIDO_Screen(viewModel())
     }
 }

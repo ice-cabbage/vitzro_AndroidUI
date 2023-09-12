@@ -18,50 +18,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
-data class AI(
-    val ai: String = "",
-    val value: UInt = 0x0u,
-    val temp: String = ""
-)
-
 @Composable
 fun AI_TDScreen(viewModel: SharedViewModel) {
-    val diStatus2 by remember { viewModel.diStatus2 }
-    val diStatus1 by remember { viewModel.diStatus1 }
-    val doStatus2 by remember { viewModel.doStatus2 }
-    val doStatus1 by remember { viewModel.doStatus1 }
 
-    val status = arrayOf(
-        AI("AI 1", diStatus2, "-"),
-        AI("AI 2", diStatus1, "-"),
-        AI("AI 3", doStatus2, "-"),
-        AI("AI 4", doStatus1, "-")
-    )
-    LazyColumn(
-        Modifier
-            .fillMaxWidth()
-            .padding(16.dp)) {
-        items(status.size) {
-            val v = status[it]
-            Row(Modifier.fillMaxWidth()) {
-                Text(v.ai,
-                    Modifier
-                        .weight(0.4f)
-                        .padding(40.dp)
-                        .border(0.6.dp, Color.Black),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    "${v.value.toUnitString("%.02f", v.temp)}",
-                    Modifier
-                        .weight(0.3f)
-                        .height(40.dp)
-                        .border(0.6.dp, Color.Black),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
 }
 
 @Preview

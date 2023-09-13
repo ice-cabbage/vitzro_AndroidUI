@@ -121,6 +121,39 @@ class SharedViewModel : ViewModel() {
     val seqA1 = mutableStateOf(0.0f)
     val seqA2 = mutableStateOf(0.0f)
     val seqA3 = mutableStateOf(0.0f)
+    val rmsVa = mutableStateOf(0.0f)
+    val rmsVb = mutableStateOf(0.0f)
+    val rmsVc = mutableStateOf(0.0f)
+    val rmsVn = mutableStateOf(0.0f)
+    val rmsIa = mutableStateOf(0.0f)
+    val rmsIb = mutableStateOf(0.0f)
+    val rmsIc = mutableStateOf(0.0f)
+    val rmsIn = mutableStateOf(0.0f)
+    val rms = mutableStateOf(0.0f)
+
+    val lmbVa = mutableStateOf(0.0f)
+    val lmbVb = mutableStateOf(0.0f)
+    val lmbVc = mutableStateOf(0.0f)
+    val lmbVab = mutableStateOf(0.0f)
+    val lmbVbc = mutableStateOf(0.0f)
+    val lmbVca = mutableStateOf(0.0f)
+    val lmbNgv = mutableStateOf(0.0f)
+    val lmbZroV = mutableStateOf(0.0f)
+    val lmbla = mutableStateOf(0.0f)
+    val lmblb = mutableStateOf(0.0f)
+    val lmblc = mutableStateOf(0.0f)
+    val lmbNgA = mutableStateOf(0.0f)
+    val lmbZroA = mutableStateOf(0.0f)
+
+    val ka = mutableStateOf(0.0f)
+    val kb = mutableStateOf(0.0f)
+    val kc = mutableStateOf(0.0f)
+    val eleca = mutableStateOf(0.0f)
+    val elecb = mutableStateOf(0.0f)
+    val elecc = mutableStateOf(0.0f)
+    val vola = mutableStateOf(0.0f)
+    val volb = mutableStateOf(0.0f)
+    val volc = mutableStateOf(0.0f)
 
     val cb1 = mutableStateOf(0x0u)
     val cb2 = mutableStateOf(0x0u)
@@ -379,6 +412,30 @@ class SharedViewModel : ViewModel() {
             "MI/MSQI/SeqA/c1/mag" -> seqA1.value = value
             "MI/MSQI/SeqA/c2/mag" -> seqA2.value = value
             "MI/MSQI/SeqA/c3/mag" -> seqA3.value = value
+            "MI/MMXUT/PhV/phsA/val/mag" -> rmsVa.value = value
+            "MI/MMXUT/PhV/phsB/val/mag" -> rmsVb.value - value
+            "MI/MMXUT/PhV/phsC/val/mag" -> rmsVc.value = value
+            "MI/MMXUT/PhV/neut/val/mag" -> rmsVn.value = value
+            "MI/MMXUT/A/phsA/val/mag" -> rmsIa.value = value
+            "MI/MMXUT/A/phsB/val/mag" -> rmsIb.value = value
+            "MI/MMXUT/A/phsC/val/mag" -> rmsIc.value = value
+            "MI/MMXUT/A/neut/val/mag" -> rmsIn.value = value
+            "MI/MMXUT/PhV/res/val/mag" -> rms.value = value
+
+            "MI/MSQI/ImbV/phsA/val/mag" -> lmbVa.value = value
+            "MI/MSQI/ImbV/phsB/val/mag" -> lmbVb.value = value
+            "MI/MSQI/ImbV/phsC/val/mag" -> lmbVc.value = value
+            "MI/MSQI/ImbPPV/phsAB/val/mag" -> lmbVab.value = value
+            "MI/MSQI/ImbPPV/phsBC/val/mag" -> lmbVbc.value = value
+            "MI/MSQI/ImbPPV/phsCA/val/mag" -> lmbVca.value = value
+            "MI/MSQI/ImbNgV/mag" -> lmbNgv.value = value
+            "MI/MSQI/ImbZroV/mag" -> lmbZroV.value = value
+            "MI/MSQI/ImbA/phsA/val/mag" -> lmbla.value = value
+            "MI/MSQI/ImbA/phsB/val/mag" -> lmblb.value = value
+            "MI/MSQI/ImbA/phsC/val/mag" -> lmblc.value = value
+            "MI/MSQI/ImbNgA/mag" -> lmbNgA.value = value
+            "MI/MSQI/ImbZroA/mag" -> lmbZroA.value = value
+
             "MI/MMTR/Wh/phsA/actVal/High" -> { whAH = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }
             "MI/MMTR/Wh/phsA/actVal/Low" -> { whAL = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }
             "MI/MMTR/Wh/phsA/actVal/Giga" -> { whAG = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }

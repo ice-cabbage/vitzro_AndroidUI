@@ -155,6 +155,11 @@ class SharedViewModel : ViewModel() {
     val volb = mutableStateOf(0.0f)
     val volc = mutableStateOf(0.0f)
 
+    val lev = mutableStateOf(0.0f)
+    val ia = mutableStateOf(0.0f)
+    val ib = mutableStateOf(0.0f)
+    val ic = mutableStateOf(0.0f)
+
     val cb1 = mutableStateOf(0x0u)
     val cb2 = mutableStateOf(0x0u)
     val diStatus1 = mutableStateOf(0x0u)
@@ -435,6 +440,11 @@ class SharedViewModel : ViewModel() {
             "MI/MSQI/ImbA/phsC/val/mag" -> lmblc.value = value
             "MI/MSQI/ImbNgA/mag" -> lmbNgA.value = value
             "MI/MSQI/ImbZroA/mag" -> lmbZroA.value = value
+
+            "MI/MMXU/Thermal/mag" -> lev.value = value
+            "MI/MMXU/LoadRate/phsA/val/mag" -> ia.value = value
+            "MI/MMXU/LoadRate/phsB/val/mag" -> ib.value = value
+            "MI/MMXU/LoadRate/phsC/val/mag" -> ic.value = value
 
             "MI/MMTR/Wh/phsA/actVal/High" -> { whAH = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }
             "MI/MMTR/Wh/phsA/actVal/Low" -> { whAL = value; whA.value = convertEnergyValue(whAH, whAL, whAG) }

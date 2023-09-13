@@ -181,7 +181,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             ReverseEnergyScreen(viewModel)
         }
         composable("DI/DO_Status") {
-            DIDO_StatusScreen(viewModel)
+            //DIDO_StatusScreen(viewModel)
         }
         composable("AI_TD") {
             AI_TDScreen(viewModel)
@@ -252,10 +252,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Company") {
             CompanyScreen(viewModel)
         }
-        //composable("Local") {
-            //LocalScreen()
-            //파라미터를 어떻게 줘야 할까요
-        //}
+        composable("relay_Status") {
+            RelayStatus_Screen(viewModel)
+        }
     }
 }
 

@@ -4,12 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chart_week"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp" />
 </LinearLayout>
-
-<com.github.mikephil.charting.charts.BarChart
-android:id="@+id/chart_week"
-android:layout_width="match_parent"
-android:layout_height="300dp"
-android:layout_marginStart="16dp"
-android:layout_marginTop="8dp"
-android:layout_marginEnd="16dp" />

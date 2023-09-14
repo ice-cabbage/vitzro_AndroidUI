@@ -82,7 +82,7 @@ fun Phase_BalanceScreen(viewModel: SharedViewModel) {
     }
 }
 
-@Preview
+@Preview(showBackground = true, widthDp = 200, heightDp = 100)
 @Composable
 fun Phase_BalanceScreenPreview() {
     VIPAM3500Theme {

@@ -54,7 +54,7 @@ fun AI_TDScreen(viewModel: SharedViewModel) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    "${v.ma.toUnitString("%.02f", v.temp)}",
+                    "${v.ma.toUnitString("%.02f", "")}",
                     Modifier
                         .weight(0.3f)
                         .height(40.dp)

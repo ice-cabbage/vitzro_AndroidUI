@@ -195,9 +195,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("phase_Balance") {
             Phase_BalanceScreen(viewModel)
         }
-        composable("harmonics") {
-            HarmonicScreen(viewModel)
-        }
+        //composable("harmonics") {
+        //    HarmonicScreen(viewModel)
+        //}
         composable("k-factor/c-factor") {
             K_C_factorScreen(viewModel)
         }

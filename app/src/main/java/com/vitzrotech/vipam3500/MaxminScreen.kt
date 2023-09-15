@@ -20,9 +20,16 @@ import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 data class Max (
     val name: String = "",
+    val year: Int = 0,
+    val mon: Int = 0,
+    val day: Int = 0,
+    val hour: Int = 0,
+    val minute: Int = 0,
+    val sec: Int = 0,
+    val ms: Int = 0,
     val flva: Float = 0.0f,
-    val inva: Int = 0,
-    val unit: String = ""
+    val unit: String = "",
+    val phase: Float = 0.0f
 )
 
 //이리노 존나 사랑해 시발
@@ -112,6 +119,80 @@ fun MaxminScreen(viewModel: SharedViewModel) {
     val minWattMin by remember { viewModel.minWattMin }
     val minWattS by remember { viewModel.minWattS }
     val minWattms by remember { viewModel.minWattms }
+
+    val maxVar by remember { viewModel.maxVar }
+    val maxVarPh by remember { viewModel.maxVarPh }
+    val maxVarY by remember { viewModel.maxVarY }
+    val maxVarMon by remember { viewModel.maxVarMon }
+    val maxVarD by remember { viewModel.maxVarD }
+    val maxVarH by remember { viewModel.maxVarH }
+    val maxVarMin by remember { viewModel.maxVarMin }
+    val maxVarS by remember { viewModel.maxVarS }
+    val maxVarms by remember { viewModel.maxVarms }
+
+    val minVar by remember { viewModel.minVar }
+    val minVarPh by remember { viewModel.minVarPh }
+    val minVarY by remember { viewModel.minVarY }
+    val minVarMon by remember { viewModel.minVarMon }
+    val minVarD by remember { viewModel.minVarD }
+    val minVarH by remember { viewModel.minVarH }
+    val minVarMin by remember { viewModel.minVarMin }
+    val minVarS by remember { viewModel.minVarS }
+    val minVarms by remember { viewModel.minVarms }
+
+    val min = arrayOf (
+        Max("Max Current", maxCurY, maxCurMon, maxCurD, maxCurH, maxCurMin, maxCurS, maxCurms, maxCur, "A", maxCurPh),
+        Max("Min Current", minCurY, minCurMon, minCurD, minCurH, minCurMin, minCurS, minCurms, minCur, "A", minCurPh),
+        Max("Max Voltage", maxVolY, maxVolMon, maxVolD, maxVolH, maxVolMin, maxVolS, maxVolms, maxVol, "V", maxVolPh),
+        Max("Min Voltage", minVolY, minVolMon, minVolD, minVolH, minVolMin, minVolS, minVolms, minVol, "V", minVolPh),
+        Max("Max Freq", maxFreqY, maxFreqMon, maxFreqD, maxFreqH, maxFreqMin, maxFreqS, maxFreqms, maxFreq, "Hz", maxFreqPh),
+        Max("Min Freq", minFreqY, minFreqMon, minFreqD, minFreqH, minFreqMin, minFreqS, minFreqms, minFreq, "Hz", minFreqPh),
+        Max("Max Watt", maxWattY, maxWattMon, maxWattD, maxWattH, maxWattMin, maxWattS, maxWattms, maxWatt, "W", maxWattPh),
+        Max("Min Watt", minWattY, minWattMon, minWattD, minWattH, minWattMin, minWattS, minWattms, minWatt, "W", minWattPh),
+        Max("Max Var", maxVarY, maxVarMon, maxVarD, maxVarH, maxVarMin, maxVarS, maxVarms, maxVar, "Var", maxVarPh),
+        Max("Min Var", minVarY, minVarMon, minVarD, minVarH, minVarMin, minVarS, minVarms, minVar, "Var", minVarPh)
+    )
+    LazyColumn(
+        Modifier
+            .fillMaxWidth()
+            .padding(16.dp)) {
+        items(min.size) {
+            val v = min[it]
+            Row(Modifier.fillMaxWidth()) {
+                Text(v.name,
+                    Modifier
+                        .weight(0.4f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    "${v.year},${v.mon},${v.day},${v.hour},${v.minute},${v.sec},${v.ms}",
+                    Modifier
+                        .weight(0.4f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    "${v.flva.toUnitString("%.02f", v.unit)}",
+                    Modifier
+                        .weight(0.3f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    "${v.phase.toUnitString("%.02f", "")}",
+                    Modifier
+                        .weight(0.2f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+    }
 }
 
 @Preview

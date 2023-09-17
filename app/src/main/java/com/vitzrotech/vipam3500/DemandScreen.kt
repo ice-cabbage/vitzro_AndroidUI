@@ -34,7 +34,7 @@ data class Mand (
 
 @Composable
 fun DemandScreen(viewModel: SharedViewModel) {
-    
+
 }
 
 @Preview

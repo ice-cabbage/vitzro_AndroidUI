@@ -18,9 +18,23 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
+data class Mand (
+    val name: String = "",
+    val year: Int = 0,
+    val mon: Int = 0,
+    val day: Int = 0,
+    val hour: Int = 0,
+    val min: Int = 0,
+    val sec: Int = 0,
+    val ms: Int = 0,
+    val flva: Float = 0.0f,
+    val unit: String = "",
+    val phase: Float = 0.0f
+)
+
 @Composable
 fun DemandScreen(viewModel: SharedViewModel) {
-
+    
 }
 
 @Preview

@@ -43,7 +43,8 @@ fun MeasurementScreen(navController: NavHostController) {
         MenuItem("true_RMS", "true_RMS"),
         MenuItem("relay_Status", "relay_Status"),
         MenuItem("interlock_Status", "interlock_Status"),
-        MenuItem("PLC_IO_Memory", "PLC_IO_Memory")
+        MenuItem("PLC_IO_Memory", "PLC_IO_Memory"),
+        MenuItem("oscilloscope", "oscilloscope")
     )
     val gridItems = buttonList.chunked(3)
 

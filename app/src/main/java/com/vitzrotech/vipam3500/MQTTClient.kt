@@ -25,20 +25,7 @@ class MQTTClient(context: Context, serverURI: String, clientID: String = "") {
 
     val defaultCbClient = object : MqttCallback {
         override fun messageArrived(topic: String?, message: MqttMessage?) {
-            if (topic != null) {
-                if (message != null) {
-                    val str = message.toString()
-                    if (str.matches(Regex("^[\\p{Nd}]+$")))  {
-                        topics.put(topic, str.toInt())
-                    } else if (str.matches(Regex("^[\\p{Nd}]+[.][\\p{Nd}Ee]+$"))) {
-                        topics.put(topic, str.toFloat())
-                    } else if (str.startsWith("0x")) {
-                        topics.put(topic, str.drop(2).toUInt(16))
-                    } else {
-                        topics.put(topic, str)
-                    }
-                }
-            }
+            Log.d(this.javaClass.name, "Message arrived $topic: ${message.toString()}")
         }
 
         override fun connectionLost(cause: Throwable?) {
@@ -98,7 +85,7 @@ class MQTTClient(context: Context, serverURI: String, clientID: String = "") {
         try {
             mqttClient.connect(options, null, cbConnect)
         } catch (e: MqttException) {
-            Log.d("connect error", e.toString())
+            e.printStackTrace()
         }
     }
 
@@ -107,8 +94,8 @@ class MQTTClient(context: Context, serverURI: String, clientID: String = "") {
     }
 
     fun subscribe(topic:        String,
-        qos:         Int                 = 1,
-        cbSubscribe: IMqttActionListener = defaultCbSubscribe) {
+                  qos:          Int                 = 1,
+                  cbSubscribe: IMqttActionListener = defaultCbSubscribe) {
         try {
             mqttClient.subscribe(topic, qos, null, cbSubscribe)
         } catch (e: MqttException) {

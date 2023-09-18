@@ -255,6 +255,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("relay_Status") {
             RelayStatus_Screen(viewModel)
         }
+        composable("oscilloscope") {
+            OscilloscopeScreen(viewModel)
+        }
     }
 }
 

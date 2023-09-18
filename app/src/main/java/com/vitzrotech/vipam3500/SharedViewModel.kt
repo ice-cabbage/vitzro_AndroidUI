@@ -3,6 +3,8 @@ package com.vitzrotech.vipam3500
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlin.collections.ArrayDeque
 
 class SharedViewModel : ViewModel() {
     val totW = mutableStateOf(0.0f)

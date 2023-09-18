@@ -2,6 +2,7 @@ package com.vitzrotech.vipam3500
 
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class SharedViewModel : ViewModel() {
     val totW = mutableStateOf(0.0f)
@@ -115,6 +116,7 @@ class SharedViewModel : ViewModel() {
     val hcfIA = mutableStateOf(0.0f)
     val hcfIB = mutableStateOf(0.0f)
     val hcfIC = mutableStateOf(0.0f)
+
     val seqV1 = mutableStateOf(0.0f)
     val seqV2 = mutableStateOf(0.0f)
     val seqV3 = mutableStateOf(0.0f)
@@ -823,7 +825,65 @@ class SharedViewModel : ViewModel() {
         }
     }
 
-    fun messageArrived(topic: String, value: String) {
+    fun messageArrived(topic: String, value: IntArray) {
+        when (topic) {
+            "sampled_value" -> {
+                for (i in value.indices step 6)
+                    addWaveData(value.copyOfRange(i, i  + 6))
+            }
+        }
+    }
+
+    private val svData = ArrayDeque<Int>()
+    private val _oscilloscopeState = MutableStateFlow(OscilloscopeState())
+    val oscilloscopeState = _oscilloscopeState.asStateFlow()
+
+    private fun addWaveData(value: IntArray) {
+        value.forEach {
+            svData.add(it)
+        }
+        while (svData.size > _oscilloscopeState.value.n * 6)
+            svData.removeFirst()
+        if (svData.size == _oscilloscopeState.value.n * 6) {
+            var pos = _oscilloscopeState.value.n / 2 + _oscilloscopeState.value.p * 36 / 10000
+            if (pos < 1) pos = 1
+            else if (pos >= _oscilloscopeState.value.n) pos = _oscilloscopeState.value.n - 1
+            val level = (_oscilloscopeState.value.level * 100).toInt()
+            val edge = _oscilloscopeState.value.edge
+            if (((edge == 0 || edge == 1) && svData[pos * 6 - 6] < level && svData[pos * 6] >= level) ||
+                ((edge == 0 || edge == 2) && svData[pos * 6 - 6] > level && svData[pos * 6] <= level)
+            ) {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(
+                    svData = svData.toArray(Array(svData.size) { 0 })
+                )
+            }
+        }
+    }
+
+    fun onOscilloscopeEvent(event: OscilloscopeEvent) {
+        when(event) {
+            is OscilloscopeEvent.Apply -> {
+                _oscilloscopeState.value = event.value
+            }
+            is OscilloscopeEvent.VaEnableChanged -> {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(vaEnable = event.value)
+            }
+            is OscilloscopeEvent.VbEnableChanged -> {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(vbEnable = event.value)
+            }
+            is OscilloscopeEvent.VcEnableChanged -> {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(vcEnable = event.value)
+            }
+            is OscilloscopeEvent.IaEnableChanged -> {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(iaEnable = event.value)
+            }
+            is OscilloscopeEvent.IbEnableChanged -> {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(ibEnable = event.value)
+            }
+            is OscilloscopeEvent.IcEnableChanged -> {
+                _oscilloscopeState.value = _oscilloscopeState.value.copy(icEnable = event.value)
+            }
+        }
     }
 }
 

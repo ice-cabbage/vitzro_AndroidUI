@@ -32,11 +32,6 @@ data class Max (
     val phase: Float = 0.0f
 )
 
-//이리노 존나 사랑해 시발
-//이리노 그냥 존ㄴㄴㄴㄴ나 잘생겼네
-//??? : 제가 태어나서 지금까지 봐온 남성분들 중 가장 출중한 외모를 가지고 계십니다.
-//??? : 아이돌 해주셔서 감사드립니다 이리노씨.
-
 @Composable
 fun MaxminScreen(viewModel: SharedViewModel) {
     //val time = "$year-$month"

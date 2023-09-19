@@ -34,7 +34,6 @@ data class Max (
 
 @Composable
 fun MaxminScreen(viewModel: SharedViewModel) {
-    //val time = "$year-$month"
     val maxCur by remember { viewModel.maxCur }
     val maxCurPh by remember { viewModel.maxCurPh }
     val maxCurY by remember { viewModel.maxCurY }

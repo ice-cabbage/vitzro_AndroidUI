@@ -835,9 +835,13 @@ class SharedViewModel : ViewModel() {
             "MI/MSQI/ImbNgA/mag" -> lmbNgA.value = value
             "MI/MSQI/ImbZroA/mag" -> lmbZroA.value = value
 
+            //열상태
             "MI/MMXU/Thermal/mag" -> lev.value = value
+            //부하율 전류 A상
             "MI/MMXU/LoadRate/phsA/val/mag" -> ia.value = value
+            //부하율 전류 B상
             "MI/MMXU/LoadRate/phsB/val/mag" -> ib.value = value
+            //부하율 전류 C상
             "MI/MMXU/LoadRate/phsC/val/mag" -> ic.value = value
 
             "MI/MMXU/AIch1_deg/mag" -> ma1.value = value

@@ -254,41 +254,6 @@ fun DemandScreen(viewModel: SharedViewModel) {
         }
     }
 }
-    //LazyColumn(
-        //Modifier
-            //.fillMaxWidth()
-            //.padding(16.dp)) {
-        //items(and.size) {
-            //val v = and[it]
-            //Row(Modifier.fillMaxWidth()) {
-                //Text(v.bName,
-                    //Modifier
-                        //.weight(0.6f)
-                        //.height(40.dp)
-                        //.border(0.6.dp, Color.Black),
-                    //textAlign = TextAlign.Center
-                //)
-                //Text(
-                    //"${v.bYear},${v.bMon},${v.bDay},${v.bHour},${v.bMin},${v.bSec},${v.bMs}",
-                    //Modifier
-                        //.weight(0.5f)
-                        //.height(40.dp)
-                        //.border(0.6.dp, Color.Black),
-                    //textAlign = TextAlign.Center
-                //)
-                //Text(
-                    //"${v.bFlva.toUnitString("%.02f", v.bUnit)}",
-                    //Modifier
-                        //.weight(0.3f)
-                        //.height(40.dp)
-                        //.border(0.6.dp, Color.Black),
-                    //textAlign = TextAlign.Center
-                //)
-            //}
-        //}
-    //}
-//}
-
 @Preview
 @Composable
 fun DemandScreenPreview() {

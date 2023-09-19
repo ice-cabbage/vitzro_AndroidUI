@@ -279,6 +279,108 @@ class SharedViewModel : ViewModel() {
     val minVarS = mutableStateOf(0)
     val minVarms = mutableStateOf(0)
 
+    //peak디맨드
+    //전류A상
+    val pdaY = mutableStateOf(0)
+    val pdaMon = mutableStateOf(0)
+    val pdaD = mutableStateOf(0)
+    val pdaH = mutableStateOf(0)
+    val pdaMin = mutableStateOf(0)
+    val pdaS = mutableStateOf(0)
+    val pdaMs = mutableStateOf(0)
+    val pda = mutableStateOf(0.0f)
+
+    //전류B상
+    val pdbY = mutableStateOf(0)
+    val pdbMon = mutableStateOf(0)
+    val pdbD = mutableStateOf(0)
+    val pdbH = mutableStateOf(0)
+    val pdbMin = mutableStateOf(0)
+    val pdbS = mutableStateOf(0)
+    val pdbMs = mutableStateOf(0)
+    val pdb = mutableStateOf(0.0f)
+
+    //전류C상
+    val pdcY = mutableStateOf(0)
+    val pdcMon = mutableStateOf(0)
+    val pdcD = mutableStateOf(0)
+    val pdcH = mutableStateOf(0)
+    val pdcMin = mutableStateOf(0)
+    val pdcS = mutableStateOf(0)
+    val pdcMs = mutableStateOf(0)
+    val pdc = mutableStateOf(0.0f)
+
+    //유효전력
+    val pdAPY = mutableStateOf(0)
+    val pdAPMon = mutableStateOf(0)
+    val pdAPD = mutableStateOf(0)
+    val pdAPH = mutableStateOf(0)
+    val pdAPMin = mutableStateOf(0)
+    val pdAPS = mutableStateOf(0)
+    val pdAPMs = mutableStateOf(0)
+    val pdAP = mutableStateOf(0.0f)
+
+    //무효전력
+    val pdRPY = mutableStateOf(0)
+    val pdRPMon = mutableStateOf(0)
+    val pdRPD = mutableStateOf(0)
+    val pdRPH = mutableStateOf(0)
+    val pdRPMin = mutableStateOf(0)
+    val pdRPS = mutableStateOf(0)
+    val pdRPMs = mutableStateOf(0)
+    val pdRP = mutableStateOf(0.0f)
+
+    //over디맨드
+    //전류A상
+    val odaY = mutableStateOf(0)
+    val odaMon = mutableStateOf(0)
+    val odaD = mutableStateOf(0)
+    val odaH = mutableStateOf(0)
+    val odaMin = mutableStateOf(0)
+    val odaS = mutableStateOf(0)
+    val odaMs = mutableStateOf(0)
+    val oda = mutableStateOf(0.0f)
+
+    //전류B상
+    val odbY = mutableStateOf(0)
+    val odbMon = mutableStateOf(0)
+    val odbD = mutableStateOf(0)
+    val odbH = mutableStateOf(0)
+    val odbMin = mutableStateOf(0)
+    val odbS = mutableStateOf(0)
+    val odbMs = mutableStateOf(0)
+    val odb = mutableStateOf(0.0f)
+
+    //전류C상
+    val odcY = mutableStateOf(0)
+    val odcMon = mutableStateOf(0)
+    val odcD = mutableStateOf(0)
+    val odcH = mutableStateOf(0)
+    val odcMin = mutableStateOf(0)
+    val odcS = mutableStateOf(0)
+    val odcMs = mutableStateOf(0)
+    val odc = mutableStateOf(0.0f)
+
+    //유효전력
+    val odAPY = mutableStateOf(0)
+    val odAPMon = mutableStateOf(0)
+    val odAPD = mutableStateOf(0)
+    val odAPH = mutableStateOf(0)
+    val odAPMin = mutableStateOf(0)
+    val odAPS = mutableStateOf(0)
+    val odAPMs = mutableStateOf(0)
+    val odAP = mutableStateOf(0.0f)
+
+    //무효전력
+    val odRPY = mutableStateOf(0)
+    val odRPMon = mutableStateOf(0)
+    val odRPD = mutableStateOf(0)
+    val odRPH = mutableStateOf(0)
+    val odRPMin = mutableStateOf(0)
+    val odRPS = mutableStateOf(0)
+    val odRPMs = mutableStateOf(0)
+    val odRP = mutableStateOf(0.0f)
+
     val cb1 = mutableStateOf(0x0u)
     val cb2 = mutableStateOf(0x0u)
     val diStatus1 = mutableStateOf(0x0u)
@@ -484,6 +586,98 @@ class SharedViewModel : ViewModel() {
             "MI/MSTA/MinTotVAr/t/tm_min" -> minVarMin.value = value
             "MI/MSTA/MinTotVAr/t/tm_sec" -> minVarS.value = value
             "MI/MSTA/MinTotVAr/t/tm_ms" -> minVarms.value = value
+
+            //peak demand
+            //current phase A
+            "MI/MMTR/PKDmdA_phsA/t/tm_year" -> pdaY.value = value
+            "MI/MMTR/PKDmdA_phsA/t/tm_mon" -> pdaMon.value = value
+            "MI/MMTR/PKDmdA_phsA/t/tm_mday" -> pdaD.value = value
+            "MI/MMTR/PKDmdA_phsA/t/tm_hour" -> pdaH.value = value
+            "MI/MMTR/PKDmdA_phsA/t/tm_min" -> pdaMin.value = value
+            "MI/MMTR/PKDmdA_phsA/t/tm_sec" -> pdaS.value = value
+            "MI/MMTR/PKDmdA_phsA/t/tm_ms" -> pdaMs.value = value
+
+            //current phase B
+            "MI/MMTR/PKDmdA_phsB/t/tm_year" -> pdbY.value = value
+            "MI/MMTR/PKDmdA_phsB/t/tm_mon" -> pdbMon.value = value
+            "MI/MMTR/PKDmdA_phsB/t/tm_mday" -> pdbD.value = value
+            "MI/MMTR/PKDmdA_phsB/t/tm_hour" -> pdbH.value = value
+            "MI/MMTR/PKDmdA_phsB/t/tm_min" -> pdbMin.value = value
+            "MI/MMTR/PKDmdA_phsB/t/tm_sec" -> pdbS.value = value
+            "MI/MMTR/PKDmdA_phsB/t/tm_ms" -> pdbMs.value = value
+
+            //current phase C
+            "MI/MMTR/PKDmdA_phsC/t/tm_year" -> pdcY.value = value
+            "MI/MMTR/PKDmdA_phsC/t/tm_mon" -> pdcMon.value = value
+            "MI/MMTR/PKDmdA_phsC/t/tm_mday" -> pdcD.value = value
+            "MI/MMTR/PKDmdA_phsC/t/tm_hour" -> pdcH.value = value
+            "MI/MMTR/PKDmdA_phsC/t/tm_min" -> pdcMin.value = value
+            "MI/MMTR/PKDmdA_phsC/t/tm_sec" -> pdcS.value = value
+            "MI/MMTR/PKDmdA_phsC/t/tm_ms" -> pdcMs.value = value
+
+            //Active Power
+            "MI/MMTR/PKDmdW/t/tm_year" -> pdAPY.value = value
+            "MI/MMTR/PKDmdW/t/tm_mon" -> pdAPMon.value = value
+            "MI/MMTR/PKDmdW/t/tm_mday" -> pdAPD.value = value
+            "MI/MMTR/PKDmdW/t/tm_hour" -> pdAPH.value = value
+            "MI/MMTR/PKDmdW/t/tm_min" -> pdAPMin.value = value
+            "MI/MMTR/PKDmdW/t/tm_sec" -> pdAPS.value = value
+            "MI/MMTR/PKDmdW/t/tm_ms" -> pdAPMs.value = value
+
+            //Reactive Power
+            "MI/MMTR/PKDmdVAr/t/tm_year" -> pdRPY.value = value
+            "MI/MMTR/PKDmdVAr/t/tm_mon" -> pdRPMon.value = value
+            "MI/MMTR/PKDmdVAr/t/tm_mday" -> pdRPD.value = value
+            "MI/MMTR/PKDmdVAr/t/tm_hour" -> pdRPH.value = value
+            "MI/MMTR/PKDmdVAr/t/tm_min" -> pdRPMin.value = value
+            "MI/MMTR/PKDmdVAr/t/tm_sec" -> pdRPS.value = value
+            "MI/MMTR/PKDmdVAr/t/tm_ms" -> pdRPMs.value = value
+
+            //Over demand
+            //current A
+            "MI/MMTR/OVDmdA_phsA/t/tm_year" -> odaY.value = value
+            "MI/MMTR/OVDmdA_phsA/t/tm_mon" -> odaMon.value = value
+            "MI/MMTR/OVDmdA_phsA/t/tm_mday" -> odaD.value = value
+            "MI/MMTR/OVDmdA_phsA/t/tm_hour" -> odaH.value = value
+            "MI/MMTR/OVDmdA_phsA/t/tm_min" -> odaMin.value = value
+            "MI/MMTR/OVDmdA_phsA/t/tm_sec" -> odaS.value = value
+            "MI/MMTR/OVDmdA_phsA/t/tm_ms" -> odaMs.value = value
+
+            //current B
+            "MI/MMTR/OVDmdA_phsB/t/tm_year" -> odbY.value = value
+            "MI/MMTR/OVDmdA_phsB/t/tm_mon" -> odbMon.value = value
+            "MI/MMTR/OVDmdA_phsB/t/tm_mday" -> odbD.value = value
+            "MI/MMTR/OVDmdA_phsB/t/tm_hour" -> odbH.value = value
+            "MI/MMTR/OVDmdA_phsB/t/tm_min" -> odbMin.value = value
+            "MI/MMTR/OVDmdA_phsB/t/tm_sec" -> odbS.value = value
+            "MI/MMTR/OVDmdA_phsB/t/tm_ms" -> odbMs.value = value
+
+            //current C
+            "MI/MMTR/OVDmdA_phsC/t/tm_year" -> odcY.value = value
+            "MI/MMTR/OVDmdA_phsC/t/tm_mon" -> odcMon.value = value
+            "MI/MMTR/OVDmdA_phsC/t/tm_mday" -> odcD.value = value
+            "MI/MMTR/OVDmdA_phsC/t/tm_hour" -> odcH.value = value
+            "MI/MMTR/OVDmdA_phsC/t/tm_min" -> odcMin.value = value
+            "MI/MMTR/OVDmdA_phsC/t/tm_sec" -> odcS.value = value
+            "MI/MMTR/OVDmdA_phsC/t/tm_ms" -> odcMs.value = value
+
+            //Active Power
+            "MI/MMTR/OVDmdW/t/tm_year" -> odAPY.value = value
+            "MI/MMTR/OVDmdW/t/tm_mon" -> odAPMon.value = value
+            "MI/MMTR/OVDmdW/t/tm_mday" -> odAPD.value = value
+            "MI/MMTR/OVDmdW/t/tm_hour" -> odAPH.value = value
+            "MI/MMTR/OVDmdW/t/tm_min" -> odAPMin.value = value
+            "MI/MMTR/OVDmdW/t/tm_sec" -> odAPS.value = value
+            "MI/MMTR/OVDmdW/t/tm_ms" -> odAPMs.value = value
+
+            //Reactive Power
+            "MI/MMTR/OVDmdVAr/t/tm_year" -> odRPY.value = value
+            "MI/MMTR/OVDmdVAr/t/tm_mon" -> odRPMon.value = value
+            "MI/MMTR/OVDmdVAr/t/tm_mday" -> odRPD.value = value
+            "MI/MMTR/OVDmdVAr/t/tm_hour" -> odRPH.value = value
+            "MI/MMTR/OVDmdVAr/t/tm_min" -> pdRPMin.value = value
+            "MI/MMTR/OVDmdVAr/t/tm_sec" -> pdRPS.value = value
+            "MI/MMTR/OVDmdVAr/t/tm_ms" -> pdRPMs.value = value
         }
     }
 
@@ -824,6 +1018,20 @@ class SharedViewModel : ViewModel() {
             //최소 무효전력
             "MI/MSTA/MinTotVAr/mag" -> minVar.value = value
             "MI/MSTA/MinTotVAr/phase" -> minVarPh.value = value
+
+            //peak demand
+            "MI/MMTR/PKDmdA_phsA/mag" -> pda.value = value
+            "MI/MMTR/PKDmdA_phsB/mag" -> pdb.value = value
+            "MI/MMTR/PKDmdA_phsC/mag" -> pdc.value = value
+            "MI/MMTR/PKDmdW/mag" -> pdAP.value = value
+            "MI/MMTR/PKDmdVAr/mag" -> pdRP.value = value
+
+            //over demand
+            "MI/MMTR/OVDmdA_phsA/mag" -> oda.value = value
+            "MI/MMTR/OVDmdA_phsB/mag" -> odb.value = value
+            "MI/MMTR/OVDmdA_phsC/mag" -> odc.value = value
+            "MI/MMTR/OVDmdW/mag" -> odAP.value = value
+            "MI/MMTR/OVDmdVAr/mag" -> odRP.value = value
         }
     }
 

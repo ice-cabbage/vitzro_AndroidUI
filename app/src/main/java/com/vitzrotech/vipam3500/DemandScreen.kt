@@ -254,6 +254,7 @@ fun DemandScreen(viewModel: SharedViewModel) {
         }
     }
 }
+
 @Preview
 @Composable
 fun DemandScreenPreview() {

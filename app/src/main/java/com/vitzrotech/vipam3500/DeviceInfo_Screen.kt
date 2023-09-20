@@ -6,14 +6,14 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 @Composable
-fun Device_infoScreen(viewModel: SharedViewModel) {
+fun DeviceInfo_Screen(viewModel: SharedViewModel) {
 
 }
 
 @Preview
 @Composable
-fun Device_infoScreenPreview() {
+fun DeviceInfo_ScreenPreview() {
     VIPAM3500Theme {
-        Device_infoScreen(viewModel())
+        DeviceInfo_Screen(viewModel())
     }
 }

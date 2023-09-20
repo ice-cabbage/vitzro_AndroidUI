@@ -32,7 +32,7 @@ fun SystemScreen(navController: NavHostController) {
     val buttonList = arrayListOf(
         MenuList("기기 정보", "device_info"),
         MenuList("기기 결선정보", "power_system"),
-        MenuList("추가 정보", "addition_faculty"),
+        MenuList("추가 정보", "addition_info"),
         MenuList("모터상태 정보", "motor_status_info"),
         MenuList("DO 제어", "DO_control"),
         MenuList("차단실패 설정", "breaker_failure"),

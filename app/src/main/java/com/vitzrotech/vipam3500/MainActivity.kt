@@ -310,6 +310,87 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("AI_Config") {
             AIconfig_Screen(viewModel)
         }
+        composable("Setting_Group") {
+            SettingGroup_Screen(viewModel)
+        }
+        composable("OCR") {
+            OCR_Screen(viewModel)
+        }
+        composable("OCGR") {
+            OCGR_Screen(viewModel)
+        }
+        composable("OVGR") {
+            OVGR_Screen(viewModel)
+        }
+        composable("SGR") {
+            SGR_Screen(viewModel)
+        }
+        composable("DGR") {
+            DGR_Screen(viewModel)
+        }
+        composable("OVR") {
+            OVR_Screen(viewModel)
+        }
+        composable("UVR") {
+            UVR_Screen(viewModel)
+        }
+        composable("POR") {
+            POR_Screen(viewModel)
+        }
+        composable("NSOVR") {
+            NSOVR_Screen(viewModel)
+        }
+        composable("DOCR") {
+            DOCR_Screen(viewModel)
+        }
+        composable("Reclosing") {
+            Reclosing_Screen(viewModel)
+        }
+        composable("Sync") {
+            Sync_Screen(viewModel)
+        }
+        composable("NSOCR") {
+            NSOCR_Screen(viewModel)
+        }
+        composable("Inrush") {
+            Inrush_Screen(viewModel)
+        }
+        composable("UFR1-4") {
+            UFR14_Screen(viewModel)
+        }
+        composable("OFR1-4") {
+            OFR14_Screen(viewModel)
+        }
+        composable("UFR5-8") {
+            UFR58_Screen(viewModel)
+        }
+        composable("OFR5-8") {
+            OFR58_Screen(viewModel)
+        }
+        composable("UCR") {
+            UCR_Screen(viewModel)
+        }
+        composable("THR") {
+            THR_Screen(viewModel)
+        }
+        composable("Stall_Locked") {
+            StallLocked_Screen(viewModel)
+        }
+        composable("NCHR") {
+            NCHR_Screen(viewModel)
+        }
+        composable("Active_Power") {
+            ActivePower_Screen(viewModel)
+        }
+        composable("Reaective_Power") {
+            Reactive_Screen(viewModel)
+        }
+        composable("ROCOF") {
+            ROCOF_Screen(viewModel)
+        }
+        composable("SEF") {
+            SEF_Screen(viewModel)
+        }
     }
 }
 

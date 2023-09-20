@@ -259,6 +259,57 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("oscilloscope") {
             OscilloscopeScreen(viewModel)
         }
+        composable("device_info") {
+            DeviceInfo_Screen(viewModel)
+        }
+        composable("power_system") {
+            PowerSystem_Screen(viewModel)
+        }
+        composable("addition_info") {
+            AdditionInfo_Screen(viewModel)
+        }
+        composable("motor_status_info") {
+            MotorStatusInfo_Screen(viewModel)
+        }
+        composable("DO_control") {
+            DOcontrol_Screen(viewModel)
+        }
+        composable("breaker_failure") {
+            Breaker_Screen(viewModel)
+        }
+        composable("TCS&TRS") {
+            TCS_TRS_Screen(viewModel)
+        }
+        composable("coldLock_pickUp") {
+            ColdLock_Screen(viewModel)
+        }
+        composable("power_Supervision") {
+            Supervision_Screen(viewModel)
+        }
+        composable("communication") {
+            Communication_Screen(viewModel)
+        }
+        composable("VT_Failure") {
+            VTfailure_Screen(viewModel)
+        }
+        composable("virtual_DI") {
+            VirtualDI_Screen(viewModel)
+        }
+        composable("PQ_Configuration") {
+            PQconfi_Screen(viewModel)
+        }
+        composable("demand_Configuration") {
+            DemandConfi_Screen(viewModel)
+        }
+        composable("system_Dignosis") {
+            SystemDig_Screen(viewModel)
+        }
+        composable("function") {
+            Function_Screen(viewModel)
+        }
+        composable("AI_Config") {
+            AIconfig_Screen(viewModel)
+        }
     }
 }
 

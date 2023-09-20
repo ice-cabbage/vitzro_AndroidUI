@@ -30,23 +30,23 @@ data class MenuList(
 @Composable
 fun SystemScreen(navController: NavHostController) {
     val buttonList = arrayListOf(
-        MenuList("device_info", "device_info"),
-        MenuList("power_system", "power_system"),
-        MenuList("addition_faculty", "addition_faculty"),
-        MenuList("motor_status_info", "motor_status_info"),
-        MenuList("DO_control", "DO_control"),
-        MenuList("breaker_failure", "breaker_failure"),
-        MenuList("TCS&TRS", "TCS&TRS"),
-        MenuList("coldLoad_pickUp", "coldLock_pickUp"),
-        MenuList("power_Supervision", "power_Supervision"),
-        MenuList("communication", "communication"),
-        MenuList("VT_Failure", "VT_Failure"),
-        MenuList("virtual_DI", "virtual_DI"),
-        MenuList("PQ_Configuration", "PQ_Configuration"),
-        MenuList("demand_Configuration", "demand_Configuration"),
-        MenuList("system_Dignosis", "system_Dignosis"),
-        MenuList("function", "function"),
-        MenuList("AI_Config", "AI_Config")
+        MenuList("기기 정보", "device_info"),
+        MenuList("기기 결선정보", "power_system"),
+        MenuList("추가 정보", "addition_faculty"),
+        MenuList("모터상태 정보", "motor_status_info"),
+        MenuList("DO 제어", "DO_control"),
+        MenuList("차단실패 설정", "breaker_failure"),
+        MenuList("TCS & TRS 설정", "TCS&TRS"),
+        MenuList("돌입전류 억제", "coldLock_pickUp"),
+        MenuList("내부전원 감시설정", "power_Supervision"),
+        MenuList("통신", "communication"),
+        MenuList("VT 감시", "VT_Failure"),
+        MenuList("가상 DI", "virtual_DI"),
+        MenuList("PQ 설정", "PQ_Configuration"),
+        MenuList("수요 설정", "demand_Configuration"),
+        MenuList("시스템 진단정보", "system_Dignosis"),
+        MenuList("부가기능", "function"),
+        MenuList("AI(TD) 설정", "AI_Config")
     )
     val gridItems = buttonList.chunked(3)
 

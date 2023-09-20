@@ -39,18 +39,18 @@ fun PowerScreen(viewModel: SharedViewModel) {
     val vaCMag by remember { viewModel.vaCMag }
     val totVA by remember { viewModel.totVA }
     val power = arrayOf(
-        Power("Active P Phs A", wAMag, "W"),
-        Power("Active P Phs B", wBMag, "W"),
-        Power("Active P Phs C", wCMag, "W"),
-        Power("Active P Phs Total", totW, "W"),
-        Power("Reactive P Phs A", varAMag, "Var"),
-        Power("Reactive P Phs B", varBMag, "Var"),
-        Power("Reactive P Phs C", varCMag, "Var"),
-        Power("Reactive P Phs Total", totVAR, "Var"),
-        Power("Apparent P Phs A", vaAMag, "VA"),
-        Power("Apparent P Phs B", vaBMag, "VA"),
-        Power("Apparent P Phs C", vaCMag, "VA"),
-        Power("Apparent P Phs Total", totVA, "VA")
+        Power("A상 유효전력", wAMag, "W"),
+        Power("B상 유효전력", wBMag, "W"),
+        Power("C상 유효전력", wCMag, "W"),
+        Power("총 유효전력", totW, "W"),
+        Power("A상 무효전력", varAMag, "Var"),
+        Power("B상 무효전력", varBMag, "Var"),
+        Power("C상 무효전력", varCMag, "Var"),
+        Power("총 무효전력", totVAR, "Var"),
+        Power("A상 피상전력", vaAMag, "VA"),
+        Power("B상 피상전력", vaBMag, "VA"),
+        Power("C상 피상전력", vaCMag, "VA"),
+        Power("총 피상전력", totVA, "VA")
     )
     LazyColumn(
         Modifier

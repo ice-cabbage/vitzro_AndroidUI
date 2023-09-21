@@ -391,6 +391,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("SEF") {
             SEF_Screen(viewModel)
         }
+        composable("about") {
+            AboutScreen()
+        }
     }
 }
 

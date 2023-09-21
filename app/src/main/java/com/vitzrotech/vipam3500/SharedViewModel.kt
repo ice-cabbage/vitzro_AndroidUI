@@ -381,6 +381,12 @@ class SharedViewModel : ViewModel() {
     val odRPMs = mutableStateOf(0)
     val odRP = mutableStateOf(0.0f)
 
+    //PLC IO Memory
+    val fir = mutableStateOf(0)
+    val sec = mutableStateOf(0)
+    val thr = mutableStateOf(0)
+    val four = mutableStateOf(0)
+
     val cb1 = mutableStateOf(0x0u)
     val cb2 = mutableStateOf(0x0u)
     val diStatus1 = mutableStateOf(0x0u)
@@ -678,6 +684,12 @@ class SharedViewModel : ViewModel() {
             "MI/MMTR/OVDmdVAr/t/tm_min" -> pdRPMin.value = value
             "MI/MMTR/OVDmdVAr/t/tm_sec" -> pdRPS.value = value
             "MI/MMTR/OVDmdVAr/t/tm_ms" -> pdRPMs.value = value
+
+            //PLC IO Memory
+            "System/SymIn/DetailInterlockStatus1/all" -> fir.value = value
+            "System/SymIn/DetailInterlockStatus2/all" -> sec.value = value
+            "System/SymIn/DetailInterlockStatus3/all" -> thr.value = value
+            "System/SymIn/DetailInterlockStatus4/all" -> four.value = value
         }
     }
 

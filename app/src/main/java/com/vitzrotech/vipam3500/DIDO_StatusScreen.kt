@@ -79,13 +79,13 @@ fun DIDO_Screen(viewModel: SharedViewModel) {
         items(dido.size) {
             val v = dido[it]
             Row(Modifier.fillMaxWidth()) {
-                Text(v.unit,
-                    Modifier
-                        .weight(1f)
-                        .height(40.dp)
-                        .border(0.6.dp, Color.Black),
-                    textAlign = TextAlign.Center
-                )
+                //Text(v.unit,
+                    //Modifier
+                        //.weight(1f)
+                        //.height(40.dp)
+                        //.border(0.6.dp, Color.Black),
+                    //textAlign = TextAlign.Center
+                //)
             }
         }
     }

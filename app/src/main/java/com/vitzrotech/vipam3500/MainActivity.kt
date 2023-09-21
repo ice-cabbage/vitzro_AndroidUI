@@ -391,6 +391,12 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("about") {
             AboutScreen()
         }
+        composable("cb1") {
+            CB1_Screen(viewModel)
+        }
+        composable("cb2") {
+            CB2_Screen(viewModel)
+        }
     }
 }
 
@@ -654,6 +660,36 @@ fun MainCompose(
                                 )
                             },
                             label = { Text(stringResource(R.string.relay)) }
+                        )
+                        NavigationBarItem(route == "cb1",
+                            onClick = {
+                                navController.navigate("cb1") {
+                                    popUpTo(popUpToId)
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    painterResource(R.drawable.ic_cb1),
+                                    contentDescription = stringResource(R.string.cb1_description),
+                                    modifier = Modifier.size(32.dp)
+                                )
+                            },
+                            label = { Text(stringResource(R.string.cb1)) }
+                        )
+                        NavigationBarItem(route == "cb2",
+                            onClick = {
+                                navController.navigate("cb2") {
+                                    popUpTo(popUpToId)
+                                }
+                            },
+                            icon = {
+                                Icon(
+                                    painterResource(R.drawable.ic_cb2),
+                                    contentDescription = stringResource(R.string.cb2_description),
+                                    modifier = Modifier.size(32.dp)
+                                )
+                            },
+                            label = { Text(stringResource(R.string.cb2)) }
                         )
                     }
                 },

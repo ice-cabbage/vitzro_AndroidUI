@@ -59,4 +59,8 @@
     <string name="vc">Vc</string>
     <string name="voltage_current">Voltage Current</string>
     <string name="voltage_current_description">Voltage current navigation button</string>
+    <string name="cb1">CB 1</string>
+    <string name="cb1_description">CB1 function</string>
+    <string name="cb2">CB 2</string>
+    <string name="cb2_description">CB2 function</string>
 </resources>

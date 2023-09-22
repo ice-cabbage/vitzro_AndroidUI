@@ -77,6 +77,7 @@ import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import kotlinx.coroutines.launch
 import android.widget.TextView
+import androidx.navigation.NavController
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -392,10 +393,10 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             AboutScreen()
         }
         composable("cb1") {
-            CB1_Screen(viewModel)
+            CB1_Screen(navController)
         }
         composable("cb2") {
-            CB2_Screen(viewModel)
+            CB2_Screen(navController)
         }
     }
 }

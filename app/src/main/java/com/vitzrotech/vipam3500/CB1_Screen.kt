@@ -1,22 +1,8 @@
 package com.vitzrotech.vipam3500
 
-import android.content.Context
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.os.Build
-import android.os.Bundle
-import android.util.Log
-import android.widget.SeekBar
 import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -67,48 +53,44 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
-import kotlinx.coroutines.launch
-import android.widget.TextView
 import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
 fun CB1_Screen(viewModel: SharedViewModel) {
     val cb1 by remember { viewModel.cb1 }
-    //var cb1Clicked by remember { mutableListOf(false) }
+    var cb1Clicked by remember { mutableListOf(false) }
     val cb1Color = if (cb1 == 1u) Color(0xFF00CC00) else if (cb1 == 2u) Color(0xFFFFF0000) else Color(0xFF5A5A5A)
 
-    //if (cb1Clicked) {
-        //PasswordDialog("0000", onDismiss = { cb1Clicked = false }) {
-            //Toast.makeText(context, "CB1 clicked", Toast.LENGTH_SHORT).show()
-        //}
-    //}
-    //Column (
-        //modifier = Modifier
-            //.fillMaxWidth()
-            //.padding(
-                //top = it.calculateTopPadding(),
-                //bottom = it.calculateBottomPadding()
-            //)
-            //.background(MaterialTheme.colorScheme.background)
-            //.wrapContentSize(Alignment.Center),
-        //verticalArrangement = Arrangement.Center,
-        //horizontalAlignment = Alignment.CenterHorizontally
-    //) {
-        //NavHost(
-            //navController,
-            //startDestination = NavRoutes.MainRoute.name
-        //) {
-            //mainGraph(navController, viewModel)
-        //}
-    //}
+    if (cb1Clicked) {
+        PasswordDialog("0000", onDismiss = { cb1Clicked = false }) {
+            Toast.makeText(context, "CB1 clicked", Toast.LENGTH_SHORT).show()
+        }
+    }
+    Column (
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(
+                top = it.calculateTopPadding(),
+                bottom = it.calculateBottomPadding()
+            )
+            .background(MaterialTheme.colorScheme.background)
+            .wrapContentSize(Alignment.Center),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        NavHost(
+            navController,
+            startDestination = NavRoutes.MainRoute.name
+        ) {
+            mainGraph(navController, viewModel)
+        }
+    }
 }
 
 @Composable

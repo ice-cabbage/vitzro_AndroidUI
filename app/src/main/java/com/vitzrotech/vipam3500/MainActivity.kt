@@ -393,10 +393,10 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             AboutScreen()
         }
         composable("cb1") {
-            CB1_Screen(navController)
+            CB1_Screen(viewModel)
         }
         composable("cb2") {
-            CB2_Screen(navController)
+            CB2_Screen(viewModel)
         }
     }
 }

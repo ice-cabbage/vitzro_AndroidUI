@@ -415,7 +415,7 @@ class SharedViewModel : ViewModel() {
     val interlock = mutableStateOf(0x0u)
 
     //device info
-    val Btype = mutableStateOf("")
+    val Dtype = mutableStateOf("")
     val DspV = mutableStateOf(0.0f)
     val MMIV = mutableStateOf(0.0f)
     val ComV = mutableStateOf(0.0f)
@@ -424,7 +424,7 @@ class SharedViewModel : ViewModel() {
     //power system
     val WirA = mutableStateOf("")
     val WirB = mutableStateOf("")
-    val Pns = mutableStateOf("")
+    val Phs = mutableStateOf("")
     val NorFreq = mutableStateOf(0)
     val PT1 = mutableStateOf(0)
     val PT2 = mutableStateOf(0.0f)
@@ -538,7 +538,13 @@ class SharedViewModel : ViewModel() {
 
     fun messageArrived(topic: String, value: String) {
         when(topic) {
-            "System/SymCfg/PowerSystem/SysTy" -> Btype.value = value
+            //device info
+            "System/SymCfg/PowerSystem/SysTy" -> Dtype.value = value
+
+            //power system
+            "System/SymCfg/sPowerSystem/Wiring" -> WirA.value = value
+            "System/SymCfg/sPowerSystem/Wiring2" -> WirB.value = value
+            "System/SymCfg/sPowerSystem/MxTy" -> Phs.value = value
         }
     }
 

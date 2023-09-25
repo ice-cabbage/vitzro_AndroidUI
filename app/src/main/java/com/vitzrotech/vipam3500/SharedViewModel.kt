@@ -414,6 +414,13 @@ class SharedViewModel : ViewModel() {
     val relayMod2 = mutableStateOf(0x0u)
     val interlock = mutableStateOf(0x0u)
 
+    //device info
+    val Btype = mutableStateOf("")
+    val DspV = mutableStateOf(0.0f)
+    val MMIV = mutableStateOf(0.0f)
+    val ComV = mutableStateOf(0.0f)
+    val PLCV = mutableStateOf(0.0f)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -510,6 +517,12 @@ class SharedViewModel : ViewModel() {
     private var rVahH = 0.0f
     private var rVahL = 0.0f
     private var rVahG = 0.0f
+
+    fun messageArrived(topic: String, value: String) {
+        when(topic) {
+            "System/SymCfg/PowerSystem/SysTy" -> Btype.value = value
+        }
+    }
 
     fun messageArrived(topic: String, value: Int) {
         when(topic) {
@@ -1048,6 +1061,12 @@ class SharedViewModel : ViewModel() {
             "MI/MMTR/OVDmdA_phsC/mag" -> odc.value = value
             "MI/MMTR/OVDmdW/mag" -> odAP.value = value
             "MI/MMTR/OVDmdVAr/mag" -> odRP.value = value
+
+            //device info
+            "System/SymCfg/DSP/Version" -> DspV.value = value
+            "System/SymCfg/MMI/Version" -> MMIV.value = value
+            "System/SymCfg/COM/Version" -> ComV.value = value
+            "System/SymCfg/PLC/Version" -> PLCV.value = value
         }
     }
 

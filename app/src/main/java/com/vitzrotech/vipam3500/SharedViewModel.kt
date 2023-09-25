@@ -421,6 +421,24 @@ class SharedViewModel : ViewModel() {
     val ComV = mutableStateOf(0.0f)
     val PLCV = mutableStateOf(0.0f)
 
+    //power system
+    val WirA = mutableStateOf("")
+    val WirB = mutableStateOf("")
+    val Pns = mutableStateOf("")
+    val NorFreq = mutableStateOf(0)
+    val PT1 = mutableStateOf(0)
+    val PT2 = mutableStateOf(0.0f)
+    val AuxPT1 = mutableStateOf(0)
+    val AuxPT2 = mutableStateOf(0.0f)
+    val GPT1 = mutableStateOf(0)
+    val GPT2 = mutableStateOf(0.0f)
+    val CT1 = mutableStateOf(0)
+    val CT2 = mutableStateOf(0)
+    val NCT1 = mutableStateOf(0)
+    val NCT2 = mutableStateOf(0)
+    val ZCT1 = mutableStateOf(0.000f)
+    val ZCT2 = mutableStateOf(0.000f)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -703,6 +721,15 @@ class SharedViewModel : ViewModel() {
             "System/SymIn/DetailInterlockStatus2/all" -> sec.value = value
             "System/SymIn/DetailInterlockStatus3/all" -> thr.value = value
             "System/SymIn/DetailInterlockStatus4/all" -> four.value = value
+
+            //power system
+            "System/SymCfg/sPowerSystem/NormalFreq" -> NorFreq.value = value
+            "System/SymCfg/sPowerSystem/PT_P/Set1" -> PT1.value = value
+            "System/SymCfg/sPowerSystem/PT_R/Set1" -> AuxPT1.value = value
+            "System/SymCfg/sPowerSystem/PT_N/Set1" -> GPT1.value = value
+            "System/SymCfg/sPowerSystem/CT_P/Set1" -> CT1.value = value
+            "System/SymCfg/sPowerSystem/CT_N/Set1" -> NCT1.value = value
+            "System/SymCfg/sPowerSystem/CT_N/Set2" -> NCT2.value = value
         }
     }
 
@@ -1067,6 +1094,13 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/MMI/Version" -> MMIV.value = value
             "System/SymCfg/COM/Version" -> ComV.value = value
             "System/SymCfg/PLC/Version" -> PLCV.value = value
+
+            //power system
+            "System/SymCfg/sPowerSystem/PT_P/Set2" -> PT2.value = value
+            "System/SymCfg/sPowerSystem/PT_R/Set2" -> AuxPT2.value = value
+            "System/SymCfg/sPowerSystem/PT_N/Set2" -> GPT2.value = value
+            "System/SymCfg/sPowerSystem/CT_R/Set1" -> ZCT1.value = value
+            "System/SymCfg/sPowerSystem/CT_R/Set2" -> ZCT2.value = value
         }
     }
 

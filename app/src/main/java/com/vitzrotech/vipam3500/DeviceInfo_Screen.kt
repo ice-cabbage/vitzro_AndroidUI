@@ -82,7 +82,7 @@ fun DeviceInfo_Screen(viewModel: SharedViewModel) {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    "${v.des.toString()}",
+                    "${v.des}",
                     Modifier
                         .weight(0.3f)
                         .height(40.dp)

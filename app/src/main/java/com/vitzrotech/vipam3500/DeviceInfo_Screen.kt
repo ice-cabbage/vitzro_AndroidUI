@@ -44,13 +44,33 @@ fun DeviceInfo_Screen(viewModel: SharedViewModel) {
     )
 
     val infoScreen = arrayOf(
-        Device("Device Type", Dtype)
+        Device("Device Type", "FM / DG")
     )
 
     LazyColumn(
         Modifier
             .fillMaxWidth()
             .padding(16.dp)) {
+        items(infoScreen.size) {
+            val v = infoScreen[it]
+            Row(Modifier.fillMaxWidth()) {
+                Text(v.name,
+                    Modifier
+                        .weight(0.4f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    v.des,
+                    Modifier
+                        .weight(0.3f)
+                        .height(40.dp)
+                        .border(0.6.dp, Color.Black),
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
         items(vicein.size) {
             val v = vicein[it]
             Row(Modifier.fillMaxWidth()) {
@@ -63,26 +83,6 @@ fun DeviceInfo_Screen(viewModel: SharedViewModel) {
                 )
                 Text(
                     "${v.descrip.toUnitString("%.02f", "")}",
-                    Modifier
-                        .weight(0.3f)
-                        .height(40.dp)
-                        .border(0.6.dp, Color.Black),
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-        items(infoScreen.size) {
-            val v = infoScreen[it]
-            Row(Modifier.fillMaxWidth()) {
-                Text(v.name,
-                    Modifier
-                        .weight(0.4f)
-                        .height(40.dp)
-                        .border(0.6.dp, Color.Black),
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    "${v.des}",
                     Modifier
                         .weight(0.3f)
                         .height(40.dp)

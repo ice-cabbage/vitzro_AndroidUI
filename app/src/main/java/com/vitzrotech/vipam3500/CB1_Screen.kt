@@ -62,7 +62,7 @@ import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import androidx.compose.foundation.layout.fillMaxWidth
 
 @Composable
-fun CB1_Screen(viewModel: SharedViewModel) {
+fun CB1_Screen(navController, viewModel: SharedViewModel) {
     val cb1 by remember { viewModel.cb1 }
     var cb1Clicked by remember { mutableListOf(false) }
     val cb1Color = if (cb1 == 1u) Color(0xFF00CC00) else if (cb1 == 2u) Color(0xFFFFF0000) else Color(0xFF5A5A5A)

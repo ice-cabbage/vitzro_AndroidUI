@@ -439,6 +439,13 @@ class SharedViewModel : ViewModel() {
     val ZCT1 = mutableStateOf(0.000f)
     val ZCT2 = mutableStateOf(0.000f)
 
+    //Addition Info
+    val VTfail = mutableStateOf("")
+    val sup = mutableStateOf("")
+    val wave = mutableStateOf("")
+    val trend = mutableStateOf("")
+    val 
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -545,6 +552,12 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/sPowerSystem/Wiring" -> WirA.value = value
             "System/SymCfg/sPowerSystem/Wiring2" -> WirB.value = value
             "System/SymCfg/sPowerSystem/MxTy" -> Phs.value = value
+
+            //Addition Factulty
+            "sSG/sRySet/sRPSRy/sRVTF/Mod" -> VTfail.value = value
+            "System/SymCfg/sPowerSystem/CTPTDiagnostic" -> sup.value = value
+            "System/SymCfg/sWvCfg/eSelWvPos" -> wave.value = value
+            "System/SymCfg/sPowerSystem/RMSTrendMod" -> trend.value = value
         }
     }
 

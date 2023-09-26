@@ -444,7 +444,8 @@ class SharedViewModel : ViewModel() {
     val sup = mutableStateOf("")
     val wave = mutableStateOf("")
     val trend = mutableStateOf("")
-    val 
+    val UVvol = mutableStateOf(0.0f)
+    
 
     private var whAH = 0.0f
     private var whAL = 0.0f

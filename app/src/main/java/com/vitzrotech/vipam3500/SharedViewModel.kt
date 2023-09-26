@@ -445,7 +445,13 @@ class SharedViewModel : ViewModel() {
     val wave = mutableStateOf("")
     val trend = mutableStateOf("")
     val UVvol = mutableStateOf(0.0f)
-    
+    val UCcur = mutableStateOf(0.0f)
+    val NVvol = mutableStateOf(0.0f)
+    val NCcur = mutableStateOf(0.0f)
+    val POvol = mutableStateOf(0.0f)
+    val TDcur = mutableStateOf(0.0f)
+    val DMtime = mutableStateOf(0)
+
 
     private var whAH = 0.0f
     private var whAL = 0.0f
@@ -750,6 +756,10 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/sPowerSystem/CT_P/Set1" -> CT1.value = value
             "System/SymCfg/sPowerSystem/CT_N/Set1" -> NCT1.value = value
             "System/SymCfg/sPowerSystem/CT_N/Set2" -> NCT2.value = value
+
+            //Addition Factulty
+            "System/SymCfg/sPowerSystem/DmdSetTms/Set1" -> DMtime.value = value
+
         }
     }
 
@@ -1121,6 +1131,15 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/sPowerSystem/PT_N/Set2" -> GPT2.value = value
             "System/SymCfg/sPowerSystem/CT_R/Set1" -> ZCT1.value = value
             "System/SymCfg/sPowerSystem/CT_R/Set2" -> ZCT2.value = value
+
+            //Addition Factulty
+            "System/SymCfg/sPowerSystem/UVRBlkVal" -> UVvol.value = value
+            "System/SymCfg/sPowerSystem/UCRBlkVal" -> UCcur.value = value
+            "System/SymCfg/sPowerSystem/NVRBlkVal" -> NVvol.value = value
+            "System/SymCfg/sPowerSystem/NCRBlkVal" -> NCcur.value = value
+            "System/SymCfg/sPowerSystem/POBlkVal" -> POvol.value = value
+            "System/SymCfg/sPowerSystem/TddAmpload" -> TDcur.value = value
+
         }
     }
 

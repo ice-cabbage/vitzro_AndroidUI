@@ -459,6 +459,14 @@ class SharedViewModel : ViewModel() {
     val lockTime = mutableStateOf(0.0f)
     val safeTime = mutableStateOf(0.0f)
 
+    //DO control
+
+    //Breaker Failure
+    val mo = mutableStateOf("")
+    val failure = mutableStateOf("")
+    val delaySec = mutableStateOf(0.0f)
+    val detect = mutableStateOf(0.0f)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -574,6 +582,10 @@ class SharedViewModel : ViewModel() {
 
             //Motor Status Info
             "SG/RySet/MSURy/RMSI/Mod" -> mod.value = value
+
+            //Breaker Failure
+            "SG/RySet/RPSRy/RBRF/Mod" -> mo.value = value
+            "SG/RySet/RPSRy/RBRF/FailMod" -> failure.value = value
         }
     }
 
@@ -1159,6 +1171,10 @@ class SharedViewModel : ViewModel() {
             "SG/RySet/MSURy/RMSI/LocRtA" -> lockCur.value = value
             "SG/RySet/MSURy/RMSI/OvLocTm / 1000" -> lockTime.value = value
             "SG/RySet/MSURy/RMSI/StSatTm / 1000" -> safeTime.value = value
+
+            //Breaker Failure
+            "SG/RySet/RPSRy/RBRF/FailTmms / 1000" -> delaySec.value = value
+            "SG/RySet/RPSRy/RBRF/DetValA" -> detect.value = value
 
         }
     }

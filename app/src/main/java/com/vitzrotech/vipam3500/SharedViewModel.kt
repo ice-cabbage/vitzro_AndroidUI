@@ -452,6 +452,12 @@ class SharedViewModel : ViewModel() {
     val TDcur = mutableStateOf(0.0f)
     val DMtime = mutableStateOf(0)
 
+    //Motor Status Info
+    val mod = mutableStateOf("")
+    val fullCur = mutableStateOf(0.0f)
+    val lockCur = mutableStateOf(0.0f)
+    val lockTime = mutableStateOf(0.0f)
+    val safeTime = mutableStateOf(0.0f)
 
     private var whAH = 0.0f
     private var whAL = 0.0f
@@ -565,6 +571,9 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/sPowerSystem/CTPTDiagnostic" -> sup.value = value
             "System/SymCfg/sWvCfg/eSelWvPos" -> wave.value = value
             "System/SymCfg/sPowerSystem/RMSTrendMod" -> trend.value = value
+
+            //Motor Status Info
+            "SG/RySet/MSURy/RMSI/Mod" -> mod.value = value
         }
     }
 
@@ -1144,6 +1153,12 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/sPowerSystem/NCRBlkVal" -> NCcur.value = value
             "System/SymCfg/sPowerSystem/POBlkVal" -> POvol.value = value
             "System/SymCfg/sPowerSystem/TddAmpload" -> TDcur.value = value
+
+            //Motor Status Info
+            "SG/RySet/MSURy/RMSI/FuLoA" -> fullCur.value = value
+            "SG/RySet/MSURy/RMSI/LocRtA" -> lockCur.value = value
+            "SG/RySet/MSURy/RMSI/OvLocTm / 1000" -> lockTime.value = value
+            "SG/RySet/MSURy/RMSI/StSatTm / 1000" -> safeTime.value = value
 
         }
     }

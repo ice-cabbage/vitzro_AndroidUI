@@ -270,7 +270,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             MotorStatusInfo_Screen(viewModel)
         }
         composable("DO_control") {
-            DOcontrol_Screen(viewModel)
+            DOcontrol_Screen(navController)
         }
         composable("breaker_failure") {
             Breaker_Screen(viewModel)

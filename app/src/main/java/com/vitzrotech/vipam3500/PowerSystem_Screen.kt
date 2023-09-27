@@ -53,8 +53,8 @@ fun PowerSystem_Screen(viewModel: SharedViewModel) {
     val ZCT2 by remember { viewModel.ZCT2 }
 
     val strPow = arrayOf(
-        PowerSys("WiringA", "YpYp(3P4W)"),
-        PowerSys("Phs Seq", "ABC")
+        PowerSys("WiringA", WirA),
+        PowerSys("Phs Seq", Phs)
     )
 
     val intPow = arrayOf(

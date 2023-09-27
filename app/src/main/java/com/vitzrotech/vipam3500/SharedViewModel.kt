@@ -763,6 +763,11 @@ class SharedViewModel : ViewModel() {
         }
     }
 
+    //집에 가고 싶다
+    //일하기 싫다
+    //아무것도 하기 싫다
+    //배고프다
+
     fun messageArrived(topic: String, value: UInt) {
         when(topic) {
             "System/SymStu/CBStatus1" -> cb1.value = value

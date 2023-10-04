@@ -3,6 +3,7 @@
     <string name="about_description">About button</string>
     <string name="app_name">VIPAM3500</string>
     <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
     <string name="client_id">Client ID</string>
     <string name="connect">Connect</string>
     <string name="curve">Curve</string>

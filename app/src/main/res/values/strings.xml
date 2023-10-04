@@ -4,10 +4,19 @@
     <string name="app_name">VIPAM3500</string>
     <string name="apply">Apply</string>
     <string name="cancel">Cancel</string>
+    <string name="cb1">CB 1</string>
+    <string name="cb1_description">CB1 function</string>
+    <string name="cb2">CB 2</string>
+    <string name="cb2_description">CB2 function</string>
     <string name="client_id">Client ID</string>
     <string name="connect">Connect</string>
     <string name="curve">Curve</string>
+    <string name="dead_bus_value">Dead Bus Value</string>
+    <string name="dead_line_value">Dead Line Value</string>
     <string name="delay">Delay (sec)</string>
+    <string name="diff_freq">Diff Freq</string>
+    <string name="diff_phs_ang">Diff Phs Ang</string>
+    <string name="diff_vol">Diff Vol</string>
     <string name="direction">Direction</string>
     <string name="disconnect">Disconnect</string>
     <string name="edge">Edge</string>
@@ -21,6 +30,9 @@
     <string name="ic">Ic</string>
     <string name="level">Level</string>
     <string name="lever">Lever</string>
+    <string name="live_bus_value">Live Bus Value</string>
+    <string name="live_dead_mode">Live Dead Mode</string>
+    <string name="live_line_value">Live Line Value</string>
     <string name="local">Local</string>
     <string name="local_description">Local Operation</string>
     <string name="log">Log</string>
@@ -29,9 +41,9 @@
     <string name="manufacturing_company_description">Manufacturing_Company Menu</string>
     <string name="max_a">Max(A)</string>
     <string name="max_v">Max(V)</string>
-    <string name="memory_mode">Memory Mode</string>
     <string name="measurement">Measurement</string>
     <string name="measurement_description">Measurement Menu</string>
+    <string name="memory_mode">Memory Mode</string>
     <string name="menu_description">Menu Button</string>
     <string name="message">Message</string>
     <string name="min_a">Min(A)</string>
@@ -72,8 +84,4 @@
     <string name="vc">Vc</string>
     <string name="voltage_current">Voltage Current</string>
     <string name="voltage_current_description">Voltage current navigation button</string>
-    <string name="cb1">CB 1</string>
-    <string name="cb1_description">CB1 function</string>
-    <string name="cb2">CB 2</string>
-    <string name="cb2_description">CB2 function</string>
 </resources>

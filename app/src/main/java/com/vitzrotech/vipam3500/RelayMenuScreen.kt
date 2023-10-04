@@ -358,6 +358,49 @@ fun SGRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun DGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Inst", "Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (x GIn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay),
+        stringResource(R.string.direction),
+        stringResource(R.string.memory_mode))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.10f.. 10.0f,
+            0.00f..00.0f,
+            0.04f.. 100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")),
+        listOf(listOf("ON", "OFF"),
+            0.02f.. 2.0f,
+            0.05f..10.0f,
+            0.10f.. 100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")))
+    val states = List(viewModel.dgrState.size) {
+        listOf(viewModel.dgrState[it].mode,
+            "%.02f".format(viewModel.dgrState[it].pickup),
+            "%.02f".format(viewModel.dgrState[it].lever),
+            "%.02f".format(viewModel.dgrState[it].delay),
+            viewModel.dgrState[it].direction,
+            viewModel.dgrState[it].memoryMode)
+    }
+    RelayTable(captions, stubs, relays, states) {  items ->
+        items.forEachIndexed { it, item ->
+            viewModel.dgrState[it] = DGRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                item[4] as Int, item[5] as Int)
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

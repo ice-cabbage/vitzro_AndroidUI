@@ -822,6 +822,63 @@ fun OFRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun ActivePowerScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Over Fwd. Act Power", "Over Rvs. Act Power", "Under Fwd. Act Power", "Under Rvs. Act Power")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.source),
+        stringResource(R.string.pickup),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_cur),
+        stringResource(R.string.blk_vol))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f))
+    val states = List(viewModel.activePowerState.size) {
+        listOf(viewModel.activePowerState[it].mode,
+            viewModel.activePowerState[it].source,
+            "%.03f".format(viewModel.activePowerState[it].pickup),
+            "%.02f".format(viewModel.activePowerState[it].delay),
+            "%.03f".format(viewModel.activePowerState[it].blkCur),
+            "%.02f".format(viewModel.activePowerState[it].blkVol),
+        )
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.activePowerState[it] = ActivePowerRelayState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat(),
+                (item[5] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

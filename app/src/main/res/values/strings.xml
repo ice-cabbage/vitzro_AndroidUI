@@ -3,12 +3,14 @@
     <string name="about_description">About button</string>
     <string name="app_name">VIPAM3500</string>
     <string name="apply">Apply</string>
+    <string name="blk_delay">Blk Delay</string>
+    <string name="blk_vol">Blk Vol (x Vn)</string>
     <string name="cancel">Cancel</string>
-    <string name="channel">Channel</string>
     <string name="cb1">CB 1</string>
     <string name="cb1_description">CB1 function</string>
     <string name="cb2">CB 2</string>
     <string name="cb2_description">CB2 function</string>
+    <string name="channel">Channel</string>
     <string name="client_id">Client ID</string>
     <string name="connect">Connect</string>
     <string name="curve">Curve</string>

@@ -879,6 +879,46 @@ fun ActivePowerScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun ReactivePowerScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Over Forward Reactive Power", "Over Reverse Reactive Power")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_cur),
+        stringResource(R.string.blk_vol))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f))
+    val states = List(viewModel.reactivePowerState.size) {
+        listOf(viewModel.reactivePowerState[it].mode,
+            "%.03f".format(viewModel.reactivePowerState[it].pickup),
+            "%.02f".format(viewModel.reactivePowerState[it].delay),
+            "%.03f".format(viewModel.reactivePowerState[it].blkCur),
+            "%.02f".format(viewModel.reactivePowerState[it].blkVol),
+        )
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.reactivePowerState[it] = ReactivePowerRelayState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

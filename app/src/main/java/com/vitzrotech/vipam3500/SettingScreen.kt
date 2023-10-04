@@ -35,6 +35,9 @@ import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.IMqttToken
 import org.eclipse.paho.client.mqttv3.MqttCallback
 import org.eclipse.paho.client.mqttv3.MqttMessage
+import java.nio.ByteBuffer
+
+var mqttClient: MQTTClient? = null
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
@@ -127,10 +130,23 @@ fun SettingScreen(viewModel: SharedViewModel) {
                         },
                         object : MqttCallback {
                             override fun messageArrived(topic: String?, message: MqttMessage?) {
-                                mqttClient?.defaultCbClient?.messageArrived(topic, message)
-                                val msg =
-                                    "Receive message: ${message.toString()} from topic: $topic"
-                                Log.d(this.javaClass.name, msg)
+                                if (topic != null) {
+                                    if (message != null) {
+                                        val str = message.toString()
+                                        Log.d("topic", topic)
+                                        if (topic == "sampled_value") {
+                                            viewModel.messageArrived(topic, message.payload.toIntArray())
+                                        }else if (str.matches(Regex("^[\\p{Nd}]+$")))  {
+                                            viewModel.messageArrived(topic, str.toInt())
+                                        } else if (str.matches(Regex("^[\\p{Nd}]+[.][\\p{Nd}Ee]+$"))) {
+                                            viewModel.messageArrived(topic, str.toFloat())
+                                        } else if (str.startsWith("0x")) {
+                                            viewModel.messageArrived(topic, str.drop(2).toUInt(16))
+                                        } else {
+                                            viewModel.messageArrived(topic, str)
+                                        }
+                                    }
+                                }
                             }
 
                             override fun connectionLost(cause: Throwable?) {
@@ -286,8 +302,36 @@ fun SettingScreen(viewModel: SharedViewModel) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
-fun SettingScreenPreview() {
-    VIPAM3500Theme() {
+fun MQTTScreenPreview() {
+    VIPAM3500Theme {
         SettingScreen(viewModel())
     }
+}
+
+fun Float.toByteArray(): ByteArray {
+    return ByteBuffer.allocate(4).putFloat(this).array()
+}
+
+fun UInt.toByteArray(): ByteArray {
+    return ByteBuffer.allocate(4).putInt(this.toInt()).array()
+}
+
+fun ByteArray.toFloat(): Float {
+    return ByteBuffer.wrap(this).float
+}
+
+fun ByteArray.toUInt(): UInt {
+    return ByteBuffer.wrap(this).int.toUInt()
+}
+
+fun IntArray.toByteArray(): ByteArray {
+    val bytes = ByteBuffer.allocate(this.size * Int.SIZE_BYTES)
+    bytes.asIntBuffer().put(this)
+    return bytes.array()
+}
+
+fun  ByteArray.toIntArray(): IntArray {
+    val ints = IntArray(this.size / Int.SIZE_BYTES)
+    ByteBuffer.wrap(this).asIntBuffer()[ints]
+    return ints
 }

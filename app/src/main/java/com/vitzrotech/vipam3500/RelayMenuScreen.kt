@@ -919,6 +919,36 @@ fun ReactivePowerScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun ROCOFScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (dF/dt)",
+        stringResource(R.string.blk_vol),
+        stringResource(R.string.delay))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            0.20f..10.00f,
+            0.50f..0.85f,
+            0.20f..10.00f))
+    val states = List(viewModel.rocofState.size) {
+        listOf(viewModel.rocofState[it].mode,
+            "%.02f".format(viewModel.rocofState[it].pickup),
+            "%.02f".format(viewModel.rocofState[it].blkVol),
+            "%.02f".format(viewModel.rocofState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.rocofState[it] = ROCOFState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

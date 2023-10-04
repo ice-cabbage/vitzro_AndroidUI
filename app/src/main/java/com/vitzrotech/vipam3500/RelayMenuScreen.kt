@@ -24,6 +24,7 @@ import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,8 +39,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 data class OCRState(
@@ -267,6 +270,10 @@ fun RelayTable(captions: List<String>, stubs: List<String>, relays: List<List<An
                         RelayTableComboBoxRow(stubs[i], List(items.size) { items[it][i] as Int },
                             List(relays.size) { relays[it][i] as List<String> }) { it, v -> items[it][i] = v}
                     }
+                    is ClosedFloatingPointRange<*> -> {
+                        RelayTableFloatTextFieldRow(stubs[i], List(items.size) {items[it][i] as String},
+                            List(relays.size) { relays[it][i] as ClosedFloatingPointRange<Float> }) { it, v -> items[it][i] = v }
+                    }
                 }
             }
         }
@@ -291,6 +298,17 @@ fun RelayTableComboBoxRow(label: String, items: List<Int>, lists: List<List<Stri
                 lists[i],
                 { onClick(i, lists[i].indexOf(it)) },
                 Modifier.weight(1.0f))
+        }
+    }
+}
+
+@Composable
+fun RelayTableFloatTextFieldRow(label: String, items: List<String>, ranges: List<ClosedFloatingPointRange<Float>>, onValueChange: (Int, String) -> Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEachIndexed { i, item ->
+            RelayTableTextField(item, ranges[i], Modifier.weight(1.0f)) {
+            }
         }
     }
 }
@@ -349,6 +367,39 @@ fun RelayTableText(text: String, modifier: Modifier) {
             .padding(8.dp, 4.dp)
             .fillMaxWidth()
             .wrapContentHeight(), textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onBackground)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RelayTableTextField(text: String, range: IntRange, modifier: Modifier, onValueChange: (String)->Unit) {
+    val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+    BasicTextField(
+        value = if (range.first != range.last) text else "-",
+        modifier = modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight(),
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        interactionSource = interactionSource,
+        singleLine = true,
+        enabled = true,
+        readOnly = range.first == range.last,
+        textStyle = LocalTextStyle.current.copy(textAlign = if (range.first != range.last)
+            LocalTextStyle.current.textAlign else TextAlign.Center, color = MaterialTheme.colorScheme.onBackground),
+        decorationBox = @Composable { innerTextField ->
+            TextFieldDefaults.DecorationBox(
+                value = text,
+                visualTransformation = VisualTransformation.None,
+                innerTextField = innerTextField,
+                label = (@Composable{ Text("${"%d".format(range.first)}~${"%d".format(range.last)}", fontSize = 9.sp) })
+                    .takeIf{range.first != range.last},
+                singleLine = true,
+                enabled = true,
+                isError = text.toIntOrNull() == null || text.toInt() !in range,
+                interactionSource = interactionSource,
+                contentPadding = PaddingValues(8.dp, 4.dp))
+        }
+    )
 }
 
 fun isRelayInRange(items: List<List<Any?>>, relays: List<List<Any>>): Boolean {

@@ -664,6 +664,32 @@ fun SyncScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun NSOCRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (x In)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.20f..10.00f,
+            0.10f..100.00f))
+    val states = List(viewModel.nsocrState.size) {
+        listOf(viewModel.nsocrState[it].mode,
+            "%.02f".format(viewModel.nsocrState[it].pickup),
+            "%.02f".format(viewModel.nsocrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.nsocrState[it] = NSOCRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

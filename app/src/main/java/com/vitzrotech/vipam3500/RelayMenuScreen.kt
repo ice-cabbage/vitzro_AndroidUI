@@ -38,6 +38,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
@@ -252,7 +253,7 @@ fun RelayMenuScreenPreview() {
 }
 
 @Composable
-fun RelayTable(captions: List<String>, stubs: List<String>, relays: List<List<Any>>, states: List<List<Any>>,
+fun RelayTable(captions: List<String>, stubs: List<String>, relays: List<List<Any>>, states: List<List<Any?>>,
                onApply: (List<List<Any>>) -> Unit) {
     val items = remember { List(states.size) { List(states[it].size) {i -> states[it][i]}.toMutableStateList() }}
     val cancelEnabled = states != items
@@ -267,18 +268,32 @@ fun RelayTable(captions: List<String>, stubs: List<String>, relays: List<List<An
                 @Suppress("UNCHECKED_CAST")
                 when(relay) {
                     is List<*> -> {
-                        RelayTableComboBoxRow(stubs[i], List(items.size) { items[it][i] as Int },
-                            List(relays.size) { relays[it][i] as List<String> }) { it, v -> items[it][i] = v}
+                        RelayTableComboBoxRow(stubs[i], List(items.size) {items[it][i] as Int},
+                            List(relays.size) { relays[it][i] as List<String>}) { it, v -> items[it][i] = v }
                     }
                     is ClosedFloatingPointRange<*> -> {
                         RelayTableFloatTextFieldRow(stubs[i], List(items.size) {items[it][i] as String},
                             List(relays.size) { relays[it][i] as ClosedFloatingPointRange<Float> }) { it, v -> items[it][i] = v }
+                    }
+                    is IntRange -> {
+                        RelayTableIntTextFieldRow(stubs[i], List(items.size) {items[it][i] as String},
+                            List(relays.size) { relays[it][i] as IntRange }) { it, v -> items[it][i] = v }
+                    }
+                }
+            }
+            RelayTableButtonRow(states.size, cancelEnabled, applyEnabled, onApply = {
+                @Suppress("UNCHECKED_CAST")
+                onApply(items as List<List<Any>>)}) {
+                states.forEachIndexed { it, state ->
+                    state.forEachIndexed { i, item ->
+                        items[it][i] = item
                     }
                 }
             }
         }
     }
 }
+
 
 @Composable
 fun RelayTableTextRow(label: String, items: List<String>) {
@@ -307,15 +322,49 @@ fun RelayTableFloatTextFieldRow(label: String, items: List<String>, ranges: List
     Row(Modifier.height(IntrinsicSize.Min)) {
         RelayTableText(label, Modifier.weight(1.0f))
         items.forEachIndexed { i, item ->
-            RelayTableTextField(item, ranges[i], Modifier.weight(1.0f)) {
-            }
+            RelayTableTextField(item, ranges[i], Modifier.weight(1.0f)) { onValueChange(i, it) }
         }
     }
 }
 
+@Composable
+fun RelayTableIntTextFieldRow(label: String, items: List<String>, ranges: List<IntRange>, onValueChange: (Int, String) -> Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEachIndexed { i, item ->
+            RelayTableTextField(item, ranges[i], Modifier.weight(1.0f)) { onValueChange(i, it) }
+        }
+    }
+}
+
+@Composable
+fun RelayTableButtonRow(size: Int, cancelEnabled: Boolean, applyEnabled: Boolean, onApply: () -> Unit, onCancel: ()->Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        Spacer (Modifier.weight(1.0f))
+        Button(onClick = onCancel, modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight()
+            .weight(size.toFloat() / 2), shape = RectangleShape, enabled = cancelEnabled) { Text(stringResource(R.string.cancel)) }
+        Button(onClick = onApply, modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight()
+            .weight(size.toFloat() / 2), shape = RectangleShape, enabled = applyEnabled) { Text(stringResource(R.string.apply)) }
+    }
+}
+
+@Composable
+fun RelayTableText(text: String, modifier: Modifier) {
+    Text(text,
+        modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .padding(8.dp, 4.dp)
+            .fillMaxHeight()
+            .wrapContentHeight(), textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onBackground)
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RelayTableComboBox(text: String, list: List<String>, onClick: (String)->Unit, modifier: Modifier) {
+fun RelayTableComboBox(text:String, list: List<String>, onClick: (String)->Unit, modifier: Modifier) {
     var expanded by remember { mutableStateOf(false) }
     val interactionSource = remember { MutableInteractionSource() }
     ExposedDropdownMenuBox(
@@ -323,7 +372,7 @@ fun RelayTableComboBox(text: String, list: List<String>, onClick: (String)->Unit
         onExpandedChange = { if (list.size > 1) expanded = !expanded },
         modifier = modifier
             .border(1.dp, MaterialTheme.colorScheme.background)
-            .fillMaxWidth()
+            .fillMaxHeight()
     ) {
         BasicTextField(
             value = text,
@@ -338,10 +387,10 @@ fun RelayTableComboBox(text: String, list: List<String>, onClick: (String)->Unit
             decorationBox = @Composable { innerTextField ->
                 TextFieldDefaults.DecorationBox(
                     value = text,
-                    innerTextField = innerTextField,
-                    enabled = true,
-                    singleLine = true,
                     visualTransformation = VisualTransformation.None,
+                    innerTextField = innerTextField,
+                    singleLine = true,
+                    enabled = true,
                     interactionSource = interactionSource,
                     contentPadding = PaddingValues(8.dp, 4.dp)) })
         ExposedDropdownMenu(
@@ -359,14 +408,37 @@ fun RelayTableComboBox(text: String, list: List<String>, onClick: (String)->Unit
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RelayTableText(text: String, modifier: Modifier) {
-    Text(text,
-        modifier
+fun RelayTableTextField(text: String, range: ClosedFloatingPointRange<Float>, modifier: Modifier, onValueChange: (String)->Unit) {
+    val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+    BasicTextField(
+        value = if (range.start != range.endInclusive) text else "-",
+        modifier = modifier
             .border(1.dp, MaterialTheme.colorScheme.background)
-            .padding(8.dp, 4.dp)
-            .fillMaxWidth()
-            .wrapContentHeight(), textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onBackground)
+            .fillMaxHeight(),
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        interactionSource = interactionSource,
+        singleLine = true,
+        enabled = true,
+        readOnly = range.start == range.endInclusive,
+        textStyle = LocalTextStyle.current.copy(textAlign = if (range.start != range.endInclusive)
+            LocalTextStyle.current.textAlign else TextAlign.Center, color = MaterialTheme.colorScheme.onBackground),
+        decorationBox = @Composable { innerTextField ->
+            TextFieldDefaults.DecorationBox(
+                value = text,
+                visualTransformation = VisualTransformation.None,
+                innerTextField = innerTextField,
+                label = (@Composable{ Text("${"%.02f".format(range.start)}~${"%.02f".format(range.endInclusive)}", fontSize = 9.sp) })
+                    .takeIf {range.start != range.endInclusive},
+                singleLine = true,
+                enabled = true,
+                isError = text.toFloatOrNull() == null || text.toFloat() !in range,
+                interactionSource = interactionSource,
+                contentPadding = PaddingValues(8.dp, 4.dp))
+        }
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -404,7 +476,7 @@ fun RelayTableTextField(text: String, range: IntRange, modifier: Modifier, onVal
 
 fun isRelayInRange(items: List<List<Any?>>, relays: List<List<Any>>): Boolean {
     items.forEachIndexed { it, item ->
-        item.forEachIndexed { i, v ->
+        item.forEachIndexed {i, v ->
             when (relays[it][i]) {
                 is IntRange -> {
                     val range = relays[it][i] as IntRange

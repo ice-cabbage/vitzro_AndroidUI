@@ -3,6 +3,7 @@
     <string name="about_description">About button</string>
     <string name="app_name">VIPAM3500</string>
     <string name="apply">Apply</string>
+    <string name="blk_cur">Blk Cur (x In)</string>
     <string name="blk_delay">Blk Delay</string>
     <string name="blk_vol">Blk Vol (x Vn)</string>
     <string name="cancel">Cancel</string>
@@ -68,6 +69,7 @@
     <string name="settings_description">Settings button</string>
     <string name="simulation_test">Simulation_Test</string>
     <string name="simulation_test_description">simulation_test Menu</string>
+    <string name="source">Source</string>
     <string name="subscribe">Subscribe</string>
     <string name="system">System</string>
     <string name="system_description">System Menu</string>

@@ -445,6 +445,38 @@ fun OVRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun UVRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "Aux Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + "\n (x Vn)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.20f..1.0f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            0.20f..1.0f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            0.20f..1.0f,
+            0.10f..100.00f))
+    val states = List(viewModel.uvrState.size) {
+        listOf(viewModel.uvrState[it].mode,
+            "%.02f".format(viewModel.uvrState[it].pickup),
+            "%.02f".format(viewModel.uvrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.uvrState[it] = UVRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

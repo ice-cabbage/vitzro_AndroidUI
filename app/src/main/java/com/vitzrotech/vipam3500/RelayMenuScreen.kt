@@ -1,10 +1,13 @@
 package com.vitzrotech.vipam3500
 
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -20,12 +23,22 @@ import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.lifecycle.viewmodel.compose.viewModel
 
@@ -278,6 +291,52 @@ fun RelayTableComboBoxRow(label: String, items: List<Int>, lists: List<List<Stri
                 lists[i],
                 { onClick(i, lists[i].indexOf(it)) },
                 Modifier.weight(1.0f))
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RelayTableComboBox(text: String, list: List<String>, onClick: (String)->Unit, modifier: Modifier) {
+    var expanded by remember { mutableStateOf(false) }
+    val interactionSource = remember { MutableInteractionSource() }
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { if (list.size > 1) expanded = !expanded },
+        modifier = modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxWidth()
+    ) {
+        BasicTextField(
+            value = text,
+            modifier = modifier
+                .menuAnchor()
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            onValueChange = {},
+            interactionSource = interactionSource,
+            readOnly = true,
+            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onBackground),
+            decorationBox = @Composable { innerTextField ->
+                TextFieldDefaults.DecorationBox(
+                    value = text,
+                    innerTextField = innerTextField,
+                    enabled = true,
+                    singleLine = true,
+                    visualTransformation = VisualTransformation.None,
+                    interactionSource = interactionSource,
+                    contentPadding = PaddingValues(8.dp, 4.dp)) })
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            list.forEach {
+                DropdownMenuItem(
+                    text = {Text(it)},
+                    onClick = {
+                        onClick(it)
+                        expanded = false })
+            }
         }
     }
 }

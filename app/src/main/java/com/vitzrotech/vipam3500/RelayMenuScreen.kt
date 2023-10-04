@@ -477,6 +477,31 @@ fun UVRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun PORScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + "(%)",
+        stringResource(R.string.delay))
+    val relays = listOf(listOf(listOf("ON", "OFF"),
+        5.0f..100.0f,
+        0.10f..100.00f))
+    val states = List(viewModel.porState.size) {
+        listOf(viewModel.porState[it].mode,
+            "%.02f".format(viewModel.porState[it].pickup),
+            "%.02f".format(viewModel.porState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.porState[it] = PORState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

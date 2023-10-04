@@ -642,7 +642,7 @@ fun SyncScreen(viewModel: SharedViewModel) {
             "%.02f".format(viewModel.syncState[it].diffVol),
             "%.02f".format(viewModel.syncState[it].diffFreq),
             "%.02f".format(viewModel.syncState[it].diffPhsAng),
-            viewModel.syncState[it].liveDeadMode,
+            "%.02f".format(viewModel.syncState[it].liveDeadMode),
             "%.02f".format(viewModel.syncState[it].deadLineValue),
             "%.02f".format(viewModel.syncState[it].liveLineValue),
             "%.02f".format(viewModel.syncState[it].deadBusValue),
@@ -720,6 +720,55 @@ fun InrushScreen(viewModel: SharedViewModel) {
                 (item[1] as String).toInt(),
                 (item[2] as String).toFloat(),
                 (item[3] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun UFRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "3rd Time", "4th Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (Hz)",
+        stringResource(R.string.blk_vol),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_delay))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f))
+    val states = List(viewModel.ufrState.size) {
+        listOf(viewModel.ufrState[it].mode,
+            "%.02f".format(viewModel.ufrState[it].pickup),
+            "%.02f".format(viewModel.ufrState[it].blkVol),
+            "%.02f".format(viewModel.ufrState[it].delay),
+            "%.02f".format(viewModel.ufrState[it].blkDelay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ufrState[it] = UFRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
         }
     }
 }

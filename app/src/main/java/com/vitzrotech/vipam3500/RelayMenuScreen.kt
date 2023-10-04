@@ -401,6 +401,50 @@ fun DGRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun OVRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "Aux Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + "\n (x Vn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.80f.. 1.6f,
+            0.05f.. 10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.80f.. 1.6f,
+            0.05f.. 10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.80f.. 1.6f,
+            0.05f.. 10.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.ovrState.size) {
+        listOf(viewModel.ovrState[it].mode,
+            viewModel.ovrState[it].curve,
+            "%.02f".format(viewModel.ovrState[it].pickup),
+            "%.02f".format(viewModel.ovrState[it].lever),
+            "%.02f".format(viewModel.ovrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ovrState[it] = OVRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

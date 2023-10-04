@@ -60,36 +60,37 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.navigation.NavController
 
 @Composable
-fun CB1_Screen(navController, viewModel: SharedViewModel) {
+fun CB1_Screen(navController: NavController, viewModel: SharedViewModel) {
     val cb1 by remember { viewModel.cb1 }
-    var cb1Clicked by remember { mutableListOf(false) }
+    //var cb1Clicked by remember { mutableListOf(false) }
     val cb1Color = if (cb1 == 1u) Color(0xFF00CC00) else if (cb1 == 2u) Color(0xFFFFF0000) else Color(0xFF5A5A5A)
 
-    if (cb1Clicked) {
-        PasswordDialog("0000", onDismiss = { cb1Clicked = false }) {
-            Toast.makeText(context, "CB1 clicked", Toast.LENGTH_SHORT).show()
-        }
-    }
+    //if (cb1Clicked) {
+        //PasswordDialog("0000", onDismiss = { cb1Clicked = false }) {
+            //Toast.makeText(context, "CB1 clicked", Toast.LENGTH_SHORT).show()
+        //}
+    //}
     Column (
         modifier = Modifier
             .fillMaxWidth()
             .padding(
-                top = it.calculateTopPadding(),
-                bottom = it.calculateBottomPadding()
+                //top = it.calculateTopPadding(),
+                //bottom = it.calculateBottomPadding()
             )
             .background(MaterialTheme.colorScheme.background)
             .wrapContentSize(Alignment.Center),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        NavHost(
-            navController,
-            startDestination = NavRoutes.MainRoute.name
-        ) {
-            mainGraph(navController, viewModel)
-        }
+        //NavHost(
+            //navController,
+            //startDestination = NavRoutes.MainRoute.name
+        //) {
+            //mainGraph(navController, viewModel)
+        //}
     }
 }
 
@@ -97,6 +98,6 @@ fun CB1_Screen(navController, viewModel: SharedViewModel) {
 @Preview
 fun CB1_ScreenPreview() {
     VIPAM3500Theme {
-        CB1_Screen(viewModel())
+        //CB1_Screen(viewModel())
     }
 }

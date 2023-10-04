@@ -247,6 +247,15 @@ fun RelayTable(captions: List<String>, stubs: List<String>, relays: List<List<An
             .border(2.dp, MaterialTheme.colorScheme.background)) {
         item {
             RelayTableTextRow("", captions)
+            relays[0].forEachIndexed { i, relay ->
+                @Suppress("UNCHECKED_CAST")
+                when(relay) {
+                    is List<*> -> {
+                        RelayTableComboBoxRow(stubs[i], List(items.size) { items[it][i] as Int },
+                            List(relays.size) { relays[it][i] as List<String> }) { it, v -> items[it][i] = v}
+                    }
+                }
+            }
         }
     }
 }
@@ -256,6 +265,20 @@ fun RelayTableTextRow(label: String, items: List<String>) {
     Row(Modifier.height(IntrinsicSize.Min)) {
         RelayTableText(label, Modifier.weight(1.0f))
         items.forEach { RelayTableText(it, Modifier.weight(1.0f)) }
+    }
+}
+
+@Composable
+fun RelayTableComboBoxRow(label: String, items: List<Int>, lists: List<List<String>>, onClick: (Int, Int) -> Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEachIndexed { i, item ->
+            RelayTableComboBox(
+                lists[i][item],
+                lists[i],
+                { onClick(i, lists[i].indexOf(it)) },
+                Modifier.weight(1.0f))
+        }
     }
 }
 

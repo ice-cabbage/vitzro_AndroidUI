@@ -5,6 +5,8 @@
     <string name="apply">Apply</string>
     <string name="client_id">Client ID</string>
     <string name="connect">Connect</string>
+    <string name="curve">Curve</string>
+    <string name="delay">Delay (sec)</string>
     <string name="disconnect">Disconnect</string>
     <string name="edge">Edge</string>
     <string name="energy">Energy</string>
@@ -14,6 +16,7 @@
     <string name="ib">Ib</string>
     <string name="ic">Ic</string>
     <string name="level">Level</string>
+    <string name="lever">Lever</string>
     <string name="local">Local</string>
     <string name="local_description">Local Operation</string>
     <string name="log">Log</string>
@@ -29,7 +32,9 @@
     <string name="min_a">Min(A)</string>
     <string name="min_v">Min(V)</string>
     <string name="mod">Mod</string>
+    <string name="mode">Mode</string>
     <string name="password">Password</string>
+    <string name="pickup">Pickup</string>
     <string name="position">Position</string>
     <string name="power">Power</string>
     <string name="publish">Publish</string>

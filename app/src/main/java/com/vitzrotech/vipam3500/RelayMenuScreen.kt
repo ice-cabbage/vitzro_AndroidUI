@@ -690,6 +690,40 @@ fun NSOCRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun InrushScreen(viewModel: SharedViewModel) {
+    val captions = listOf("2nd Time", "1st Time")
+    val stubs  = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.channel),
+        stringResource(R.string.pickup) + "(%)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            2..31,
+            0.10f..100.00f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            2..31,
+            0.10f..100.00f,
+            0.10f..100.00f))
+    val states = List(viewModel.inrushState.size) {
+        listOf(viewModel.inrushState[it].mode,
+            "%d".format(viewModel.inrushState[it].channel),
+            "%.02f".format(viewModel.inrushState[it].pickup),
+            "%.02f".format(viewModel.inrushState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.inrushState[it] = InrushRelayState(
+                item[0] as Int,
+                (item[1] as String).toInt(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

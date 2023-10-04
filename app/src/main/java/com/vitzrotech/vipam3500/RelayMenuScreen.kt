@@ -527,6 +527,55 @@ fun NSOVRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun DOCRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Inst", "Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + " (x In)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay),
+        stringResource(R.string.direction),
+        stringResource(R.string.memory_mode))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..32.0f,
+            0.00f..00.0f,
+            0.04f..100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f..10.0f,
+            0.05f..10.0f,
+            0.10f..100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")))
+    val states = List(viewModel.docrState.size) {
+        listOf(viewModel.docrState[it].mode,
+            viewModel.docrState[it].curve,
+            "%.02f".format(viewModel.docrState[it].pickup),
+            "%.02f".format(viewModel.docrState[it].lever),
+            "%.02f".format(viewModel.docrState[it].delay),
+            viewModel.docrState[it].direction,
+            viewModel.docrState[it].memoryMode)
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.docrState[it] = DOCRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat(),
+                item[5] as Int,
+                item[6] as Int)
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

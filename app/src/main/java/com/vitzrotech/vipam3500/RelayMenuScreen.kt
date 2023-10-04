@@ -332,7 +332,31 @@ fun OVGRScreen(viewModel: SharedViewModel) {
     }
 }
 
-
+@Composable
+fun SGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (x ZIn)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.6f.. 4.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.sgrState.size) {
+        listOf(viewModel.sgrState[it].mode,
+            "%.02f".format(viewModel.sgrState[it].pickup),
+            "%.02f".format(viewModel.sgrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.sgrState[it] = SGRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
 
 @Preview
 @Composable

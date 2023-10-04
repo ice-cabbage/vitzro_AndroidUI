@@ -773,6 +773,55 @@ fun UFRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun OFRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "3rd Time", "4th Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (Hz)",
+        stringResource(R.string.blk_vol),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_delay))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f))
+    val states = List(viewModel.ofrState.size) {
+        listOf(viewModel.ofrState[it].mode,
+            "%.02f".format(viewModel.ofrState[it].pickup),
+            "%.02f".format(viewModel.ofrState[it].blkVol),
+            "%.02f".format(viewModel.ofrState[it].delay),
+            "%.02f".format(viewModel.ofrState[it].blkDelay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ofrState[it] = OFRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

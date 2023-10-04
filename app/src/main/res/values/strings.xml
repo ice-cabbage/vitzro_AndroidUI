@@ -8,6 +8,7 @@
     <string name="connect">Connect</string>
     <string name="curve">Curve</string>
     <string name="delay">Delay (sec)</string>
+    <string name="direction">Direction</string>
     <string name="disconnect">Disconnect</string>
     <string name="edge">Edge</string>
     <string name="energy">Energy</string>
@@ -26,6 +27,7 @@
     <string name="manufacturing_company_description">Manufacturing_Company Menu</string>
     <string name="max_a">Max(A)</string>
     <string name="max_v">Max(V)</string>
+    <string name="memory_mode">Memory Mode</string>
     <string name="measurement">Measurement</string>
     <string name="measurement_description">Measurement Menu</string>
     <string name="menu_description">Menu Button</string>

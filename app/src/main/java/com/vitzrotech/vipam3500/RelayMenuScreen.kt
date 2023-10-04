@@ -244,6 +244,55 @@ fun RelayMenuScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun OCGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Inst", "2nd Inst", "1st Time", "2nd Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + "\n (x GIn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..10.00f,
+            0.0f..0.0f,
+            0.04f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..10.00f,
+            0.0f..0.0f,
+            0.04f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f..2.00f,
+            0.05f..10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f.. 2.00f,
+            0.05f..10.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.ocgrState.size) {
+        listOf(viewModel.ocgrState[it].mode,
+            viewModel.ocgrState[it].curve,
+            "%.02f".format(viewModel.ocgrState[it].pickup),
+            "%.02f".format(viewModel.ocgrState[it].lever),
+            "%.02f".format(viewModel.ocgrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ocgrState[it] = OCGRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

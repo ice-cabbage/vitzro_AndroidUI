@@ -1,5 +1,6 @@
 package com.vitzrotech.vipam3500
 
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -1239,6 +1240,69 @@ class SharedViewModel : ViewModel() {
             }
         }
     }
+
+    val ocrState =  mutableStateListOf(
+        OCRState(1, 0, 16.0f, 0.0f, 0.04f),
+        OCRState(1, 0, 16.0f, 0.0f, 0.04f),
+        OCRState(1, 0, 5.0f, 0.05f, 0.10f),
+        OCRState(1, 0, 5.0f, 0.05f, 0.10f))
+    val ocgrState =  mutableStateListOf(
+        OCGRState(1, 0, 5.0f, 0.0f, 0.04f),
+        OCGRState(1, 0, 5.0f, 0.0f, 0.04f),
+        OCGRState(1, 0, 1.0f, 0.05f, 0.10f),
+        OCGRState(1, 0, 1.0f, 0.05f, 0.10f))
+    val ovgrState =  mutableStateListOf(
+        OVGRState(1, 0, 0.4f, 0.05f, 0.10f),
+        OVGRState(1, 0, 0.4f, 0.05f, 0.10f))
+    val sgrState =  mutableStateListOf(
+        SGRState(1, 2.00f, 0.10f))
+    val dgrState =  mutableStateListOf(
+        DGRState(1, 5.00f, 0.00f, 0.04f, 1, 0),
+        DGRState(1, 1.00f, 0.05f, 0.10f, 1, 0))
+    val ovrState =  mutableStateListOf(
+        OVRState(1, 0, 1.20f, 0.05f, 0.10f),
+        OVRState(1, 0, 1.20f, 0.05f, 0.10f),
+        OVRState(1, 0, 1.20f, 0.05f, 0.10f))
+    val uvrState =  mutableStateListOf(
+        UVRState(1, 0.50f, 0.10f),
+        UVRState(1, 0.50f, 0.10f),
+        UVRState(1, 0.50f, 0.10f))
+    val porState =  mutableStateListOf(
+        PORState(1, 50f, 0.10f))
+    val nsovrState =  mutableStateListOf(
+        NSOVRState(1, 0.80f, 0.10f))
+    val docrState =  mutableStateListOf(
+        DOCRState(1, 0, 16.00f, 0.00f, 0.04f, 1, 0),
+        DOCRState(1, 0, 5.00f, 0.05f, 0.10f, 1, 0))
+    val reclosingState =  mutableStateListOf(
+        ReclosingRelayState(1, 1, 0.2f, 5.0f, 30.0f, 60.0f))
+    val syncState = mutableStateListOf(
+        SyncRelayState(1, 3.00f, 0.10f, 5.00f, 0, 0.10f, 0.80f, 0.10f, 0.80f))
+    val nsocrState = mutableStateListOf(
+        NSOCRState(1, 5.00f, 0.10f))
+    val inrushState = mutableStateListOf(
+        InrushRelayState(1, 2, 50.00f, 0.10f),
+        InrushRelayState(1, 2, 50.00f, 0.10f))
+    val ufrState = mutableStateListOf(
+        UFRState(1, 55.00f, 0.50f, 0.10f, 0.50f),
+        UFRState(1, 55.00f, 0.50f, 0.10f, 0.50f),
+        UFRState(1, 55.00f, 0.50f, 0.10f, 0.50f),
+        UFRState(1, 55.00f, 0.50f, 0.10f, 0.50f))
+    val ofrState = mutableStateListOf(
+        OFRState(1, 65.00f, 0.50f, 0.10f, 0.50f),
+        OFRState(1, 65.00f, 0.50f, 0.10f, 0.50f),
+        OFRState(1, 65.00f, 0.50f, 0.10f, 0.50f),
+        OFRState(1, 65.00f, 0.50f, 0.10f, 0.50f))
+    val activePowerState = mutableStateListOf(
+        ActivePowerRelayState(1, 1, 2.00f, 0.10f, 0.01f, 0.20f),
+        ActivePowerRelayState(1, 1, 2.00f, 0.10f, 0.01f, 0.20f),
+        ActivePowerRelayState(1, 1, 2.00f, 0.10f, 0.01f, 0.20f),
+        ActivePowerRelayState(1, 1, 2.00f, 0.10f, 0.01f, 0.20f))
+    val reactivePowerState = mutableStateListOf(
+        ReactivePowerRelayState(1, 1.995f, 0.10f, 0.010f, 0.20f),
+        ReactivePowerRelayState(1, 1.995f, 0.10f, 0.010f, 0.20f))
+    val rocofState = mutableStateListOf(
+        ROCOFState(1, 2.00f, 0.50f, 0.200f))
 }
 
 fun UInt.setBit(bit: Int, value: UInt) : UInt {

@@ -576,6 +576,44 @@ fun DOCRScreen(viewModel: SharedViewModel) {
     }
 }
 
+@Composable
+fun ReclosingScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Auto Reclosing")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.number),
+        stringResource(R.string.first_rcd_time),
+        stringResource(R.string.second_rcd_time),
+        stringResource(R.string.third_rcd_time),
+        stringResource(R.string.fourth_rcd_time))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("0", "1", "2", "3", "4"),
+            0.2f..180.0f,
+            0.2f..180.0f,
+            0.2f..180.0f,
+            0.2f..180.0f))
+    val states = List(viewModel.reclosingState.size) {
+        listOf(viewModel.reclosingState[it].mode,
+            viewModel.reclosingState[it].number,
+            "%.02f".format(viewModel.reclosingState[it].first),
+            "%.02f".format(viewModel.reclosingState[it].second),
+            "%.02f".format(viewModel.reclosingState[it].third),
+            "%.02f".format(viewModel.reclosingState[it].fourth))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.reclosingState[it] = ReclosingRelayState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat(),
+                (item[5] as String).toFloat())
+        }
+    }
+}
+
 @Preview
 @Composable
 fun RelayMenuScreenPreview() {

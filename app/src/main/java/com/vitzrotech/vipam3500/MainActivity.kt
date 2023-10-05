@@ -420,6 +420,12 @@ fun MainCompose(
         if (it.name == route)
             title = stringResource(it.title)
     }
+    if (relayTitles.keys.contains(route)) {
+        title = relayTitles[route] ?: ""
+    }
+    if (measurementTitles.keys.contains(route)) {
+        title = measurementTitles[route] ?: ""
+    }
     if (route == "settings")
         title = stringResource(R.string.settings)
     else if (route == "about")

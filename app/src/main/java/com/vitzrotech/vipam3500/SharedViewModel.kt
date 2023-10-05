@@ -1160,22 +1160,22 @@ class SharedViewModel : ViewModel() {
             "System/SymCfg/sPowerSystem/CT_R/Set2" -> ZCT2.value = value
 
             //Addition Factulty
-            "System/SymCfg/sPowerSystem/UVRBlkVal" -> UVvol.value = value
-            "System/SymCfg/sPowerSystem/UCRBlkVal" -> UCcur.value = value
-            "System/SymCfg/sPowerSystem/NVRBlkVal" -> NVvol.value = value
-            "System/SymCfg/sPowerSystem/NCRBlkVal" -> NCcur.value = value
-            "System/SymCfg/sPowerSystem/POBlkVal" -> POvol.value = value
+            "System/SymCfg/sPowerSystem/UVRBlkVal / System/SymCfg/sPowerSystem/PT_P/Set2" -> UVvol.value = value
+            "System/SymCfg/sPowerSystem/UCRBlkVal / System/SymCfg/sPowerSystem/CT_P/Set2" -> UCcur.value = value
+            "System/SymCfg/sPowerSystem/NVRBlkVal / System/SymCfg/sPowerSystem/PT_P/Set2" -> NVvol.value = value
+            "System/SymCfg/sPowerSystem/NCRBlkVal / System/SymCfg/sPowerSystem/CT_P/Set2" -> NCcur.value = value
+            "System/SymCfg/sPowerSystem/POBlkVal / System/SymCfg/sPowerSystem/PT_P/Set2" -> POvol.value = value
             "System/SymCfg/sPowerSystem/TddAmpload" -> TDcur.value = value
 
             //Motor Status Info
-            "SG/RySet/MSURy/RMSI/FuLoA" -> fullCur.value = value
-            "SG/RySet/MSURy/RMSI/LocRtA" -> lockCur.value = value
+            "SG/RySet/MSURy/RMSI/FuLoA / System/SymCfg/sPowerSystem/CT_P/Set2" -> fullCur.value = value
+            "SG/RySet/MSURy/RMSI/LocRtA / System/SymCfg/sPowerSystem/CT_P/Set2" -> lockCur.value = value
             "SG/RySet/MSURy/RMSI/OvLocTm / 1000" -> lockTime.value = value
             "SG/RySet/MSURy/RMSI/StSatTm / 1000" -> safeTime.value = value
 
             //Breaker Failure
             "SG/RySet/RPSRy/RBRF/FailTmms / 1000" -> delaySec.value = value
-            "SG/RySet/RPSRy/RBRF/DetValA" -> detect.value = value
+            "SG/RySet/RPSRy/RBRF/DetValA / System/SymCfg/sPowerSystem/CT_P/Set2" -> detect.value = value
 
         }
     }

@@ -245,8 +245,8 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("TCS&TRS") {
             TCS_TRS_Screen(viewModel)
         }
-        composable("coldLock_pickUp") {
-            ColdLock_Screen(viewModel)
+        composable("coldLoad_pickUp") {
+            ColdLoad_Screen(viewModel)
         }
         composable("power_Supervision") {
             Supervision_Screen(viewModel)

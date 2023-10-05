@@ -170,9 +170,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("log") {
             LogScreen(navController)
         }
-        composable("relaymenu") {
-            RelayMenuScreen(navController)
-        }
         composable("power") {
             PowerScreen(viewModel)
         }
@@ -214,36 +211,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         }
         composable("PLC_IO_Memory") {
             PLC_IO_MemoryScreen(viewModel)
-        }
-        composable("Setting_Group") {
-            SettingGroupScreen(viewModel)
-        }
-        composable("COS_Log") {
-            COS_LogScreen(viewModel)
-        }
-        composable("SOE_Log") {
-            SOE_LogScreen(viewModel)
-        }
-        composable("Demand_LogScreen") {
-            Demand_LogScreen(viewModel)
-        }
-        composable("Fault_List") {
-            Fault_ListScreen(viewModel)
-        }
-        composable("PQ_Log") {
-            PQ_LogScreen(viewModel)
-        }
-        composable("DO_Count") {
-            DO_CountScreen(viewModel)
-        }
-        composable("CB_OperationCount") {
-            CB_OperationCount_Screen(viewModel)
-        }
-        composable("SMS_Log") {
-            SMS_LogScreen(viewModel)
-        }
-        composable("Operation_Time") {
-            Operation_TimeScreen(viewModel)
         }
         composable("Simulation_Test") {
             Simulation_TestScreen(viewModel)
@@ -291,7 +258,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             VTfailure_Screen(viewModel)
         }
         composable("virtual_DI") {
-            VirtualDI_Screen(viewModel)
+            VirtualDI_Screen(navController)
         }
         composable("PQ_Configuration") {
             PQconfi_Screen(viewModel)
@@ -308,95 +275,68 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("AI_Config") {
             AIconfig_Screen(viewModel)
         }
-        composable("Setting_Group") {
-            SettingGroup_Screen(viewModel)
-        }
-        composable("OCR") {
-            OCR_Screen(viewModel)
-        }
-        composable("OCGR") {
-            OCGR_Screen(viewModel)
-        }
-        composable("OVGR") {
-            OVGR_Screen(viewModel)
-        }
-        composable("SGR") {
-            SGR_Screen(viewModel)
-        }
-        composable("DGR") {
-            DGR_Screen(viewModel)
-        }
-        composable("OVR") {
-            OVR_Screen(viewModel)
-        }
-        composable("UVR") {
-            UVR_Screen(viewModel)
-        }
-        composable("POR") {
-            POR_Screen(viewModel)
-        }
-        composable("NSOVR") {
-            NSOVR_Screen(viewModel)
-        }
-        composable("DOCR") {
-            DOCR_Screen(viewModel)
-        }
-        composable("Reclosing") {
-            Reclosing_Screen(viewModel)
-        }
-        composable("Sync") {
-            Sync_Screen(viewModel)
-        }
-        composable("NSOCR") {
-            NSOCR_Screen(viewModel)
-        }
-        composable("Inrush") {
-            Inrush_Screen(viewModel)
-        }
-        composable("UFR1-4") {
-            UFR14_Screen(viewModel)
-        }
-        composable("OFR1-4") {
-            OFR14_Screen(viewModel)
-        }
-        composable("UFR5-8") {
-            UFR58_Screen(viewModel)
-        }
-        composable("OFR5-8") {
-            OFR58_Screen(viewModel)
-        }
-        composable("UCR") {
-            UCR_Screen(viewModel)
-        }
-        composable("THR") {
-            THR_Screen(viewModel)
-        }
-        composable("Stall_Locked") {
-            StallLocked_Screen(viewModel)
-        }
-        composable("NCHR") {
-            NCHR_Screen(viewModel)
-        }
-        composable("Active_Power") {
-            ActivePower_Screen(viewModel)
-        }
-        composable("Reaective_Power") {
-            Reactive_Screen(viewModel)
-        }
-        composable("ROCOF") {
-            ROCOF_Screen(viewModel)
-        }
-        composable("SEF") {
-            SEF_Screen(viewModel)
-        }
         composable("about") {
             AboutScreen()
         }
         composable("cb1") {
-            CB1_Screen(viewModel)
+            //CB1_Screen(viewModel)
         }
         composable("cb2") {
             CB2_Screen(viewModel)
+        }
+        composable("ocgr") {
+            OCGRScreen(viewModel)
+        }
+        composable("ovgr") {
+            OVGRScreen(viewModel)
+        }
+        composable("sgr") {
+            SGRScreen(viewModel)
+        }
+        composable("dgr") {
+            DGRScreen(viewModel)
+        }
+        composable("ovr") {
+            OVRScreen(viewModel)
+        }
+        composable("uvr") {
+            UVRScreen(viewModel)
+        }
+        composable("por") {
+            PORScreen(viewModel)
+        }
+        composable("nsovr") {
+            NSOVRScreen(viewModel)
+        }
+        composable("docr") {
+            DOCRScreen(viewModel)
+        }
+        composable("reclosing") {
+            ReclosingScreen(viewModel)
+        }
+        composable("sync") {
+            SyncScreen(viewModel)
+        }
+        composable("nsocr") {
+            NSOCRScreen(viewModel)
+        }
+        composable("inrush") {
+            InrushScreen(viewModel)
+        }
+        composable("ufr") {
+            UFRScreen(viewModel)
+        }
+        composable("ofr") {
+            OFRScreen(viewModel)
+        }
+        composable("active_power") {
+            ActivePowerScreen(viewModel)
+        }
+        composable("reactive_power") {
+            ReactivePowerScreen(viewModel)
+        }
+        composable("rocof") {
+            ROCOFScreen(viewModel)
         }
     }
 }

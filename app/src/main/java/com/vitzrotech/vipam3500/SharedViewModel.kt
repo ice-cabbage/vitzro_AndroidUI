@@ -468,6 +468,11 @@ class SharedViewModel : ViewModel() {
     val delaySec = mutableStateOf(0.0f)
     val detect = mutableStateOf(0.0f)
 
+    //TCS&TRS
+    val onOffMode = mutableStateOf("")
+    val TcsChkTime = mutableStateOf(0)
+    val TrsChkTime = mutableStateOf(0)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -587,6 +592,9 @@ class SharedViewModel : ViewModel() {
             //Breaker Failure
             "SG/RySet/RPSRy/RBRF/Mod" -> mo.value = value
             "SG/RySet/RPSRy/RBRF/FailMod" -> failure.value = value
+
+            //TCS & TRS
+            "SG/RySet/RPSRy/RRCS/Mod" -> onOffMode.value = value
         }
     }
 
@@ -782,6 +790,9 @@ class SharedViewModel : ViewModel() {
             //Addition Factulty
             "System/SymCfg/sPowerSystem/DmdSetTms/Set1" -> DMtime.value = value
 
+            //TCS & TRS
+            "SG/RySet/RPSRy/RRCS/TCSMogTmms / 1000" -> TcsChkTime.value = value
+            "SG/RySet/RPSRy/RRCS/TRSMogTmms / 1000" -> TrsChkTime.value = value
         }
     }
 

@@ -46,7 +46,7 @@ fun DOcontrol_Screen(navController: NavHostController) {
         ButtonMenu("43PDA MAN SEL", "MAN_SEL")
     )
 
-    val gridItems = doButton.chunked(3)
+    val gridItems = doButton.chunked(4)
 
     LazyColumn {
         items(gridItems) { rowItems ->

@@ -77,7 +77,6 @@ import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 import kotlinx.coroutines.launch
 import android.widget.TextView
-import androidx.navigation.NavController
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -159,7 +158,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             SettingScreen(viewModel)
         }
         composable("relay") {
-            RelayScreen(viewModel)
+            RelayStatusScreen(viewModel)
         }
         composable("measurement") {
             MeasurementScreen(navController)
@@ -219,7 +218,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             CompanyScreen(viewModel)
         }
         composable("relay_Status") {
-            RelayStatus_Screen(viewModel)
+            RelayStatusBottomScreen(viewModel)
         }
         composable("oscilloscope") {
             OscilloscopeScreen(viewModel)
@@ -282,7 +281,10 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
             //CB1_Screen(viewModel)
         }
         composable("cb2") {
-            CB2_Screen(viewModel)
+            //CB2_Screen(viewModel)
+        }
+        composable("ocr") {
+            OCRScreen(viewModel)
         }
         composable("ocgr") {
             OCGRScreen(viewModel)
@@ -337,6 +339,9 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         }
         composable("rocof") {
             ROCOFScreen(viewModel)
+        }
+        composable("relayMenu") {
+            RelayMenuScreen(navController)
         }
     }
 }

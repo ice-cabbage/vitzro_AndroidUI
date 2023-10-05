@@ -1,168 +1,973 @@
 package com.vitzrotech.vipam3500
 
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.toMutableStateList
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 
-enum class Bit {
-    TOCA1, TOCB1, TOCC1, TOCN1, TOCA2, TOCB2, TOCC2, TOCN2,
-    TDOCA, TDOCB, TDOCC, TDOCN, IDOCA, IDOCB, IDOCC, IDOCN,
-    IOCA1, IOCB1, IOCC1, IOCN1, IOCA2, IOCB2, IOCC2, IOCN2,
-    TUVA1, TUVB1, TUVC1, TUVA2, TUVB2, TUVC2, TUVAux, TOVAux,
-    TOVA1, TOVB1, TOVC1, TOVN1, TOVA2, TOVB2, TOVC2, TOVN2,
-    TOF1, TOF2, TOF3, TOF4, TUF1, TUF2, TUF3, TUF4,
-    FRC, TVVSA, TVVSB, TVVSC, TSG, TRUPA, TRUPB, TRUPC,
-    TNSOV, TNSOC, TPOA, TPOB, TPOC, TUPA, TUPB, TUPC,
-    TOPA, TOPB, TOPC, TOQA, TOQB, TOQC, Reserve107, Reserve108,
-    TRPA, TRPB, TRPC, TRQA, TRQB, TRQC, TSEF1, TSEF2,
-    TUCA, TUCB, TUCC, M48, M51, TTR, MSS, M66,
-    DIFA, DIFB, DIFC, Reserve134, IDIFA, IDIFB, IDIFC, Reserve138,
-    DIFN1, DIFN2, DIFN3, Reserve144, BRFIn, BRFEx, Reserve147, Reserve148,
-    VT_Fail, CLP, Synch, PQ_Sag, PQ_Swell, PQ_Inter, Reserve157, Reserve158,
-    RecReady, RecIn_Pg, RecSucc, RecFail, RecOp1, RecOp2, RecOp3, RecOp4,
-    RecTOut1, RecTOut2, RecTOut3, RecTOut4, RecRclTOut, RecSignal, RecIOCBlk, RecOLTCBlk,
-    P02p5, P05p0, P15p0, Reserved, HARA1, HARB1, HARC1, HARA2,
-    HARB2, HARC2, Reserve193, PhaseADir, PhaseBDir, PhaseCDir, Reserve207 }
+data class OCRState(
+    var mode: Int,
+    var curve: Int,
+    var pickup: Float,
+    var lever: Float,
+    var delay: Float)
 
-data class RelayStatus(val name: String, val trip: Boolean, val mod: Boolean)
+data class OCGRState(
+    var mode: Int,
+    var curve: Int,
+    var pickup: Float,
+    var lever: Float,
+    var delay: Float)
 
-operator fun Array<UInt>.get(bit: Bit): Boolean {
-    var b = bit.ordinal
-    val i = b / 32
-    b %= 32
-    return this[i].shr(b).and(1u) == 1u
+data class OVGRState(
+    var mode: Int,
+    var curve: Int,
+    var pickup: Float,
+    var lever: Float,
+    var delay: Float)
+
+data class SGRState(
+    var mode: Int,
+    var pickup: Float,
+    var delay: Float)
+
+data class DGRState(
+    var mode: Int,
+    var pickup: Float,
+    var lever: Float,
+    var delay: Float,
+    var direction: Int,
+    var memoryMode: Int)
+
+data class OVRState(
+    var mode: Int,
+    var curve: Int,
+    var pickup: Float,
+    var lever: Float,
+    var delay: Float)
+
+data class UVRState(
+    var mode: Int,
+    var pickup: Float,
+    var delay: Float)
+
+data class PORState(
+    var mode: Int,
+    var pickup: Float,
+    var delay: Float)
+
+data class NSOVRState(
+    var mode: Int,
+    var pickup: Float,
+    var delay: Float)
+
+data class DOCRState(
+    var mode: Int,
+    var curve: Int,
+    var pickup: Float,
+    var lever: Float,
+    var delay: Float,
+    var direction: Int = 0,
+    var memoryMode: Int = 0)
+
+data class ReclosingRelayState(
+    var mode: Int,
+    var number: Int,
+    var first: Float,
+    var second: Float,
+    var third: Float,
+    var fourth: Float)
+
+data class SyncRelayState(
+    var mode: Int,
+    var diffVol: Float,
+    var diffFreq: Float,
+    var diffPhsAng: Float,
+    var liveDeadMode: Int,
+    var deadLineValue: Float,
+    var liveLineValue: Float,
+    var deadBusValue: Float,
+    var liveBusValue: Float)
+
+data class NSOCRState(
+    var mode: Int,
+    var pickup: Float,
+    var delay: Float)
+
+data class InrushRelayState(
+    var mode: Int,
+    var channel: Int,
+    var pickup: Float,
+    var delay: Float)
+
+data class UFRState(
+    var mode: Int,
+    var pickup: Float,
+    var blkVol: Float,
+    var delay: Float,
+    var blkDelay: Float)
+
+data class OFRState(
+    var mode: Int,
+    var pickup: Float,
+    var blkVol: Float,
+    var delay: Float,
+    var blkDelay: Float)
+
+data class ActivePowerRelayState(
+    var mode: Int,
+    var source: Int = 0,
+    var pickup: Float,
+    var delay: Float,
+    var blkCur: Float,
+    var blkVol: Float)
+
+data class ReactivePowerRelayState(
+    var mode: Int,
+    var pickup: Float,
+    var delay: Float,
+    var blkCur: Float,
+    var blkVol: Float)
+
+data class ROCOFState(
+    var mode: Int,
+    var pickup: Float,
+    var blkVol: Float,
+    var delay: Float
+)
+
+@Composable
+fun OCRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Inst", "2nd Inst", "1st Time", "2nd Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + "\n (x In)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..32.00f,
+            0.0f..0.0f,
+            0.01f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..32.00f,
+            0.0f..0.0f,
+            0.01f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f..10.00f,
+            0.05f..10.0f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f..10.00f,
+            0.05f..10.0f,
+            0.10f..100.00f))
+    val states = List(viewModel.ocrState.size) {
+        listOf(viewModel.ocrState[it].mode,
+            viewModel.ocrState[it].curve,
+            "%.02f".format(viewModel.ocrState[it].pickup),
+            "%.02f".format(viewModel.ocrState[it].lever),
+            "%.02f".format(viewModel.ocrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ocrState[it] = OCRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
 }
 
 @Composable
-fun RelayScreen(viewModel: SharedViewModel) {
-    val opStored1 by remember { viewModel.opStored1 }
-    val opStored2 by remember { viewModel.opStored2 }
-    val opStored3 by remember { viewModel.opStored3 }
-    val opStored4 by remember { viewModel.opStored4 }
-    val opStored5 by remember { viewModel.opStored5 }
-    val op = arrayOf(opStored1, opStored2, opStored3, opStored4, opStored5)
-    val mod0 by remember { viewModel.relayMod0 }
-    val mod1 by remember { viewModel.relayMod1 }
-    val mod2 by remember { viewModel.relayMod2 }
-    val status = arrayOf(
-        RelayStatus("TOCR-1",   op[Bit.TOCA1] || op[Bit.TOCB1] || op[Bit.TOCC1], mod0.getBit(0)),
-        RelayStatus("TOCR-2",   op[Bit.TOCA2] || op[Bit.TOCB2] || op[Bit.TOCC2], mod0.getBit(1)),
-        RelayStatus("IOCR-1",   op[Bit.IOCA1] || op[Bit.IOCB1] || op[Bit.IOCC1], mod0.getBit(2)),
-        RelayStatus("IOCR-2",   op[Bit.IOCA2] || op[Bit.IOCB2] || op[Bit.IOCC2], mod0.getBit(3)),
-        RelayStatus("TOCGR-1",  op[Bit.TOCN1], mod0.getBit(4)),
-        RelayStatus("TOCGR-2",  op[Bit.TOCN2], mod0.getBit(5)),
-        RelayStatus("IOCGR-1",  op[Bit.IOCN1], mod0.getBit(6)),
-        RelayStatus("IOCGR-2",  op[Bit.IOCN2], mod0.getBit(7)),
-        RelayStatus("OVGR-1",   op[Bit.TOVN1], mod0.getBit(8)),
-        RelayStatus("OVGR-2",   op[Bit.TOVN2], mod0.getBit(9)),
-        RelayStatus("SGR",      op[Bit.TSG], mod0.getBit(10)),
-        RelayStatus("TDGR",     op[Bit.TDOCN], mod0.getBit(11)),
-        RelayStatus("IDGR",     op[Bit.IDOCN], mod0.getBit(12)),
-        RelayStatus("TOVR-1",   op[Bit.TOVA1] || op[Bit.TOVB1] || op[Bit.TOVC1], mod0.getBit(13)),
-        RelayStatus("TOVR-2",   op[Bit.TOVA2] || op[Bit.TOVB2] || op[Bit.TOVC2], mod0.getBit(14)),
-        RelayStatus("TOVR-A",   op[Bit.TOVAux], mod1.getBit(0)),
-        RelayStatus("TUVR-1",   op[Bit.TUVA1] || op[Bit.TUVB1] || op[Bit.TUVC1], mod1.getBit(1)),
-        RelayStatus("TUVR-2",   op[Bit.TUVA2] || op[Bit.TUVB2] || op[Bit.TUVC2], mod1.getBit(2)),
-        RelayStatus("TUVR-A",   op[Bit.TUVAux], mod1.getBit(3)),
-        RelayStatus("POR",      op[Bit.TPOA] || op[Bit.TPOB] || op[Bit.TPOC], mod1.getBit(4)),
-        RelayStatus("NSOVR",    op[Bit.TNSOV], mod1.getBit(5)),
-        RelayStatus("TDOCR",    op[Bit.TDOCA] || op[Bit.TDOCB] || op[Bit.TDOCC], mod1.getBit(6)),
-        RelayStatus("IDOCR",    op[Bit.IDOCA] || op[Bit.IDOCB] || op[Bit.IDOCC], mod1.getBit(7)),
-        RelayStatus("Sync",     op[Bit.Synch], mod1.getBit(8)),
-        RelayStatus("NSOCR",    op[Bit.TNSOC], mod1.getBit(9)),
-        RelayStatus("Inrush-1", op[Bit.HARA1] || op[Bit.HARB1] || op[Bit.HARC1], mod1.getBit(10)),
-        RelayStatus("Inrush-2", op[Bit.HARA2] || op[Bit.HARB2] || op[Bit.HARC2], mod1.getBit(11)),
-        RelayStatus("UFR-1",    op[Bit.TUF1], mod1.getBit(12)),
-        RelayStatus("UFR-2",    op[Bit.TUF2], mod1.getBit(13)),
-        RelayStatus("UFR-3",    op[Bit.TUF3], mod1.getBit(14)),
-        RelayStatus("UFR-4",    op[Bit.TUF4], mod1.getBit(15)),
-        RelayStatus("OFR-1",    op[Bit.TOF1], mod2.getBit(0)),
-        RelayStatus("OFR-2",    op[Bit.TOF2], mod2.getBit(1)),
-        RelayStatus("OFR-3",    op[Bit.TOF3], mod2.getBit(2)),
-        RelayStatus("OFR-4",    op[Bit.TOF4], mod2.getBit(3)),
-        RelayStatus("UCR",      op[Bit.TUCA] || op[Bit.TUCB] || op[Bit.TUCC], mod2.getBit(4)),
-        RelayStatus("THR",      op[Bit.TTR], mod2.getBit(5)),
-        RelayStatus("S/L",      op[Bit.M48] || op[Bit.M51], mod2.getBit(6)),
-        RelayStatus("NCHR",     op[Bit.MSS] || op[Bit.M66], mod2.getBit(7)),
-        RelayStatus("SEF-1",    op[Bit.TSEF1], mod2.getBit(8)),
-        RelayStatus("SEF-2",    op[Bit.TSEF2], mod2.getBit(9)))
-    val columns = if (LocalConfiguration.current.orientation == ORIENTATION_PORTRAIT) 2 else 4
-    val rows = (status.size + 1) / columns
-    Column(
+fun OCGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Inst", "2nd Inst", "1st Time", "2nd Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + "\n (x GIn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..10.00f,
+            0.0f..0.0f,
+            0.04f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..10.00f,
+            0.0f..0.0f,
+            0.04f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f..2.00f,
+            0.05f..10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f.. 2.00f,
+            0.05f..10.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.ocgrState.size) {
+        listOf(viewModel.ocgrState[it].mode,
+            viewModel.ocgrState[it].curve,
+            "%.02f".format(viewModel.ocgrState[it].pickup),
+            "%.02f".format(viewModel.ocgrState[it].lever),
+            "%.02f".format(viewModel.ocgrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ocgrState[it] = OCGRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun OVGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + " (x GVn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.05f.. 0.80f,
+            0.05f..10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.05f.. 0.80f,
+            0.05f..10.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.ovgrState.size) {
+        listOf(viewModel.ovgrState[it].mode,
+            viewModel.ovgrState[it].curve,
+            "%.02f".format(viewModel.ovgrState[it].pickup),
+            "%.02f".format(viewModel.ovgrState[it].lever),
+            "%.02f".format(viewModel.ovgrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ovgrState[it] = OVGRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun SGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (x ZIn)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.6f.. 4.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.sgrState.size) {
+        listOf(viewModel.sgrState[it].mode,
+            "%.02f".format(viewModel.sgrState[it].pickup),
+            "%.02f".format(viewModel.sgrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.sgrState[it] = SGRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun DGRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Inst", "Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (x GIn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay),
+        stringResource(R.string.direction),
+        stringResource(R.string.memory_mode))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.10f.. 10.0f,
+            0.00f..00.0f,
+            0.04f.. 100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")),
+        listOf(listOf("ON", "OFF"),
+            0.02f.. 2.0f,
+            0.05f..10.0f,
+            0.10f.. 100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")))
+    val states = List(viewModel.dgrState.size) {
+        listOf(viewModel.dgrState[it].mode,
+            "%.02f".format(viewModel.dgrState[it].pickup),
+            "%.02f".format(viewModel.dgrState[it].lever),
+            "%.02f".format(viewModel.dgrState[it].delay),
+            viewModel.dgrState[it].direction,
+            viewModel.dgrState[it].memoryMode)
+    }
+    RelayTable(captions, stubs, relays, states) {  items ->
+        items.forEachIndexed { it, item ->
+            viewModel.dgrState[it] = DGRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                item[4] as Int, item[5] as Int)
+        }
+    }
+}
+
+@Composable
+fun OVRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "Aux Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + "\n (x Vn)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.80f.. 1.6f,
+            0.05f.. 10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.80f.. 1.6f,
+            0.05f.. 10.0f,
+            0.10f.. 100.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "KEPCO V-NI", "KEPCO V-VI"),
+            0.80f.. 1.6f,
+            0.05f.. 10.0f,
+            0.10f.. 100.00f))
+    val states = List(viewModel.ovrState.size) {
+        listOf(viewModel.ovrState[it].mode,
+            viewModel.ovrState[it].curve,
+            "%.02f".format(viewModel.ovrState[it].pickup),
+            "%.02f".format(viewModel.ovrState[it].lever),
+            "%.02f".format(viewModel.ovrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ovrState[it] = OVRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun UVRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "Aux Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + "\n (x Vn)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.20f..1.0f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            0.20f..1.0f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            0.20f..1.0f,
+            0.10f..100.00f))
+    val states = List(viewModel.uvrState.size) {
+        listOf(viewModel.uvrState[it].mode,
+            "%.02f".format(viewModel.uvrState[it].pickup),
+            "%.02f".format(viewModel.uvrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.uvrState[it] = UVRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun PORScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + "(%)",
+        stringResource(R.string.delay))
+    val relays = listOf(listOf(listOf("ON", "OFF"),
+        5.0f..100.0f,
+        0.10f..100.00f))
+    val states = List(viewModel.porState.size) {
+        listOf(viewModel.porState[it].mode,
+            "%.02f".format(viewModel.porState[it].pickup),
+            "%.02f".format(viewModel.porState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.porState[it] = PORState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun NSOVRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + "(x Vn)",
+        stringResource(R.string.delay))
+    val relays = listOf(listOf(listOf("ON", "OFF"),
+        0.05f..1.6f,
+        0.10f..100.00f))
+    val states = List(viewModel.nsovrState.size) {
+        listOf(viewModel.nsovrState[it].mode,
+            "%.02f".format(viewModel.nsovrState[it].pickup),
+            "%.02f".format(viewModel.nsovrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.nsovrState[it] = NSOVRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun DOCRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Inst", "Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.curve),
+        stringResource(R.string.pickup) + " (x In)",
+        stringResource(R.string.lever),
+        stringResource(R.string.delay),
+        stringResource(R.string.direction),
+        stringResource(R.string.memory_mode))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite"),
+            0.10f..32.0f,
+            0.00f..00.0f,
+            0.04f..100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")),
+        listOf(listOf("ON", "OFF"),
+            listOf("Definite", "IEC NI", "IEC VI", "IEC EI", "IEC LI", "KEPCO NI", "KEPCO VI"),
+            0.02f..10.0f,
+            0.05f..10.0f,
+            0.10f..100.00f,
+            listOf("Non_Dir",  "Forward", "Reverse"),
+            listOf("ON", "OFF")))
+    val states = List(viewModel.docrState.size) {
+        listOf(viewModel.docrState[it].mode,
+            viewModel.docrState[it].curve,
+            "%.02f".format(viewModel.docrState[it].pickup),
+            "%.02f".format(viewModel.docrState[it].lever),
+            "%.02f".format(viewModel.docrState[it].delay),
+            viewModel.docrState[it].direction,
+            viewModel.docrState[it].memoryMode)
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.docrState[it] = DOCRState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat(),
+                item[5] as Int,
+                item[6] as Int)
+        }
+    }
+}
+
+@Composable
+fun ReclosingScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Auto Reclosing")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.number),
+        stringResource(R.string.first_rcd_time),
+        stringResource(R.string.second_rcd_time),
+        stringResource(R.string.third_rcd_time),
+        stringResource(R.string.fourth_rcd_time))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            listOf("0", "1", "2", "3", "4"),
+            0.2f..180.0f,
+            0.2f..180.0f,
+            0.2f..180.0f,
+            0.2f..180.0f))
+    val states = List(viewModel.reclosingState.size) {
+        listOf(viewModel.reclosingState[it].mode,
+            viewModel.reclosingState[it].number,
+            "%.02f".format(viewModel.reclosingState[it].first),
+            "%.02f".format(viewModel.reclosingState[it].second),
+            "%.02f".format(viewModel.reclosingState[it].third),
+            "%.02f".format(viewModel.reclosingState[it].fourth))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.reclosingState[it] = ReclosingRelayState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat(),
+                (item[5] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun SyncScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.diff_vol),
+        stringResource(R.string.diff_freq),
+        stringResource(R.string.diff_phs_ang),
+        stringResource(R.string.live_dead_mode),
+        stringResource(R.string.dead_line_value),
+        stringResource(R.string.live_line_value),
+        stringResource(R.string.dead_bus_value),
+        stringResource(R.string.live_bus_value))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            3.00f..10.00f,
+            0.10f..0.50f,
+            5.00f..20.00f,
+            listOf("DL-DB", "LL-DB", "DL-LB", "DL-DB | LL-DB", "DL-DB | DL-LB", "LL-DB | DL-LB", "DL-DB | LL-DB | DL-LB"),
+            0.10f..0.80f,
+            0.80f..1.60f,
+            0.10f..0.80f,
+            0.80f..1.60f))
+    val states = List(viewModel.syncState.size) {
+        listOf(viewModel.syncState[it].mode,
+            "%.02f".format(viewModel.syncState[it].diffVol),
+            "%.02f".format(viewModel.syncState[it].diffFreq),
+            "%.02f".format(viewModel.syncState[it].diffPhsAng),
+            viewModel.syncState[it].liveDeadMode,
+            "%.02f".format(viewModel.syncState[it].deadLineValue),
+            "%.02f".format(viewModel.syncState[it].liveLineValue),
+            "%.02f".format(viewModel.syncState[it].deadBusValue),
+            "%.02f".format(viewModel.syncState[it].liveBusValue))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.syncState[it] = SyncRelayState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                item[4] as Int,
+                (item[5] as String).toFloat(),
+                (item[6] as String).toFloat(),
+                (item[7] as String).toFloat(),
+                (item[8] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun NSOCRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (x In)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            0.20f..10.00f,
+            0.10f..100.00f))
+    val states = List(viewModel.nsocrState.size) {
+        listOf(viewModel.nsocrState[it].mode,
+            "%.02f".format(viewModel.nsocrState[it].pickup),
+            "%.02f".format(viewModel.nsocrState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.nsocrState[it] = NSOCRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun InrushScreen(viewModel: SharedViewModel) {
+    val captions = listOf("2nd Time", "1st Time")
+    val stubs  = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.channel),
+        stringResource(R.string.pickup) + "(%)",
+        stringResource(R.string.delay))
+    val relays = listOf (
+        listOf(listOf("ON", "OFF"),
+            2..31,
+            0.10f..100.00f,
+            0.10f..100.00f),
+        listOf(listOf("ON", "OFF"),
+            2..31,
+            0.10f..100.00f,
+            0.10f..100.00f))
+    val states = List(viewModel.inrushState.size) {
+        listOf(viewModel.inrushState[it].mode,
+            "%d".format(viewModel.inrushState[it].channel),
+            "%.02f".format(viewModel.inrushState[it].pickup),
+            "%.02f".format(viewModel.inrushState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.inrushState[it] = InrushRelayState(
+                item[0] as Int,
+                (item[1] as String).toInt(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun UFRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "3rd Time", "4th Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (Hz)",
+        stringResource(R.string.blk_vol),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_delay))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            55.00f..60.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f))
+    val states = List(viewModel.ufrState.size) {
+        listOf(viewModel.ufrState[it].mode,
+            "%.02f".format(viewModel.ufrState[it].pickup),
+            "%.02f".format(viewModel.ufrState[it].blkVol),
+            "%.02f".format(viewModel.ufrState[it].delay),
+            "%.02f".format(viewModel.ufrState[it].blkDelay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ufrState[it] = UFRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun OFRScreen(viewModel: SharedViewModel) {
+    val captions = listOf("1st Time", "2nd Time", "3rd Time", "4th Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (Hz)",
+        stringResource(R.string.blk_vol),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_delay))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f),
+        listOf(listOf("ON", "OFF"),
+            60.00f..65.00f,
+            0.50f..0.85f,
+            0.07f..20.00f,
+            0.03f..60.00f))
+    val states = List(viewModel.ofrState.size) {
+        listOf(viewModel.ofrState[it].mode,
+            "%.02f".format(viewModel.ofrState[it].pickup),
+            "%.02f".format(viewModel.ofrState[it].blkVol),
+            "%.02f".format(viewModel.ofrState[it].delay),
+            "%.02f".format(viewModel.ofrState[it].blkDelay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.ofrState[it] = OFRState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun ActivePowerScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Over Fwd. Act Power", "Over Rvs. Act Power", "Under Fwd. Act Power", "Under Rvs. Act Power")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.source),
+        stringResource(R.string.pickup),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_cur),
+        stringResource(R.string.blk_vol))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            listOf("3 Phase", "1 Phase"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f))
+    val states = List(viewModel.activePowerState.size) {
+        listOf(viewModel.activePowerState[it].mode,
+            viewModel.activePowerState[it].source,
+            "%.03f".format(viewModel.activePowerState[it].pickup),
+            "%.02f".format(viewModel.activePowerState[it].delay),
+            "%.03f".format(viewModel.activePowerState[it].blkCur),
+            "%.02f".format(viewModel.activePowerState[it].blkVol),
+        )
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.activePowerState[it] = ActivePowerRelayState(
+                item[0] as Int,
+                item[1] as Int,
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat(),
+                (item[5] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun ReactivePowerScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Over Forward Reactive Power", "Over Reverse Reactive Power")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup),
+        stringResource(R.string.delay),
+        stringResource(R.string.blk_cur),
+        stringResource(R.string.blk_vol))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f),
+        listOf(listOf("ON", "OFF"),
+            0.01f..4.00f,
+            0.01f..100.00f,
+            0.002f..2.00f,
+            0.02f..1.00f))
+    val states = List(viewModel.reactivePowerState.size) {
+        listOf(viewModel.reactivePowerState[it].mode,
+            "%.03f".format(viewModel.reactivePowerState[it].pickup),
+            "%.02f".format(viewModel.reactivePowerState[it].delay),
+            "%.03f".format(viewModel.reactivePowerState[it].blkCur),
+            "%.02f".format(viewModel.reactivePowerState[it].blkVol),
+        )
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.reactivePowerState[it] = ReactivePowerRelayState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat(),
+                (item[4] as String).toFloat())
+        }
+    }
+}
+
+@Composable
+fun ROCOFScreen(viewModel: SharedViewModel) {
+    val captions = listOf("Time")
+    val stubs = listOf(
+        stringResource(R.string.mode),
+        stringResource(R.string.pickup) + " (dF/dt)",
+        stringResource(R.string.blk_vol),
+        stringResource(R.string.delay))
+    val relays = listOf(
+        listOf(listOf("ON", "OFF"),
+            0.20f..10.00f,
+            0.50f..0.85f,
+            0.20f..10.00f))
+    val states = List(viewModel.rocofState.size) {
+        listOf(viewModel.rocofState[it].mode,
+            "%.02f".format(viewModel.rocofState[it].pickup),
+            "%.02f".format(viewModel.rocofState[it].blkVol),
+            "%.02f".format(viewModel.rocofState[it].delay))
+    }
+    RelayTable(captions, stubs, relays, states) { items ->
+        items.forEachIndexed { it, item ->
+            viewModel.rocofState[it] = ROCOFState(
+                item[0] as Int,
+                (item[1] as String).toFloat(),
+                (item[2] as String).toFloat(),
+                (item[3] as String).toFloat())
+        }
+    }
+}
+
+@Preview
+@Composable
+fun OCRScreenPreview() {
+    VIPAM3500Theme {
+        OCRScreen(viewModel())
+    }
+}
+
+@Composable
+fun RelayTable(captions: List<String>, stubs: List<String>, relays: List<List<Any>>, states: List<List<Any?>>,
+               onApply: (List<List<Any>>) -> Unit) {
+    val items = remember { List(states.size) { List(states[it].size) {i -> states[it][i]}.toMutableStateList() }}
+    val cancelEnabled = states != items
+    val applyEnabled = cancelEnabled && isRelayInRange(items, relays)
+    LazyColumn(
         Modifier
             .fillMaxWidth()
-            .padding(
-                32.dp, 8.dp,
-                if (LocalConfiguration.current.orientation == ORIENTATION_PORTRAIT) 32.dp else 56.dp
-            ),
-        verticalArrangement = Arrangement.Top,
-    ) {
-        Row(Modifier.fillMaxWidth()) {
-            for (c in 0 until columns) {
-                Text("",
-                    Modifier
-                        .weight(3f)
-                        .padding(1.dp, 1.dp))
-                Text(stringResource(R.string.mod),
-                    Modifier
-                        .weight(2f)
-                        .padding(1.dp, 1.dp)
-                        .background(Color.Blue),
-                    color = Color.White, textAlign = TextAlign.Center)
-                Text(stringResource(R.string.trip),
-                    Modifier
-                        .weight(2f)
-                        .padding(1.dp, 1.dp)
-                        .background(Color.Blue),
-                    color = Color.White, textAlign = TextAlign.Center)
+            .border(2.dp, MaterialTheme.colorScheme.background)) {
+        item {
+            RelayTableTextRow("", captions)
+            relays[0].forEachIndexed { i, relay ->
+                @Suppress("UNCHECKED_CAST")
+                when(relay) {
+                    is List<*> -> {
+                        RelayTableComboBoxRow(stubs[i], List(items.size) {items[it][i] as Int},
+                            List(relays.size) { relays[it][i] as List<String>}) { it, v -> items[it][i] = v }
+                    }
+                    is ClosedFloatingPointRange<*> -> {
+                        RelayTableFloatTextFieldRow(stubs[i], List(items.size) {items[it][i] as String},
+                            List(relays.size) { relays[it][i] as ClosedFloatingPointRange<Float> }) { it, v -> items[it][i] = v }
+                    }
+                    is IntRange -> {
+                        RelayTableIntTextFieldRow(stubs[i], List(items.size) {items[it][i] as String},
+                            List(relays.size) { relays[it][i] as IntRange }) { it, v -> items[it][i] = v }
+                    }
+                }
             }
-        }
-        LazyColumn(Modifier.fillMaxWidth()) {
-            items(rows) {
-                Row(Modifier.fillMaxWidth()) {
-                    for (c in 0 until columns) {
-                        val index = c * rows + it
-                        if (index < status.size) {
-                            val s = status[index]
-                            Text(s.name,
-                                Modifier
-                                    .weight(4f)
-                                    .padding(1.dp, 1.dp)
-                                    .background(Color.Blue),
-                                color = Color.White, textAlign = TextAlign.Center)
-                            Text("\u2B24",
-                                Modifier
-                                    .weight(2f)
-                                    .padding(1.dp, 1.dp),
-                                color = if (s.mod) Color.Red else Color.Gray,
-                                textAlign = TextAlign.Center)
-                            Text("\u2B24",
-                                Modifier
-                                    .weight(2f)
-                                    .padding(1.dp, 1.dp),
-                                color = if (s.trip) Color.Red else Color.Gray,
-                                textAlign = TextAlign.Center)
-                        } else {
-                            Column(Modifier.weight(8f)){}
-                        }
+            RelayTableButtonRow(states.size, cancelEnabled, applyEnabled, onApply = {
+                @Suppress("UNCHECKED_CAST")
+                onApply(items as List<List<Any>>)}) {
+                states.forEachIndexed { it, state ->
+                    state.forEachIndexed { i, item ->
+                        items[it][i] = item
                     }
                 }
             }
@@ -170,10 +975,203 @@ fun RelayScreen(viewModel: SharedViewModel) {
     }
 }
 
-@Preview
+
 @Composable
-fun RelayScreenPreview() {
-    VIPAM3500Theme {
-        RelayScreen(viewModel())
+fun RelayTableTextRow(label: String, items: List<String>) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEach { RelayTableText(it, Modifier.weight(1.0f)) }
     }
+}
+
+@Composable
+fun RelayTableComboBoxRow(label: String, items: List<Int>, lists: List<List<String>>, onClick: (Int, Int) -> Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEachIndexed { i, item ->
+            RelayTableComboBox(
+                lists[i][item],
+                lists[i],
+                { onClick(i, lists[i].indexOf(it)) },
+                Modifier.weight(1.0f))
+        }
+    }
+}
+
+@Composable
+fun RelayTableFloatTextFieldRow(label: String, items: List<String>, ranges: List<ClosedFloatingPointRange<Float>>, onValueChange: (Int, String) -> Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEachIndexed { i, item ->
+            RelayTableTextField(item, ranges[i], Modifier.weight(1.0f)) { onValueChange(i, it) }
+        }
+    }
+}
+
+@Composable
+fun RelayTableIntTextFieldRow(label: String, items: List<String>, ranges: List<IntRange>, onValueChange: (Int, String) -> Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        RelayTableText(label, Modifier.weight(1.0f))
+        items.forEachIndexed { i, item ->
+            RelayTableTextField(item, ranges[i], Modifier.weight(1.0f)) { onValueChange(i, it) }
+        }
+    }
+}
+
+@Composable
+fun RelayTableButtonRow(size: Int, cancelEnabled: Boolean, applyEnabled: Boolean, onApply: () -> Unit, onCancel: ()->Unit) {
+    Row(Modifier.height(IntrinsicSize.Min)) {
+        Spacer (Modifier.weight(1.0f))
+        Button(onClick = onCancel, modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight()
+            .weight(size.toFloat() / 2), shape = RectangleShape, enabled = cancelEnabled) { Text(stringResource(R.string.cancel)) }
+        Button(onClick = onApply, modifier = Modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight()
+            .weight(size.toFloat() / 2), shape = RectangleShape, enabled = applyEnabled) { Text(stringResource(R.string.apply)) }
+    }
+}
+
+@Composable
+fun RelayTableText(text: String, modifier: Modifier) {
+    Text(text,
+        modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .padding(8.dp, 4.dp)
+            .fillMaxHeight()
+            .wrapContentHeight(), textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onBackground)
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RelayTableComboBox(text:String, list: List<String>, onClick: (String)->Unit, modifier: Modifier) {
+    var expanded by remember { mutableStateOf(false) }
+    val interactionSource = remember { MutableInteractionSource() }
+    ExposedDropdownMenuBox(
+        expanded = expanded,
+        onExpandedChange = { if (list.size > 1) expanded = !expanded },
+        modifier = modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight()
+    ) {
+        BasicTextField(
+            value = text,
+            modifier = modifier
+                .menuAnchor()
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            onValueChange = {},
+            interactionSource = interactionSource,
+            readOnly = true,
+            textStyle = LocalTextStyle.current.copy(color = MaterialTheme.colorScheme.onBackground),
+            decorationBox = @Composable { innerTextField ->
+                TextFieldDefaults.DecorationBox(
+                    value = text,
+                    visualTransformation = VisualTransformation.None,
+                    innerTextField = innerTextField,
+                    singleLine = true,
+                    enabled = true,
+                    interactionSource = interactionSource,
+                    contentPadding = PaddingValues(8.dp, 4.dp)) })
+        ExposedDropdownMenu(
+            expanded = expanded,
+            onDismissRequest = { expanded = false }
+        ) {
+            list.forEach {
+                DropdownMenuItem(
+                    text = {Text(it)},
+                    onClick = {
+                        onClick(it)
+                        expanded = false })
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RelayTableTextField(text: String, range: ClosedFloatingPointRange<Float>, modifier: Modifier, onValueChange: (String)->Unit) {
+    val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+    BasicTextField(
+        value = if (range.start != range.endInclusive) text else "-",
+        modifier = modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight(),
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        interactionSource = interactionSource,
+        singleLine = true,
+        enabled = true,
+        readOnly = range.start == range.endInclusive,
+        textStyle = LocalTextStyle.current.copy(textAlign = if (range.start != range.endInclusive)
+            LocalTextStyle.current.textAlign else TextAlign.Center, color = MaterialTheme.colorScheme.onBackground),
+        decorationBox = @Composable { innerTextField ->
+            TextFieldDefaults.DecorationBox(
+                value = text,
+                visualTransformation = VisualTransformation.None,
+                innerTextField = innerTextField,
+                label = (@Composable{ Text("${"%.02f".format(range.start)}~${"%.02f".format(range.endInclusive)}", fontSize = 9.sp) })
+                    .takeIf {range.start != range.endInclusive},
+                singleLine = true,
+                enabled = true,
+                isError = text.toFloatOrNull() == null || text.toFloat() !in range,
+                interactionSource = interactionSource,
+                contentPadding = PaddingValues(8.dp, 4.dp))
+        }
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun RelayTableTextField(text: String, range: IntRange, modifier: Modifier, onValueChange: (String)->Unit) {
+    val interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
+    BasicTextField(
+        value = if (range.first != range.last) text else "-",
+        modifier = modifier
+            .border(1.dp, MaterialTheme.colorScheme.background)
+            .fillMaxHeight(),
+        onValueChange = onValueChange,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        interactionSource = interactionSource,
+        singleLine = true,
+        enabled = true,
+        readOnly = range.first == range.last,
+        textStyle = LocalTextStyle.current.copy(textAlign = if (range.first != range.last)
+            LocalTextStyle.current.textAlign else TextAlign.Center, color = MaterialTheme.colorScheme.onBackground),
+        decorationBox = @Composable { innerTextField ->
+            TextFieldDefaults.DecorationBox(
+                value = text,
+                visualTransformation = VisualTransformation.None,
+                innerTextField = innerTextField,
+                label = (@Composable{ Text("${"%d".format(range.first)}~${"%d".format(range.last)}", fontSize = 9.sp) })
+                    .takeIf{range.first != range.last},
+                singleLine = true,
+                enabled = true,
+                isError = text.toIntOrNull() == null || text.toInt() !in range,
+                interactionSource = interactionSource,
+                contentPadding = PaddingValues(8.dp, 4.dp))
+        }
+    )
+}
+
+fun isRelayInRange(items: List<List<Any?>>, relays: List<List<Any>>): Boolean {
+    items.forEachIndexed { it, item ->
+        item.forEachIndexed {i, v ->
+            when (relays[it][i]) {
+                is IntRange -> {
+                    val range = relays[it][i] as IntRange
+                    if ((v !is String) || (v.toIntOrNull() == null) || (v.toInt() !in range))
+                        return false
+                }
+                is ClosedFloatingPointRange<*> -> {
+                    @Suppress("UNCHECKED_CAST")
+                    val range = relays[it][i] as ClosedFloatingPointRange<Float>
+                    if ((v !is String) || (v.toFloatOrNull() == null) || (v.toFloat() !in range))
+                        return false
+                }
+            }
+        }
+    }
+    return true
 }

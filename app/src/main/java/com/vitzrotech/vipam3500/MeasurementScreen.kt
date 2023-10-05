@@ -24,23 +24,23 @@ import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 val measurementTitles = mapOf(
-    "voltage/current" to "OCR (50/51)",
-    "power" to "OCGR (50G/51G)",
-    "energy" to "OVGR (64G)",
-    "reverse energy" to "SGR (67G)",
-    "di/do status" to "DGR (67N)",
-    "ai td" to "OVR (59)",
-    "thermal/loadrate" to "UVR (27)",
-    "sequence" to "POR (47P)",
-    "phase balance" to "NSOVR (47N)",
-    "harmonics" to "DOCR (67P)",
-    "k-factor/c-factor" to "Reclosing (79)",
-    "demand" to "Sync (25)",
-    "max/min" to "NSOCR (46)",
-    "true rms" to "Inrush (68)",
-    "relay status" to "UFR (81U)",
-    "interlock status" to "OFR (81O)",
-    "plc io memory" to "Active Power (32P)")
+    "voltage/current" to "Voltage/Current",
+    "power" to "Power",
+    "energy" to "Energy",
+    "reverse energy" to "Reverse Energy",
+    "di/do status" to "DI/DO Status",
+    "ai td" to "AI(4~20mA) TD",
+    "thermal/loadRate" to "Thermal/LoadRate",
+    "sequence" to "Sequence",
+    "phase balance" to "Phase Balance",
+    "harmonics" to "Harmonics",
+    "k-factor/c-factor" to "K-factor/C-factor",
+    "demand" to "Demand",
+    "max/min" to "Max/Min",
+    "true rms" to "True RMS",
+    "relay status" to "Relay Status",
+    "interlock status" to "Interlock Status",
+    "plc io memory" to "PLC IO Memory")
 
 @Composable
 fun NaviButton(navController: NavController, route: String, modifier: Modifier) {

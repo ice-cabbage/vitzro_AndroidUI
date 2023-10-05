@@ -473,6 +473,12 @@ class SharedViewModel : ViewModel() {
     val TcsChkTime = mutableStateOf(0)
     val TrsChkTime = mutableStateOf(0)
 
+    //Cold Load Pick up
+    val coldMode = mutableStateOf("")
+    val cbOpenTime = mutableStateOf(0.0f)
+    val activeTime = mutableStateOf(0.0f)
+    val stopTime = mutableStateOf(0.0f)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -595,6 +601,9 @@ class SharedViewModel : ViewModel() {
 
             //TCS & TRS
             "SG/RySet/RPSRy/RRCS/Mod" -> onOffMode.value = value
+
+            //Cold Load Pick up
+            "SG/RySet/RPSRy/RCLP/Mod" -> coldMode.value = value
         }
     }
 
@@ -1188,6 +1197,10 @@ class SharedViewModel : ViewModel() {
             "SG/RySet/RPSRy/RBRF/FailTmms / 1000" -> delaySec.value = value
             "SG/RySet/RPSRy/RBRF/DetValA / System/SymCfg/sPowerSystem/CT_P/Set2" -> detect.value = value
 
+            //Cold Load Pick up
+            "SG/RySet/RPSRy/RCLP/CBOpnTmms / 1000" -> cbOpenTime.value = value
+            "SG/RySet/RPSRy/RCLP/ActTmms / 1000" -> activeTime.value = value
+            "SG/RySet/RPSRy/RCLP/StpTmms / 1000" -> stopTime.value = value
         }
     }
 

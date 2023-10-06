@@ -479,6 +479,17 @@ class SharedViewModel : ViewModel() {
     val activeTime = mutableStateOf(0.0f)
     val stopTime = mutableStateOf(0.0f)
 
+    //Power Supervision
+    val sv25M = mutableStateOf("")
+    val sv25P = mutableStateOf(0.0f)
+    val sv25D = mutableStateOf(0.0f)
+    val sv50M = mutableStateOf("")
+    val sv50P = mutableStateOf(0.0f)
+    val sv50D = mutableStateOf(0.0f)
+    val sv150M = mutableStateOf("")
+    val sv150P = mutableStateOf(0.0f)
+    val sv150D = mutableStateOf(0.0f)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -604,6 +615,11 @@ class SharedViewModel : ViewModel() {
 
             //Cold Load Pick up
             "SG/RySet/RPSRy/RCLP/Mod" -> coldMode.value = value
+
+            //Power supervision
+            "SG/RySet/SPWRy/sPTOVP02p5/Mod" -> sv25M.value = value
+            "SG/RySet/SPWRy/sPTOVP05p0/Mod" -> sv50M.value = value
+            "SG/RySet/SPWRy/sPTOVP15p0/Mod" -> sv150M.value = value
         }
     }
 
@@ -1201,6 +1217,14 @@ class SharedViewModel : ViewModel() {
             "SG/RySet/RPSRy/RCLP/CBOpnTmms / 1000" -> cbOpenTime.value = value
             "SG/RySet/RPSRy/RCLP/ActTmms / 1000" -> activeTime.value = value
             "SG/RySet/RPSRy/RCLP/StpTmms / 1000" -> stopTime.value = value
+
+            //Power Supervision
+            "SG/RySet/SPWRy/sPTOVP02p5/StrVal" -> sv25P.value = value
+            "SG/RySet/SPWRy/sPTOVP02p5/OpDlTmms / 1000" -> sv25D.value = value
+            "SG/RySet/SPWRy/sPTOVP05p0/StrVal" -> sv50P.value = value
+            "SG/RySet/SPWRy/sPTOVP05p0/OpDlTmms / 1000" -> sv50D.value = value
+            "SG/RySet/SPWRy/sPTOVP15p0/StrVal" -> sv150P.value = value
+            "SG/RySet/SPWRy/sPTOVP15p0/OpDlTmms / 1000" -> sv150D.value = value
         }
     }
 

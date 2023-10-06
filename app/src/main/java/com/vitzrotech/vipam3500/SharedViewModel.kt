@@ -490,6 +490,14 @@ class SharedViewModel : ViewModel() {
     val sv150P = mutableStateOf(0.0f)
     val sv150D = mutableStateOf(0.0f)
 
+    //PQ Configuration
+    val sagM = mutableStateOf("")
+    val swellM = mutableStateOf("")
+    val interM = mutableStateOf("")
+    val sagP = mutableStateOf(0)
+    val swellP = mutableStateOf(0)
+    val interP = mutableStateOf(0)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -620,6 +628,11 @@ class SharedViewModel : ViewModel() {
             "SG/RySet/SPWRy/sPTOVP02p5/Mod" -> sv25M.value = value
             "SG/RySet/SPWRy/sPTOVP05p0/Mod" -> sv50M.value = value
             "SG/RySet/SPWRy/sPTOVP15p0/Mod" -> sv150M.value = value
+
+            //PQ Configuration
+            "SG/RySet/RPSRy/RPQC/SagMod" -> sagM.value = value
+            "SG/RySet/RPSRy/RPQC/SwellMod" -> swellM.value = value
+            "SG/RySet/RPSRy/RPQC/InterruptionMod" -> interM.value = value
         }
     }
 
@@ -818,6 +831,11 @@ class SharedViewModel : ViewModel() {
             //TCS & TRS
             "SG/RySet/RPSRy/RRCS/TCSMogTmms / 1000" -> TcsChkTime.value = value
             "SG/RySet/RPSRy/RRCS/TRSMogTmms / 1000" -> TrsChkTime.value = value
+
+            //PQ Configuration
+            "SG/RySet/RPSRy/RPQC/SagStrVal" -> sagP.value = value
+            "SG/RySet/RPSRy/RPQC/SwellStrVal" -> swellP.value = value
+            "SG/RySet/RPSRy/RPQC/InterruptionStrVal" -> interP.value = value
         }
     }
 

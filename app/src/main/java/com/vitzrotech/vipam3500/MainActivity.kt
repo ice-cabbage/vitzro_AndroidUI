@@ -175,7 +175,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("energy") {
             EnergyScreen(viewModel)
         }
-        composable("reverse_Energy") {
+        composable("reverse Energy") {
             ReverseEnergyScreen(viewModel)
         }
         composable("DI/DO_Status") {
@@ -190,7 +190,7 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("sequence") {
             SequenceScreen(viewModel)
         }
-        composable("phase_Balance") {
+        composable("phase balance") {
             Phase_BalanceScreen(viewModel)
         }
         composable("k-factor/c-factor") {
@@ -202,10 +202,10 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("max/min") {
             MaxminScreen(viewModel)
         }
-        composable("true_RMS") {
+        composable("true RMS") {
             True_RMS_Screen(viewModel)
         }
-        composable("interlock_Status") {
+        composable("interlock Status") {
             Interlock_StatusScreen(viewModel)
         }
         composable("PLC_IO_Memory") {
@@ -217,28 +217,28 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Company") {
             CompanyScreen(viewModel)
         }
-        composable("relay_Status") {
+        composable("relay Status") {
             RelayStatusBottomScreen(viewModel)
         }
         composable("oscilloscope") {
             OscilloscopeScreen(viewModel)
         }
-        composable("device_info") {
+        composable("device Info") {
             DeviceInfo_Screen(viewModel)
         }
-        composable("power_system") {
+        composable("power System") {
             PowerSystem_Screen(viewModel)
         }
-        composable("addition_info") {
+        composable("addition Faculty") {
             AdditionInfo_Screen(viewModel)
         }
-        composable("motor_status_info") {
+        composable("motor StatusInfo") {
             MotorStatusInfo_Screen(viewModel)
         }
-        composable("DO_control") {
+        composable("DO Control") {
             DOcontrol_Screen(navController)
         }
-        composable("breaker_failure") {
+        composable("breaker Failure") {
             Breaker_Screen(viewModel)
         }
         composable("TCS&TRS") {
@@ -247,32 +247,35 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("coldLoad_pickUp") {
             ColdLoad_Screen(viewModel)
         }
-        composable("power_Supervision") {
+        composable("power Supervision") {
             Supervision_Screen(viewModel)
         }
         composable("communication") {
             Communication_Screen(viewModel)
         }
-        composable("VT_Failure") {
+        composable("VT Failure") {
             VTfailure_Screen(viewModel)
         }
-        composable("virtual_DI") {
+        composable("virtual DI") {
             VirtualDI_Screen(navController)
         }
-        composable("PQ_Configuration") {
+        composable("PQ Configuration") {
             PQconfi_Screen(viewModel)
         }
-        composable("demand_Configuration") {
+        composable("demand Configuration") {
             DemandConfi_Screen(viewModel)
         }
-        composable("system_Dignosis") {
+        composable("system Dignosis") {
             SystemDig_Screen(viewModel)
         }
         composable("function") {
             Function_Screen(viewModel)
         }
-        composable("AI_Config") {
+        composable("AI Config") {
             AIconfig_Screen(viewModel)
+        }
+        composable("Osil") {
+            OscilloscopeScreen(viewModel)
         }
         composable("about") {
             AboutScreen()
@@ -425,6 +428,9 @@ fun MainCompose(
     }
     if (measurementTitles.keys.contains(route)) {
         title = measurementTitles[route] ?: ""
+    }
+    if (systemTitles.keys.contains(route)) {
+        title = systemTitles[route] ?: ""
     }
     if (route == "settings")
         title = stringResource(R.string.settings)

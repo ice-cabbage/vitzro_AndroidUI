@@ -5,6 +5,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -24,23 +25,24 @@ import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 val measurementTitles = mapOf(
-    "voltage/current" to "Voltage/Current",
+    "voltage_current" to "Voltage/Current",
     "power" to "Power",
     "energy" to "Energy",
-    "reverse energy" to "Reverse Energy",
-    "di/do status" to "DI/DO Status",
-    "ai td" to "AI(4~20mA) TD",
-    "thermal/loadRate" to "Thermal/LoadRate",
+    "reverse Energy" to "Reverse Energy",
+    "DI/DO_Status" to "DI/DO Status",
+    "AI_TD" to "AI(4~20mA) TD",
+    "Thermal/LoadRate" to "Thermal/LoadRate",
     "sequence" to "Sequence",
     "phase balance" to "Phase Balance",
     "harmonics" to "Harmonics",
     "k-factor/c-factor" to "K-factor/C-factor",
     "demand" to "Demand",
     "max/min" to "Max/Min",
-    "true rms" to "True RMS",
-    "relay status" to "Relay Status",
+    "true RMS" to "True RMS",
+    "relay Status" to "Relay Status",
     "interlock status" to "Interlock Status",
-    "plc io memory" to "PLC IO Memory")
+    "PLC_IO_Memory" to "PLC IO Memory",
+    "Osil" to "Oscilloscope")
 
 @Composable
 fun NaviButton(navController: NavController, route: String, modifier: Modifier) {
@@ -68,7 +70,8 @@ fun MeasurementScreen(navController: NavController) {
                                 Modifier
                                     .weight(1.0f)
                                     .fillMaxWidth()
-                                    .padding(8.dp))
+                                    .padding(8.dp)
+                                    .fillMaxHeight())
                         else
                             Spacer(Modifier.weight(1.0f))
                     }

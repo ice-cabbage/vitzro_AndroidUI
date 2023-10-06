@@ -1,78 +1,78 @@
 package com.vitzrotech.vipam3500
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import android.content.res.Configuration
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
-data class MenuList(
-    val buttonName: String = "",
-    val dst: String = ""
-)
+val systemTitles = mapOf(
+    "device Info" to "Device Info",
+    "power System" to "Power System",
+    "addition Faculty" to "Addition Faculty",
+    "motor StatusInfo" to "Motor Status Info",
+    "DO Control" to "DO Control",
+    "breaker Failure" to "Breaker Failure",
+    "TCS&TRS" to "TCS & TRS",
+    "coldLoad pickUp" to "Cold Load Pick up",
+    "power Supervision" to "Power Supervision",
+    "communication" to "Communication",
+    "VT Failure" to "VT Failure",
+    "virtual DI" to "Virtual DI",
+    "PQ Configuration" to "PQ Configuration",
+    "demand Configuration" to "Demand Configuration",
+    "system Dignosis" to "System Dignosis",
+    "function" to "Function",
+    "AI Config" to "AI Config")
 
 @Composable
-fun SystemScreen(navController: NavHostController) {
-    val buttonList = arrayListOf(
-        MenuList("기기 정보", "device_info"),
-        MenuList("기기 결선정보", "power_system"),
-        MenuList("추가 정보", "addition_info"),
-        MenuList("모터상태 정보", "motor_status_info"),
-        MenuList("DO 제어", "DO_control"),
-        MenuList("차단실패 설정", "breaker_failure"),
-        MenuList("TCS & TRS 설정", "TCS&TRS"),
-        MenuList("돌입전류 억제", "coldLock_pickUp"),
-        MenuList("내부전원 감시설정", "power_Supervision"),
-        MenuList("통신", "communication"),
-        MenuList("VT 감시", "VT_Failure"),
-        MenuList("가상 DI", "virtual_DI"),
-        MenuList("PQ 설정", "PQ_Configuration"),
-        MenuList("수요 설정", "demand_Configuration"),
-        MenuList("시스템 진단정보", "system_Dignosis"),
-        MenuList("부가기능", "function"),
-        MenuList("AI(TD) 설정", "AI_Config")
-    )
-    val gridItems = buttonList.chunked(3)
+fun NavigationButton(navController: NavController, route: String, modifier: Modifier) {
+    Button(onClick = {
+        navController.navigate(route) {
+            popUpTo(NavRoutes.MainRoute.name)
+        }
+    }, modifier = modifier.border(1.dp, MaterialTheme.colorScheme.background),
+        shape = RectangleShape) {
+        Text(systemTitles[route] ?: "", textAlign = TextAlign.Center)
+    }
+}
 
-    LazyColumn {
-        items(gridItems) { rowItems ->
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
-            ) {
-                for (item in rowItems) {
-                    val modifier = Modifier
-                        .height(75.dp)
-                        .width(100.dp)
-                        .weight(1f)
-                        .padding(8.dp, 8.dp)
-
-                    Button(
-                        onClick = {
-                            navController.navigate(item.dst) {
-                                popUpTo(popUpToId)
-                            }
-                        },
-                        modifier = modifier,
-                        shape = RectangleShape
-                    ) {
-                        Text(text = item.buttonName)
+@Composable
+fun SystemScreen(navController: NavController) {
+    val key = systemTitles.keys.iterator()
+    val columns = if (LocalConfiguration.current.orientation == Configuration.ORIENTATION_PORTRAIT) 3 else 4
+    LazyColumn(Modifier.border(2.dp, MaterialTheme.colorScheme.background)) {
+        item {
+            while(key.hasNext()) {
+                Row(modifier = Modifier.height(IntrinsicSize.Min)) {
+                    repeat(columns) {
+                        if (key.hasNext())
+                            NavigationButton(navController, key.next(),
+                                Modifier
+                                    .weight(1.0f)
+                                    .fillMaxWidth()
+                                    .padding(8.dp)
+                                    .fillMaxHeight())
+                        else
+                            Spacer(Modifier.weight(1.0f))
                     }
                 }
             }

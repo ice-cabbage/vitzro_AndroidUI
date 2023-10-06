@@ -498,6 +498,13 @@ class SharedViewModel : ViewModel() {
     val swellP = mutableStateOf(0)
     val interP = mutableStateOf(0)
 
+    //Demand Configuration
+    val decur = mutableStateOf(0)
+    val desec = mutableStateOf(0)
+    val deact = mutableStateOf(0)
+    val derea = mutableStateOf(0)
+    val demin = mutableStateOf(0)
+
     private var whAH = 0.0f
     private var whAL = 0.0f
     private var whAG = 0.0f
@@ -836,6 +843,13 @@ class SharedViewModel : ViewModel() {
             "SG/RySet/RPSRy/RPQC/SagStrVal" -> sagP.value = value
             "SG/RySet/RPSRy/RPQC/SwellStrVal" -> swellP.value = value
             "SG/RySet/RPSRy/RPQC/InterruptionStrVal" -> interP.value = value
+
+            //Demand Configuration
+            "System/SymCfg/sPowerSystem/MinMaxA/Set1" -> decur.value = value
+            "(int)System/SymCfg/sPowerSystem/DmdSetTms/Set1" -> desec.value = value
+            "System/SymCfg/sPowerSystem/MinMaxW/Set1" -> deact.value = value
+            "System/SymCfg/sPowerSystem/MinMaxVar/Set1" -> derea.value = value
+            "(int)System/SymCfg/sPowerSystem/DmdSetTms/Set2" -> demin.value = value
         }
     }
 

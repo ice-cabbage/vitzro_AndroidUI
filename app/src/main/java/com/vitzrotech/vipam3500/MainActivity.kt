@@ -83,21 +83,6 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val statusText:TextView = findViewById(R.id.status_text)
-        val seekBar:SeekBar = findViewById(R.id.seekBar)
-
-        seekBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener{
-            override fun onProgressChanged(p0: SeekBar?, progress: Int, p2: Boolean) {
-                statusText.text = "${progress}%"
-            }
-
-            override fun onStartTrackingTouch(p0: SeekBar?) {
-            }
-
-            override fun onStopTrackingTouch(p0: SeekBar?) {
-            }
-        })
-
         setContent {
             VIPAM3500Theme {
                 // A surface container using the 'background' color from the theme
@@ -651,48 +636,6 @@ fun MainCompose(
                         )
                     }
                 },
-                floatingActionButton = {
-                    val cb1 by remember {viewModel.cb1}
-                    val cb2 by remember {viewModel.cb2}
-                    var cb1Clicked by remember {mutableStateOf(false) }
-                    var cb2Clicked by remember {mutableStateOf(false) }
-                    val cb1Color = if (cb1 == 1u) Color(0xFF00CC00) else if (cb1 == 2u) Color(0xFFFF0000) else Color(0xFF5A5A5A)
-                    val cb2Color = if (cb2 == 1u) Color(0xFF00CC00) else if (cb2 == 2u) Color(0xFFFF0000) else Color(0xFF5A5A5A)
-                    if (cb1Clicked) {
-                        PasswordDialog("0000", onDismiss = {cb1Clicked = false}) {
-                            Toast.makeText(context, "CB1 clicked", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    if (cb2Clicked) {
-                        PasswordDialog("0000", onDismiss = {cb2Clicked = false}) {
-                            Toast.makeText(context, "CB2 clicked", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-                    if (LocalConfiguration.current.orientation == ORIENTATION_PORTRAIT) {
-                        Row {
-                            FloatingActionButton({ cb1Clicked = true }, containerColor = cb1Color) {
-                                Text("CB1", color = Color.White)
-                            }
-                            Spacer(modifier = Modifier.width(8.dp))
-                            FloatingActionButton({ cb2Clicked = true }, containerColor = cb2Color) {
-                                Text("CB2", color = Color.White)
-                            }
-                        }
-                    } else {
-                        Column {
-                            FloatingActionButton({ cb1Clicked = true }, containerColor = cb1Color) {
-                                Text("CB1", color = Color.White)
-                            }
-                            Spacer(modifier = Modifier.height(8.dp))
-                            FloatingActionButton({ cb2Clicked = true }, containerColor = cb2Color) {
-                                Text("CB2", color = Color.White)
-                            }
-                        }
-                    }
-                },
-
-
-
             ) {
                 Column(
                     modifier = Modifier

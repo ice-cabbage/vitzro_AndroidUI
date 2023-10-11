@@ -19,20 +19,6 @@ import com.vitzrotech.vipam3500.ui.theme.VIPAM3500Theme
 
 @Composable
 fun AboutScreen() {
-    LazyColumn (
-        Modifier
-            .fillMaxWidth()
-            .padding(16.dp)) {
-        //Row(Modifier.fillMaxWidth()) {
-            //Text(
-                //Modifier
-                    //.weight(1f)
-                    //.height(40.dp)
-                    //.border(0.6.dp, Color.Black),
-                //"VIPAM 3500"
-            //)
-        //}
-    }
 }
 
 @Composable

@@ -278,7 +278,6 @@ fun ComboBox(level: Int, text:String, list: List<String>, onClick: (String)->Uni
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OscilloscopeControl(viewModel: SharedViewModel, state: OscilloscopeState) {
     var minVText by remember { mutableStateOf(state.minV.toString()) }

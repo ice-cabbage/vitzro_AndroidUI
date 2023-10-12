@@ -37,7 +37,6 @@ import kotlin.math.sin
 
 data class Phase(val name: String, val mag: Float, val ang: Float)
 
-@OptIn(ExperimentalTextApi::class)
 @Composable
 fun VoltageCurrentScreen(viewModel: SharedViewModel) {
     val vAMag by remember { viewModel.vAMag }

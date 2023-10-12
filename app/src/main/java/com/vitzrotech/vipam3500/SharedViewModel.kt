@@ -460,8 +460,6 @@ class SharedViewModel : ViewModel() {
     val lockTime = mutableStateOf(0.0f)
     val safeTime = mutableStateOf(0.0f)
 
-    //DO control
-
     //Breaker Failure
     val mo = mutableStateOf("")
     val failure = mutableStateOf("")

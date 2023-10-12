@@ -88,7 +88,6 @@ fun PasswordDialog(password: String, onDismiss: ()-> Unit, onOK: ()-> Unit) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun PasswordDialogPreview() {

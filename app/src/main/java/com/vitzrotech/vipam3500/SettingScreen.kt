@@ -39,7 +39,7 @@ import java.nio.ByteBuffer
 
 var mqttClient: MQTTClient? = null
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SettingScreen(viewModel: SharedViewModel) {
     Column(

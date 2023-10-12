@@ -12,9 +12,9 @@
     <color name="hmc_3rd">#FF88d4bb</color>
     <color name="hmc_4th">#FF76aeaf</color>
     <color name="hmc_5th">#FF2a6d82</color>
-    <color name="color_dark_000000_ffffff">#000000</color>
-    <color name="color_dark_ffffff_000000">#ffffff</color>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="color_dark_000000_ffffff">#FF000000</color>
+    <color name="color_dark_ffffff_000000">#FFffffff</color>
+    <color name="colorPrimary">#FF6200EE</color>
+    <color name="colorPrimaryDark">#FF3700B3</color>
+    <color name="colorAccent">#FF03DAC5</color>
 </resources>

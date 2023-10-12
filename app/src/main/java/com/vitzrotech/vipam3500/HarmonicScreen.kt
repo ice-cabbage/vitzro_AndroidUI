@@ -120,7 +120,6 @@ private fun setDate(barChart: BarChart) {
     for (i in 0 until 5) {
         valueList.add(BarEntry(i.toFloat(), i * 100f))
     }
-    //집에 가고 싶다
     val barDataSet = BarDataSet(valueList, title)
     barDataSet.setColors(
         R.color.hmc_1st, R.color.hmc_2nd, R.color.hmc_3rd,

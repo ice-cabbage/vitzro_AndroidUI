@@ -185,9 +185,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         composable("Simulation_Test") {
             Simulation_TestScreen(viewModel)
         }
-        composable("Company") {
-            CompanyScreen(viewModel)
-        }
         composable("relay Status") {
             RelayStatusBottomScreen(viewModel)
         }
@@ -365,12 +362,6 @@ object DrawerParams {
             R.string.simulation_test,
             R.drawable.ic_simulation_test,
             R.string.simulation_test_description
-        ),
-        AppDrawerItemInfo(
-            "manufacturing company",
-            R.string.manufacturing_company,
-            R.drawable.ic_manufacturing_company,
-            R.string.manufacturing_company_description
         )
     )
 }

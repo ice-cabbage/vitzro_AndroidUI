@@ -28,19 +28,10 @@ enum class Bit {
     IOCA1, IOCB1, IOCC1, IOCN1, IOCA2, IOCB2, IOCC2, IOCN2,
     TUVA1, TUVB1, TUVC1, TUVA2, TUVB2, TUVC2, TUVAux, TOVAux,
     TOVA1, TOVB1, TOVC1, TOVN1, TOVA2, TOVB2, TOVC2, TOVN2,
-    TOF1, TOF2, TOF3, TOF4, TUF1, TUF2, TUF3, TUF4,
-    FRC, TVVSA, TVVSB, TVVSC, TSG, TRUPA, TRUPB, TRUPC,
-    TNSOV, TNSOC, TPOA, TPOB, TPOC, TUPA, TUPB, TUPC,
-    TOPA, TOPB, TOPC, TOQA, TOQB, TOQC, Reserve107, Reserve108,
-    TRPA, TRPB, TRPC, TRQA, TRQB, TRQC, TSEF1, TSEF2,
-    TUCA, TUCB, TUCC, M48, M51, TTR, MSS, M66,
-    DIFA, DIFB, DIFC, Reserve134, IDIFA, IDIFB, IDIFC, Reserve138,
-    DIFN1, DIFN2, DIFN3, Reserve144, BRFIn, BRFEx, Reserve147, Reserve148,
-    VT_Fail, CLP, Synch, PQ_Sag, PQ_Swell, PQ_Inter, Reserve157, Reserve158,
-    RecReady, RecIn_Pg, RecSucc, RecFail, RecOp1, RecOp2, RecOp3, RecOp4,
-    RecTOut1, RecTOut2, RecTOut3, RecTOut4, RecRclTOut, RecSignal, RecIOCBlk, RecOLTCBlk,
-    P02p5, P05p0, P15p0, Reserved, HARA1, HARB1, HARC1, HARA2,
-    HARB2, HARC2, Reserve193, PhaseADir, PhaseBDir, PhaseCDir, Reserve207 }
+    TOF1, TOF2, TOF3, TOF4, TUF1, TUF2, TUF3, TUF4, TSG,
+    TNSOV, TNSOC, TPOA, TPOB, TPOC, TSEF1, TSEF2,
+    TUCA, TUCB, TUCC, M48, M51, TTR, MSS, M66, Synch,
+    HARA1, HARB1, HARC1, HARA2, HARB2, HARC2 }
 
 data class RelayStatus(val name: String, val trip: Boolean, val mod: Boolean)
 

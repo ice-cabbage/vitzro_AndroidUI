@@ -62,14 +62,6 @@ fun K_C_factorScreen(viewModel: SharedViewModel) {
                         .border(0.6.dp, Color.Black),
                     textAlign = TextAlign.Center
                 )
-                //Text(
-                    //"${v.fac.toUnitString("%.02f", v.fac)}",
-                    //Modifier
-                        //.weight(0.3f)
-                        //.height(40.dp)
-                        //.border(0.6.dp, Color.Black),
-                    //textAlign = TextAlign.Center
-                //)
             }
         }
     }

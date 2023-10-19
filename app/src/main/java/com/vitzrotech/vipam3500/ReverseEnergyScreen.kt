@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -64,23 +65,23 @@ fun ReverseEnergyScreen(viewModel: SharedViewModel) {
     LazyColumn(
         Modifier
             .fillMaxWidth()
-            .padding(16.dp)) {
+            .padding(8.dp)) {
         items(reverse.size) {
             val v = reverse[it]
             Row(Modifier.fillMaxWidth()) {
                 Text(v.name,
                     Modifier
-                        .weight(0.4f)
-                        .padding(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .weight(0.3f)
+                        .padding(5.dp)
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
                     "${v.wattHour.toUnitString("%.02f", v.unit)}",
                     Modifier
                         .weight(0.3f)
-                        .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .height(30.dp)
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }

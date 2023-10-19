@@ -16,6 +16,7 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -161,8 +162,9 @@ fun OscilloscopeScreen(viewModel: SharedViewModel) {
 @Composable
 fun OscilloscopeView(state: OscilloscopeState) {
     val colors = Array(6) {Color.hsv(60.0f * it, 1.0f, 1.0f)}
+    val onBackground = MaterialTheme.colorScheme.onBackground
     Canvas(Modifier.fillMaxSize()) {
-        drawRect(Color.Black, Offset(0.0f, 0.0f), size)
+        drawRect(onBackground, Offset(0.0f, 0.0f), size)
         for (i in 0..8) {
             drawLine(
                 Color.White,

@@ -39,9 +39,7 @@ val systemTitles = mapOf(
     "virtual DI" to "Virtual DI",
     "PQ Configuration" to "PQ Configuration",
     "demand Configuration" to "Demand Configuration",
-    "system Dignosis" to "System Dignosis",
-    "function" to "Function",
-    "AI Config" to "AI Config")
+    "system Dignosis" to "System Dignosis")
 
 @Composable
 fun NavigationButton(navController: NavController, route: String, modifier: Modifier) {

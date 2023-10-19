@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -62,7 +63,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
         Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .border(0.6.dp, Color.Black)) {
+            .border(0.6.dp, MaterialTheme.colorScheme.onBackground)) {
         items(mode.size) {
             val v = mode[it]
             Row(Modifier.fillMaxWidth()) {
@@ -70,28 +71,28 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.2f)
                         .height(40.dp)
-                        .border(1.dp, Color.Black),
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(v.sv25,
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(v.sv50,
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(v.sv15,
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }
@@ -103,7 +104,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.2f)
                         .height(40.dp)
-                        .border(1.dp, Color.Black),
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -111,7 +112,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -119,7 +120,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -127,7 +128,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }
@@ -139,7 +140,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.2f)
                         .height(40.dp)
-                        .border(1.dp, Color.Black),
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -147,7 +148,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -155,7 +156,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -163,7 +164,7 @@ fun Supervision_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }

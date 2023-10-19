@@ -72,7 +72,6 @@ import kotlinx.coroutines.launch
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         setContent {
             VIPAM3500Theme {
                 Surface(
@@ -235,12 +234,6 @@ fun NavGraphBuilder.mainGraph(navController: NavHostController, viewModel: Share
         }
         composable("system Dignosis") {
             SystemDig_Screen(viewModel)
-        }
-        composable("function") {
-            Function_Screen(viewModel)
-        }
-        composable("AI Config") {
-            AIconfig_Screen(viewModel)
         }
         composable("Osil") {
             OscilloscopeScreen(viewModel)

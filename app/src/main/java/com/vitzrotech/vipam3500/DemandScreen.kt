@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -179,7 +180,7 @@ fun DemandScreen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(1f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }
@@ -191,7 +192,7 @@ fun DemandScreen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.6f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -199,7 +200,7 @@ fun DemandScreen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.5f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -207,7 +208,7 @@ fun DemandScreen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.3f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }

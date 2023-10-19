@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,7 +50,7 @@ fun Breaker_Screen(viewModel: SharedViewModel) {
         Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .border(0.6.dp, Color.Black)) {
+            .border(0.6.dp, MaterialTheme.colorScheme.onBackground)) {
         items(fail.size) {
             val v = fail[it]
             Row(Modifier.fillMaxWidth()) {
@@ -57,7 +58,7 @@ fun Breaker_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.4f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -65,7 +66,7 @@ fun Breaker_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.5f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }
@@ -77,7 +78,7 @@ fun Breaker_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.4f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
                 Text(
@@ -85,7 +86,7 @@ fun Breaker_Screen(viewModel: SharedViewModel) {
                     Modifier
                         .weight(0.5f)
                         .height(40.dp)
-                        .border(0.6.dp, Color.Black),
+                        .border(0.6.dp, MaterialTheme.colorScheme.onBackground),
                     textAlign = TextAlign.Center
                 )
             }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -95,6 +96,7 @@ fun VoltageCurrentScreen(viewModel: SharedViewModel) {
 @OptIn(ExperimentalTextApi::class)
 @Composable
 fun VoltageCurrentDiagram(voltage: Array<Phase>, current: Array<Phase>, voltageRange: Float, currentRange: Float) {
+    val onBackground = MaterialTheme.colorScheme.onBackground
     val textMeasure = rememberTextMeasurer()
     Canvas(
         modifier = Modifier.fillMaxSize()
@@ -103,11 +105,11 @@ fun VoltageCurrentDiagram(voltage: Array<Phase>, current: Array<Phase>, voltageR
         val cx = size.width / 2
         val cy = size.height / 2
         for (i in 1..4) {
-            drawCircle(Color.Black, radius / 4.0f * i, style = Stroke(2.0f))
+            drawCircle(onBackground, radius / 4.0f * i, style = Stroke(2.0f))
         }
         for (i in 0 until 360 step 30) {
             rotate(i.toFloat()) {
-                drawLine(Color.Black, Offset(cx + radius / 4.0f, cy), Offset(cx + radius, cy))
+                drawLine(onBackground, Offset(cx + radius / 4.0f, cy), Offset(cx + radius, cy))
             }
         }
         voltage.forEach {
@@ -158,18 +160,18 @@ fun VoltageCurrentTable(voltage: Array<Phase>, current: Array<Phase>) {
         Modifier
             .fillMaxWidth()
             .padding(16.dp)
-            .border(2.dp, Color.Black)) {
+            .border(2.dp, MaterialTheme.colorScheme.onBackground)) {
         items(voltage.size) {
             val v = voltage[it]
             Row(Modifier.fillMaxWidth()) {
                 Text(v.name,
                     Modifier
-                        .border(1.dp, Color.Black)
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground)
                         .weight(0.3f)
                         .padding(8.dp, 4.dp))
                 Text("${v.mag.toUnitString("%.02f","V")} \u2220${v.ang.toUnitString("%.02f", "\u00B0")}",
                     Modifier
-                        .border(1.dp, Color.Black)
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground)
                         .weight(0.7f)
                         .padding(8.dp, 4.dp))
             }
@@ -179,12 +181,12 @@ fun VoltageCurrentTable(voltage: Array<Phase>, current: Array<Phase>) {
             Row(Modifier.fillMaxWidth()) {
                 Text(i.name,
                     Modifier
-                        .border(1.dp, Color.Black)
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground)
                         .weight(0.3f)
                         .padding(8.dp, 4.dp))
                 Text("${i.mag.toUnitString("%.02f","A")} \u2220${i.ang.toUnitString("%.02f", "\u00B0")}",
                     Modifier
-                        .border(1.dp, Color.Black)
+                        .border(1.dp, MaterialTheme.colorScheme.onBackground)
                         .weight(0.7f)
                         .padding(8.dp, 4.dp))
             }

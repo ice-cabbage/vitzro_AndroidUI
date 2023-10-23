@@ -1,92 +1,92 @@
 <resources>
-    <string name="about">About</string>
-    <string name="about_description">About button</string>
-    <string name="app_name">VIPAM3500</string>
-    <string name="apply">Apply</string>
-    <string name="blk_cur">Blk Cur (x In)</string>
-    <string name="blk_delay">Blk Delay</string>
-    <string name="blk_vol">Blk Vol (x Vn)</string>
-    <string name="cancel">Cancel</string>
-    <string name="cb1">CB 1</string>
-    <string name="cb1_description">CB1 function</string>
-    <string name="cb2">CB 2</string>
-    <string name="cb2_description">CB2 function</string>
-    <string name="channel">Channel</string>
-    <string name="client_id">Client ID</string>
-    <string name="connect">Connect</string>
-    <string name="curve">Curve</string>
-    <string name="dead_bus_value">Dead Bus Value</string>
-    <string name="dead_line_value">Dead Line Value</string>
-    <string name="delay">Delay (sec)</string>
-    <string name="diff_freq">Diff Freq</string>
-    <string name="diff_phs_ang">Diff Phs Ang</string>
-    <string name="diff_vol">Diff Vol</string>
-    <string name="direction">Direction</string>
-    <string name="disconnect">Disconnect</string>
-    <string name="edge">Edge</string>
-    <string name="energy">Energy</string>
-    <string name="first_rcd_time">First RCD Time</string>
-    <string name="fourth_rcd_time">Fourth RCD Time</string>
-    <string name="home">Home</string>
-    <string name="home_description">Home Navigation Button</string>
-    <string name="ia">Ia</string>
-    <string name="ib">Ib</string>
-    <string name="ic">Ic</string>
-    <string name="level">Level</string>
-    <string name="lever">Lever</string>
-    <string name="live_bus_value">Live Bus Value</string>
-    <string name="live_dead_mode">Live Dead Mode</string>
-    <string name="live_line_value">Live Line Value</string>
-    <string name="local">Local</string>
-    <string name="local_description">Local Operation</string>
-    <string name="log">Log</string>
-    <string name="log_description">Log Menu</string>
-    <string name="manufacturing_company">Company</string>
-    <string name="manufacturing_company_description">Manufacturing_Company Menu</string>
-    <string name="max_a">Max(A)</string>
-    <string name="max_v">Max(V)</string>
-    <string name="measurement">Measurement</string>
-    <string name="measurement_description">Measurement Menu</string>
-    <string name="memory_mode">Memory Mode</string>
-    <string name="menu_description">Menu Button</string>
-    <string name="message">Message</string>
-    <string name="min_a">Min(A)</string>
-    <string name="min_v">Min(V)</string>
-    <string name="mod">Mod</string>
-    <string name="mode">Mode</string>
-    <string name="number">Number</string>
-    <string name="password">Password</string>
-    <string name="pickup">Pickup</string>
-    <string name="position">Position</string>
-    <string name="power">Power</string>
-    <string name="publish">Publish</string>
-    <string name="relay">Relay</string>
-    <string name="relay_description">Status of Relay</string>
-    <string name="s_div">s/div</string>
-    <string name="second_rcd_time">Second RCD Time</string>
-    <string name="server_uri">Server URI</string>
-    <string name="settings">Settings</string>
-    <string name="settings_description">Settings button</string>
-    <string name="simulation_test">Simulation_Test</string>
-    <string name="simulation_test_description">simulation_test Menu</string>
-    <string name="source">Source</string>
-    <string name="subscribe">Subscribe</string>
-    <string name="system">System</string>
-    <string name="system_description">System Menu</string>
-    <string name="third_rcd_time">Third RCD Time</string>
-    <string name="topic">Topic</string>
-    <string name="trip">Trip</string>
-    <string name="type_client_id">Type Client ID</string>
-    <string name="type_message">Type Message</string>
-    <string name="type_password">Type Password</string>
-    <string name="type_server_uri">tcp://brocker_address:1883</string>
-    <string name="type_topic">Type Topic</string>
-    <string name="type_username">Type Username</string>
-    <string name="unsubscribe">Unsubscribe</string>
-    <string name="username">Username</string>
-    <string name="va">Va</string>
-    <string name="vb">Vb</string>
-    <string name="vc">Vc</string>
-    <string name="voltage_current">Voltage Current</string>
-    <string name="voltage_current_description">Voltage current navigation button</string>
+    <string name="about" translatable="false">About</string>
+    <string name="about_description" translatable="false">About button</string>
+    <string name="app_name" translatable="false">VIPAM3500</string>
+    <string name="apply" translatable="false">Apply</string>
+    <string name="blk_cur" translatable="false">Blk Cur (x In)</string>
+    <string name="blk_delay" translatable="false">Blk Delay</string>
+    <string name="blk_vol" translatable="false">Blk Vol (x Vn)</string>
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="cb1" translatable="false">CB 1</string>
+    <string name="cb1_description" translatable="false">CB1 function</string>
+    <string name="cb2" translatable="false">CB 2</string>
+    <string name="cb2_description" translatable="false">CB2 function</string>
+    <string name="channel" translatable="false">Channel</string>
+    <string name="client_id" translatable="false">Client ID</string>
+    <string name="connect" translatable="false">Connect</string>
+    <string name="curve" translatable="false">Curve</string>
+    <string name="dead_bus_value" translatable="false">Dead Bus Value</string>
+    <string name="dead_line_value" translatable="false">Dead Line Value</string>
+    <string name="delay" translatable="false">Delay (sec)</string>
+    <string name="diff_freq" translatable="false">Diff Freq</string>
+    <string name="diff_phs_ang" translatable="false">Diff Phs Ang</string>
+    <string name="diff_vol" translatable="false">Diff Vol</string>
+    <string name="direction" translatable="false">Direction</string>
+    <string name="disconnect" translatable="false">Disconnect</string>
+    <string name="edge" translatable="false">Edge</string>
+    <string name="energy" translatable="false">Energy</string>
+    <string name="first_rcd_time" translatable="false">First RCD Time</string>
+    <string name="fourth_rcd_time" translatable="false">Fourth RCD Time</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="home_description" translatable="false">Home Navigation Button</string>
+    <string name="ia" translatable="false">Ia</string>
+    <string name="ib" translatable="false">Ib</string>
+    <string name="ic" translatable="false">Ic</string>
+    <string name="level" translatable="false">Level</string>
+    <string name="lever" translatable="false">Lever</string>
+    <string name="live_bus_value" translatable="false">Live Bus Value</string>
+    <string name="live_dead_mode" translatable="false">Live Dead Mode</string>
+    <string name="live_line_value" translatable="false">Live Line Value</string>
+    <string name="local" translatable="false">Local</string>
+    <string name="local_description" translatable="false">Local Operation</string>
+    <string name="log" translatable="false">Log</string>
+    <string name="log_description" translatable="false">Log Menu</string>
+    <string name="manufacturing_company" translatable="false">Company</string>
+    <string name="manufacturing_company_description" translatable="false">Manufacturing_Company Menu</string>
+    <string name="max_a" translatable="false">Max(A)</string>
+    <string name="max_v" translatable="false">Max(V)</string>
+    <string name="measurement" translatable="false">Measurement</string>
+    <string name="measurement_description" translatable="false">Measurement Menu</string>
+    <string name="memory_mode" translatable="false">Memory Mode</string>
+    <string name="menu_description" translatable="false">Menu Button</string>
+    <string name="message" translatable="false">Message</string>
+    <string name="min_a" translatable="false">Min(A)</string>
+    <string name="min_v" translatable="false">Min(V)</string>
+    <string name="mod" translatable="false">Mod</string>
+    <string name="mode" translatable="false">Mode</string>
+    <string name="number" translatable="false">Number</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="pickup" translatable="false">Pickup</string>
+    <string name="position" translatable="false">Position</string>
+    <string name="power" translatable="false">Power</string>
+    <string name="publish" translatable="false">Publish</string>
+    <string name="relay" translatable="false">Relay</string>
+    <string name="relay_description" translatable="false">Status of Relay</string>
+    <string name="s_div" translatable="false">s/div</string>
+    <string name="second_rcd_time" translatable="false">Second RCD Time</string>
+    <string name="server_uri" translatable="false">Server URI</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="settings_description" translatable="false">Settings button</string>
+    <string name="simulation_test" translatable="false">Simulation_Test</string>
+    <string name="simulation_test_description" translatable="false">simulation_test Menu</string>
+    <string name="source" translatable="false">Source</string>
+    <string name="subscribe" translatable="false">Subscribe</string>
+    <string name="system" translatable="false">System</string>
+    <string name="system_description" translatable="false">System Menu</string>
+    <string name="third_rcd_time" translatable="false">Third RCD Time</string>
+    <string name="topic" translatable="false">Topic</string>
+    <string name="trip" translatable="false">Trip</string>
+    <string name="type_client_id" translatable="false">Type Client ID</string>
+    <string name="type_message" translatable="false">Type Message</string>
+    <string name="type_password" translatable="false">Type Password</string>
+    <string name="type_server_uri" translatable="false">tcp://brocker_address:1883</string>
+    <string name="type_topic" translatable="false">Type Topic</string>
+    <string name="type_username" translatable="false">Type Username</string>
+    <string name="unsubscribe" translatable="false">Unsubscribe</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="va" translatable="false">Va</string>
+    <string name="vb" translatable="false">Vb</string>
+    <string name="vc" translatable="false">Vc</string>
+    <string name="voltage_current" translatable="false">Voltage Current</string>
+    <string name="voltage_current_description" translatable="false">Voltage current navigation button</string>
 </resources>

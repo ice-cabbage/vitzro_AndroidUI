@@ -115,7 +115,7 @@ fun VoltageCurrentDiagram(voltage: Array<Phase>, current: Array<Phase>, voltageR
         voltage.forEach {
             if (it.mag != 0.0f) {
                 rotate(-it.ang) {
-                    drawPath(arrow(radius * it.mag / voltageRange, cx, cy), Color.Blue)
+                    drawPath(arrow(radius * it.mag / voltageRange, cx, cy), Color.Green)
                 }
                 val s = textMeasure.measure(AnnotatedString(it.name)).size
                 val r = radius * it.mag / voltageRange + 20
@@ -123,7 +123,7 @@ fun VoltageCurrentDiagram(voltage: Array<Phase>, current: Array<Phase>, voltageR
                 drawText(
                     textMeasure, it.name,
                     Offset(cx + r * cos(theta) - s.width / 2, cy + r * sin(theta) - s.height / 2),
-                    TextStyle(Color.Blue)
+                    TextStyle(Color.Green)
                 )
             }
         }
@@ -145,7 +145,7 @@ fun VoltageCurrentDiagram(voltage: Array<Phase>, current: Array<Phase>, voltageR
         var str = "V range: ${voltageRange.toUnitString("%.02f", "V")}"
         var s = textMeasure.measure(AnnotatedString(str)).size
         drawText(textMeasure, str, Offset(60.0f, size.height - s.height),
-            TextStyle(Color.Blue))
+            TextStyle(Color.Green))
         str = "I range: ${currentRange.toUnitString("%.02f", "A")}"
         s = textMeasure.measure(AnnotatedString(str)).size
         drawText(textMeasure, str, Offset(size.width - s.width - 60, size.height - s.height),
